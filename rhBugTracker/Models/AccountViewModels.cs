@@ -64,6 +64,12 @@ namespace rhBugTracker.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name = "Full Name")]
+        public string Name { get; set; }
+
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +85,9 @@ namespace rhBugTracker.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+
     }
 
     public class ResetPasswordViewModel

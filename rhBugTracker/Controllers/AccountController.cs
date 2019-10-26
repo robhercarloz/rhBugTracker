@@ -11,7 +11,8 @@ using Microsoft.Owin.Security;
 using rhBugTracker.Models;
 
 namespace rhBugTracker.Controllers
-{
+{ 
+    [RequireHttps]
     [Authorize]
     public class AccountController : Controller
     {
