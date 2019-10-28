@@ -1,0 +1,81 @@
+﻿@model IEnumerable<rhBugTracker.Models.ManageRolesViewModel>
+
+@{ 
+    ViewBag.Title = "ManageRoles";
+}
+@{
+    Layout = null;
+}
+
+<style>
+    .cntrlWide{
+        width: 100%;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ManageRoles</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ListBox("UserIds", null, new { @class = "cntrlWide"})
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.DropDownList("Role", null, "-- Select Role -- ", new { @class = "cntrlWide"})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("User Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Role")
+                    </th>
+
+                </tr>
+
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => user.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => user.RoleName)
+                        </td>
+                    </tr>
+                }
+
+
+
+            </table>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
