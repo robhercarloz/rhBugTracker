@@ -51,10 +51,21 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
+                            <!--DASHBOARD-->
                             <li class="active">
-                                <!--Dashboard-->
-                                @Html.ActionLink("Dashboard", "Index", "Home", new { @class = "ti-dashboard"})
-
+                                @Html.ActionLink(" Dashboard", "Index", "Home", new { @class = "ti-dashboard"})
+                            </li>
+                            <!--USERS-->
+                            <li>
+                                @Html.ActionLink(" Users", "Users", "Home", new { @class = "ti-user"})
+                            </li>
+                            <!--PROJECTS-->
+                            <li>
+                                @Html.ActionLink(" Projects", "Projects", "Home", new { @class = "ti-book"})
+                            </li>
+                            <!--TICKETS-->
+                            <li>
+                                @Html.ActionLink(" Tickets", "Tickets", "Home", new { @class = "ti-ticket"})
                             </li>
                         </ul>
                     </nav>

@@ -79,5 +79,7 @@ namespace rhBugTracker.Models
         //public System.Data.Entity.DbSet<rhBugTracker.Models.ApplicationUser> ApplicationUsers { get; set; }
 
         //public System.Data.Entity.DbSet<rhBugTracker.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        //public System.Data.Entity.DbSet<rhBugTracker.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
