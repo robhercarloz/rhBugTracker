@@ -71,7 +71,7 @@
                                     @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
                                     {
                                         <!--DASHBOARD-->
-                                        <li class="active">
+                                        <li>
                                             <a href=@Url.Action("Index","Admin", null) class="ti-home"> Dashboard</a>
                                         </li>
                                         <!--USERS-->
@@ -90,7 +90,7 @@
                                     else if (User.IsInRole("Developer"))
                                     {
                                         <!--DASHBOARD-->
-                                        <li class="active">
+                                        <li>
                                             <a href=@Url.Action("Index","Developer", null) class="ti-home"> Dashboard</a>
                                         </li>
                                         <!--USERS-->
@@ -109,7 +109,7 @@
                                     else
                                     {
                                         <!--DASHBOARD-->
-                                        <li class="active">
+                                        <li>
                                             <a href=@Url.Action("Index","Home", null) class="ti-home"> Dashboard</a>
                                         </li>
                                         <!--USERS-->
@@ -211,8 +211,7 @@
                                     <img class="avatar user-thumb" src="~/Images/profile_Placeholder.png" alt="avatar">
                                     <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @User.Identity.Name <i class="fa fa-angle-down"></i></h4>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Message</a>
-                                        <a class="dropdown-item" href="#">Settings</a>
+                                        <a class="dropdown-item" href=@Url.Action("About", "Home")>Profile</a>
                                         <a class="dropdown-item" href=@Url.Action("CustomLogOff", "Account")>Log Out</a>
                                     </div>
                                 </div>
