@@ -2,38 +2,52 @@
     ViewBag.Title = "Home Page";
 }
 
-<!-- sidebar Nav menu area start --------------------------->
-<div class="sidebar-menu">
-    <div class="sidebar-header">
-        <div class="logo">
-            <a href=@Url.Action("Index", "Home", null)><img src="~/Images/bugTrackerLogo.png" alt="logo"></a>
-        </div>
-    </div>
-    <div class="main-menu">
-        <div class="menu-inner">
-            <nav>
-                <ul class="metismenu" id="menu">
-                    <!--DASHBOARD-->
-                    <li class="active">
-                        <a href=@Url.Action("Index","Home", null) class="ti-dashboard"> Dashboard</a>
-                    </li>
-                    <!--USERS-->
-                    <li>
-                        <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Users</a>
-                    </li>
-                    <!--PROJECTS-->
-                    <li>
-                        <a href=@Url.Action("", "", null) class="ti-book"> Projects</a>
-                    </li>
-                    <!--TICKETS-->
-                    <li>
-                        <a href=@Url.Action("", "", null) class="ti-ticket"> Tickets</a>
-                    </li>
-                </ul>
-            </nav>
+
+    
+<!---------------MAIN CONTENT ----------------------->
+<div class="container" style="padding: 10px 10px 10px 10px">    
+    <div class="main-content-inner">
+        <div class="row">
+            <!-- seo fact area start -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <div class="card">
+                            <div class="seo-fact sbg1">
+                                <div class="p-4 d-flex justify-content-between align-items-center">
+                                    <div class="seofct-icon"><i class="ti-thumb-up"></i>My Tickets</div>
+                                    <h2>#TC Placeholder</h2>
+                                </div>
+                                <canvas id="seolinechart1" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="card">
+                            <div class="seo-fact sbg1">
+                                <div class="p-4 d-flex justify-content-between align-items-center">
+                                    <div class="seofct-icon"><i class="ti-thumb-up"></i>My Projects</div>
+                                    <h2>Ticket Count Placeholder</h2>
+                                </div>
+                                <canvas id="seolinechart1" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="card">
+                            <div class="seo-fact sbg1">
+                                <div class="p-4 d-flex justify-content-between align-items-center">
+                                    <div class="seofct-icon"><i class="ti-thumb-up"></i>Unassigned Tickets</div>
+                                    <h2>Ticket Count Placeholder</h2>
+                                </div>
+                                <canvas id="seolinechart1" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- seo fact area end -->
         </div>
     </div>
 </div>
-<!-- sidebar menu area end --------------------------------->
-
-<p style="text-align:center ">TEST</p>

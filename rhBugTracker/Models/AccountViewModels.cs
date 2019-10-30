@@ -4,8 +4,6 @@ using System.ComponentModel.DataAnnotations;
 namespace rhBugTracker.Models
 {
 
-
-
     public class ManageRolesViewModel
     {
         public string FullName { get; set; }

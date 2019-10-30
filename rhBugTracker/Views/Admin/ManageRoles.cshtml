@@ -11,73 +11,41 @@
     }
 </style>
 
-<!DOCTYPE html>
-
-
 <html>
 <head>
 
-   
-    
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/themify-icons.css">
     <link rel="stylesheet" href="~/Content/metisMenu.css">
     <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Content/slicknav.min.css">
-    <!-- amcharts css -->
+     amcharts css 
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-    <!-- Start datatable css -->
+     Start datatable css 
+
+
+    <link href="~/Content/datatable/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Content/datatable/dataTables.bootstrap4.js"></script>
+    <script src="~/Content/datatable/dataTables.bootstrap4.min.js"></script>
+
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
-    <!-- style css -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+     style css 
     <link rel="stylesheet" href="~/Content/typography.css">
     <link rel="stylesheet" href="~/Content/default-css.css">
     <link rel="stylesheet" href="~/Content/styles.css">
     <link rel="stylesheet" href="~/Content/responsive.css">
-    <!-- modernizr css -->
-    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+     modernizr css 
+    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>*@
 
 </head>
 <body>
-    <!-- sidebar Nav menu area start --------------------------->
-    <div class="sidebar-menu">
-        <div class="sidebar-header">
-            <div class="logo">
-                <a href="@Url.Action("Index","Home", null)"><img src="~/Images/bugTrackerLogo.png" alt="logo" /></a>
-            </div>
-        </div>
-        <div class="main-menu">
-            <div class="menu-inner">
-                <nav>
-                    <ul class="metismenu" id="menu">
-                        <!--DASHBOARD-->
-                        <li>
-                            <a href=@Url.Action("Index","Home", null) class="ti-dashboard"> Dashboard</a>
-                        </li>
-                        <!--USERS-->
-                        <li class="active">
-                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Manage Users</a>
-                        </li>
-                        <!--PROJECTS-->
-                        <li>
-                            <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> Projects</a>
-                        </li>
-                        <!--TICKETS-->
-                        <li>
-                            <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> Tickets</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!--END NAV BAR --------------------------------->
-
     <!--START DISPLAYING USER AND THEIR INFO------------->
-    <!-- Dark table start -->
     <div class="col-12 mt-5">
         <div class="card">
             <div class="card-body">
@@ -112,59 +80,45 @@
             </div>
         </div>
     </div>
-    <!-- Dark table end -->
     <!--END TABLE FOR DISPLAYING THE USER ---------------->
 
-
-    <div class="row">
-        <div class="col-md-6">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <div class="row">
-                    <div class="col-md-12">
-                        @Html.ListBox("UserIds", null, new { @class = "cntrlWide" })
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @Html.DropDownList("Role", null, "-- Select Role -- ", new { @class = "cntrlWide" })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-    @*<div class="col-md-6">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayName("User Name")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Role")
-                        </th>
-
-                    </tr>
-
-                    @foreach (var user in Model)
+    <!--ASSIGNING ROLES TO USERS----------ADMIN || PROJECT MANAGER ONLY---------------->
+    @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+    {
+        <!--ADDING USER -->
+        <div class="container" style="padding: 10px 10px 10px 10px">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(model => user.FullName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => user.RoleName)
-                            </td>
-                        </tr>
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.ListBox("UserIds", null, new { @class = "cntrlWide" })
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.DropDownList("Role", null, "-- Select Role -- ", new { @class = "cntrlWide" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
+                            </div>
+                        </div>
                     }
-                </table>
+                </div>
             </div>
-        </div>*@
+        </div>
+    }
+    <!--END ASSIGNING TO USER ADMIN AND PROJECT MANAGER ONLY----------------------->
+
+    <!--DATATABLE SCRIPT REFERENCE-->
+    <script>
+        $('#dataTable3').dataTable();
+    </script>
+    
 </body>
 </html>

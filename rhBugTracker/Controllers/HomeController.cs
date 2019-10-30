@@ -9,9 +9,35 @@ namespace rhBugTracker.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        //make and if else to see which role is being logged in 
+
+
+
+
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole("Submitter"))
+            {
+                return View();
+            }
+            else if (User.IsInRole("Developer"))
+            {
+                return RedirectToAction("Index", "Developer", null);
+            }
+            else if (User.IsInRole("Project Manager"))
+            {
+                return RedirectToAction("", "", null);
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            else
+            {
+                return View();
+            }           
+            
+            
         }
 
         public ActionResult About()

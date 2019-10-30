@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="~/Content/slicknav.min.css">
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+    <!--START DATATABLES CSS-->
+    <link href="~/Content/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/datatable/jquery.dataTables.css" rel="stylesheet" />
+
+    <!--END DATATABLES CSS-->
+
     <!-- others css -->
     <link rel="stylesheet" href="~/Content/typography.css">
     <link rel="stylesheet" href="~/Content/default-css.css">
@@ -26,6 +33,12 @@
     <link rel="stylesheet" href="~/Content/responsive.css">
     <!-- modernizr css -->
     <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+
+    <!--JQUERY START DATATABLES-->
+    <script src="~/Content/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatable/jquery.dataTables.js"></script>
+
+    <!--JQUERY END DATATABLES-->
 </head>
 
 <body>
@@ -37,118 +50,196 @@
         <div class="loader"></div>
     </div>
     <!-- preloader area end -->
-
     <!-- page container area start --------------------->
     <div class="page-container">
-        
-        <!--TOOK OUT NAV AND PLACED INTO EACH INDIVIDUAL PAGE-->
 
-        <!-- main content area start ----------------------------------->
-        <div class="main-content">
-            <!-- header area start ------------------------------>
-            <div class="header-area">
-                <div class="row align-items-center">
-                    <!-- nav and search button -->
-                    <div class="col-md-6 col-sm-8 clearfix">
-                        <div class="nav-btn pull-left">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="search-box pull-left">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
-                                <i class="ti-search"></i>
-                            </form>
+        <!--SIDEBAR START-->
+            
+                <!-- sidebar Nav menu area start --------------------------->
+                <div class="sidebar-menu">
+                    <div class="sidebar-header">
+                        <div class="logo">
+                            @*<a href=@Url.Action("Index", "Home", null)><img src="~/Images/bugTrackerLogo.png" alt="logo"></a>*@
+                            <img src="~/Images/bugTrackerLogo.png" alt="logo">
                         </div>
                     </div>
-                    <!-- profile info & task notification -->
-                    <div class="col-md-6 col-sm-4 clearfix">
-                        <ul class="notification-area pull-right">
-                            <li id="full-view"><i class="ti-fullscreen"></i></li>
-                            <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                            <li class="dropdown">
-                                <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>0</span>
-                                </i>
-                                <div class="dropdown-menu bell-notify-box notify-box">
-                                    <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
-                                    <div class="nofity-list">
-                                        <!--LIST OF NOTIFICATIONS-->
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown">
-                                    <span>0</span>
-                                </i>
-                                <div class="dropdown-menu notify-box nt-enveloper-box">
-                                    <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
-                                    <div class="nofity-list">
-                                        <!--EMAIL LIST-->
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="settings-btn">
-                                <i class="ti-settings"></i>
-                            </li>
-                        </ul>
+                    <div class="main-menu">
+                        <div class="menu-inner">
+                            <nav>
+                                <ul class="metismenu" id="menu">
+
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                                    {
+                                        <!--DASHBOARD-->
+                                        <li class="active">
+                                            <a href=@Url.Action("Index","Admin", null) class="ti-home"> Dashboard</a>
+                                        </li>
+                                        <!--USERS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> User Management</a>
+                                        </li>
+                                        <!--PROJECTS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> Project Management</a>
+                                        </li>
+                                        <!--TICKETS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> Tickets</a>
+                                        </li>
+                                    }
+                                    else if (User.IsInRole("Developer"))
+                                    {
+                                        <!--DASHBOARD-->
+                                        <li class="active">
+                                            <a href=@Url.Action("Index","Developer", null) class="ti-home"> Dashboard</a>
+                                        </li>
+                                        <!--USERS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Users</a>
+                                        </li>
+                                        <!--PROJECTS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> My Projects</a>
+                                        </li>
+                                        <!--TICKETS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> My Tickets</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <!--DASHBOARD-->
+                                        <li class="active">
+                                            <a href=@Url.Action("Index","Home", null) class="ti-home"> Dashboard</a>
+                                        </li>
+                                        <!--USERS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Users</a>
+                                        </li>
+                                        <!--PROJECTS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> Projects</a>
+                                        </li>
+                                        <!--TICKETS-->
+                                        <li>
+                                            <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> My Tickets</a>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- header area end -->
+            
+            
 
-            <!-- page title area start -->
-            <div class="page-title-area">
-                <div class="row align-items-center">
-                    <div class="col-sm-6">
-                        <div class="breadcrumbs-area clearfix">
-                            <h4 class="page-title pull-left">Dashboard</h4>
-                            @*<ul class="breadcrumbs pull-left">
-                                <li><a href="index.html">Home</a></li>
-                                <li><span>Dashboard</span></li>
-                            </ul>*@
-                        </div>
-                    </div>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="col-sm-6 clearfix">
-                            <div class="user-profile pull-right">
-                                <img class="avatar user-thumb" src="~/Images/profile_Placeholder.png" alt="avatar">
-                                <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @User.Identity.Name <i class="fa fa-angle-down"></i></h4>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Message</a>
-                                    <a class="dropdown-item" href="#">Settings</a>
-                                    <a class="dropdown-item" href=@Url.Action("CustomLogOff", "Account")>Log Out</a>
-                                </div>
+            <!--SIDEBAR END-->
+
+
+            <!-- main content area start ----------------------------------->
+            <div class="main-content">
+                <!-- header area start ------------------------------>
+                <div class="header-area">
+                    <div class="row align-items-center">
+                        <!-- nav and search button -->
+                        <div class="col-md-6 col-sm-8 clearfix">
+                            <div class="nav-btn pull-left">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="search-box pull-left">
+                                <form action="#">
+                                    <input type="text" name="search" placeholder="Search..." required>
+                                    <i class="ti-search"></i>
+                                </form>
                             </div>
                         </div>
-                    }
+                        <!-- profile info & task notification -->
+                        <div class="col-md-6 col-sm-4 clearfix">
+                            <ul class="notification-area pull-right">
+                                <li id="full-view"><i class="ti-fullscreen"></i></li>
+                                <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
+                                <li class="dropdown">
+                                    <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
+                                        <span>0</span>
+                                    </i>
+                                    <div class="dropdown-menu bell-notify-box notify-box">
+                                        <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
+                                        <div class="nofity-list">
+                                            <!--LIST OF NOTIFICATIONS-->
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown">
+                                    <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown">
+                                        <span>0</span>
+                                    </i>
+                                    <div class="dropdown-menu notify-box nt-enveloper-box">
+                                        <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
+                                        <div class="nofity-list">
+                                            <!--EMAIL LIST-->
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="settings-btn">
+                                    <i class="ti-settings"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!--page title area end-->
+                <!-- header area end -->
+                <!-- page title area start -->
+                <div class="page-title-area">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="breadcrumbs-area clearfix">
+                                <h4 class="page-title pull-left">Dashboard</h4>
+                                @*<ul class="breadcrumbs pull-left">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><span>Dashboard</span></li>
+                                </ul>*@
+                            </div>
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="col-sm-6 clearfix">
+                                <div class="user-profile pull-right">
+                                    <img class="avatar user-thumb" src="~/Images/profile_Placeholder.png" alt="avatar">
+                                    <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @User.Identity.Name <i class="fa fa-angle-down"></i></h4>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Message</a>
+                                        <a class="dropdown-item" href="#">Settings</a>
+                                        <a class="dropdown-item" href=@Url.Action("CustomLogOff", "Account")>Log Out</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!--page title area end-->
+                <!--BODY----------------------------------->
+                @RenderBody()
+                <!--END BODY-->
 
-            <!--BODY----------------------------------->
-            @RenderBody()
-            <!--END BODY-->
+            </div>
+            <!-- main content area end -->
+            <!-- footer area start-------------------------------->
+            <footer>
+                <div class="footer-area">
+                    <p>
+                        © Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>|
+                        Modified by: <a href="https://robertochprofile.azurewebsites.net">Roberto Hernandez</a>
+                    </p>
+                </div>
+            </footer>
+            <!-- footer area end--------------------------------->
 
         </div>
-        <!-- main content area end -->
-
-        <!-- footer area start-------------------------------->
-        <footer>
-            <div class="footer-area">
-                <p>
-                    © Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>|
-                    Modified by: <a href="https://robertochprofile.azurewebsites.net">Roberto Hernandez</a>
-                </p>
-            </div>
-        </footer>
-        <!-- footer area end--------------------------------->
-
-    </div>
     <!-- page container area end -->
-
     <!-- offset area start  SETTINGS -------------------------------->
     <div class="offset-area">
         <div class="offset-close"><i class="ti-close"></i></div>
@@ -335,8 +426,6 @@
         </div>
     </div>
     <!-- offset area end -->
-
-
     <!-- jquery latest version -->
     <script src="~/Scripts/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
@@ -354,8 +443,8 @@
     <!-- start zingchart js -->
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <script>
-    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
     </script>
     <!-- all line chart activation -->
     <script src="~/Scripts/line-chart.js"></script>
@@ -366,6 +455,24 @@
     <!-- others plugins -->
     <script src="~/Scripts/plugins.js"></script>
     <script src="~/Scripts/scripts.js"></script>
+
+    <!--Jquery Datatable-->
+    <script src="~/Content/datatable/jquery.dataTables.js"></script>
+    <script src="~/Content/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatable/dataTables.bootstrap4.js"></script>
+    <script src="~/Content/datatable/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/Content/datatable/dataTables.bootstrap.js"></script>
+    <script src="~/Content/datatable/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Content/datatable/dataTables.jqueryui.js"></script>
+    <script src="~/Content/datatable/dataTables.jqueryui.min.js"></script>
+
+
+    <script>
+        $('#dataTable3').DataTable();
+    </script>
+
 </body>
 
 </html>

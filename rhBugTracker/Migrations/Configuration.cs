@@ -50,12 +50,12 @@ namespace rhBugTracker.Migrations
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             //AdminUser
-            if (!context.Users.Any(u => u.Email == "rhernandezroberto@Gmail.com"))
+            if (!context.Users.Any(u => u.Email == "rboH@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "rhernandezroberto@Gmail.com",
-                    Email = "rhernandezroberto@Gmail.com",
+                    UserName = "rboH@Mailinator.com",
+                    Email = "rboH@Mailinator.com",
                     FName = "Roberto",
                     LName = "Hernandez",
                     DisplayName = "DemoAdmin"
@@ -123,6 +123,27 @@ namespace rhBugTracker.Migrations
                     DisplayName = "DemoUser3"
                 }, WebConfigurationManager.AppSettings["User3Password"]);
             }
+            #endregion
+
+            //Assigning Roles
+            #region
+            var adminId = userManager.FindByEmail("rboH@Mailinator.com").Id;
+            userManager.AddToRole(adminId, "Admin");
+
+            var proMgrId = userManager.FindByEmail("coderhcarlos@Gmail.com").Id;
+            userManager.AddToRole(proMgrId, "Project Manager");
+
+            var developerId = userManager.FindByEmail("DemoDev@Mailinator.com").Id;
+            userManager.AddToRole(developerId, "Developer");
+
+            var user1Id = userManager.FindByEmail("DemoUser1@Mailinator.com").Id;
+            userManager.AddToRole(user1Id, "Submitter");
+
+            var user2Id = userManager.FindByEmail("DemoUser2@Mailinator.com").Id;
+            userManager.AddToRole(user2Id, "Submitter");
+
+            var user3Id = userManager.FindByEmail("DemoUser3@Mailinator.com").Id;
+            userManager.AddToRole(user3Id, "Submitter");
             #endregion
 
             //Seeding in ticket status, priority  and typess

@@ -13,8 +13,9 @@ namespace rhBugTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserRolesHelper roleHelper = new UserRolesHelper();
        
-
+        //--------------------------
         // GET: Admin
+        [Authorize]
         public ActionResult ManageRoles()
         {
             ViewBag.UserIds = new MultiSelectList(db.Users, "Id", "Email");
@@ -66,32 +67,15 @@ namespace rhBugTracker.Controllers
             //Redirect to dashboard
             return RedirectToAction("ManageRoles", "Admin");
         }
+        //=----------------------------------------
 
+        [Authorize]
+        public ActionResult index()
+        {
+            return View();
+        }
 
-        //[Authorize(Roles = "Admin, Project_Manager")]
-        //public ActionResult ManageProjectUsers()
-        //{
-        //    ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
-        //    ViewBag.Developers = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
-        //    ViewBag.Submitters = new MultiSelectList(roleHelper.UsersInRole("Sumbitter"), "Id", "Email");
-
-        //    if (User.IsInRole("Admin"))
-        //    {
-        //        Viewbag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project_Manager"), "Id", "Email")
-        //    }
-
-        //    var myData = new List<UserProjectListViewModel>();
-
-        //    foreach(var user in db.Users.ToList())
-        //    {
-        //        userVm = new UserProjectListViewModel
-        //        {
-                    
-        //        }
-        //    }
-
-        //    return View();
-        //}
+        
 
         
     }

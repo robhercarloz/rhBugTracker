@@ -58,53 +58,72 @@
                     <div class="login-form-body">
                         <div class="form-gp">
                             @*<label for="exampleInputName1">Full Name</label>*@
-                            @Html.Label("exampleInputName1", "Full Name")
+                            @Html.Label("exampleInputName1", "First Name")
                             @*<input type="text" id="exampleInputName1">*@
-                            @Html.TextBoxFor(m => m.Name, new { id = "exampleInputName1"})
-                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger"})
+                            @Html.TextBoxFor(m => m.FName, new { id = "exampleInputName1" })
+                            @Html.ValidationMessageFor(m => m.FName, "", new { @class = "text-danger" })
                             <i class="ti-user"></i>
                         </div>
-                    <div class="form-gp">
-                        @*<label for="exampleInputEmail1">Email address</label>*@
-                        @Html.Label("exampleInputEmail1", "Email Address")
-                        @*<input type="email" id="exampleInputEmail1">*@
-                        @Html.TextBoxFor(m => m.Email, new { id = "exampleInputName1"})
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger"})
-                        <i class="ti-email"></i>
-                    </div>
-                    <div class="form-gp">
-                        @*<label for="exampleInputPassword1">Password</label>*@
-                        @Html.Label("exampleInputPassword1", "Password")
-                        @*<input type="password" id="exampleInputPassword1">*@
-                        @Html.TextBoxFor(m => m.Password, new { id = "exampleInputPassword1"})
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger"})
-                        <i class="ti-lock"></i>
-                    </div>
-                    <div class="form-gp">
-                        @*<label for="exampleInputPassword2">Confirm Password</label>*@
-                        @Html.Label("exampleInputPassword2", "Confirm Password")
-                        @*<input type="password" id="exampleInputPassword2">*@
-                        @Html.TextBoxFor(m => m.ConfirmPassword, new { id = "exampleInputPassword2"})
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger"})
-                        <i class="ti-lock"></i>
-                    </div>
-                    <div class="submit-btn-area">
-                        <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
+
+                        <div class="form-gp">
+                            @*<label for="exampleInputName1">Full Name</label>*@
+                            @Html.Label("exampleInputName1", "Last Name")
+                            @*<input type="text" id="exampleInputName1">*@
+                            @Html.TextBoxFor(m => m.LName, new { id = "exampleInputName1" })
+                            @Html.ValidationMessageFor(m => m.LName, "", new { @class = "text-danger" })
+                            <i class="ti-user"></i>
+                        </div>
+                        <div class="form-gp">
+                            @*<label for="exampleInputName1">Full Name</label>*@
+                            @Html.Label("exampleInputName1", "Display Name")
+                            @*<input type="text" id="exampleInputName1">*@
+                            @Html.TextBoxFor(m => m.DisplayName, new { id = "exampleInputName1" })
+                            @Html.ValidationMessageFor(m => m.DisplayName, "", new { @class = "text-danger" })
+                            <i class="ti-user"></i>
+                        </div>
+
+                        <div class="form-gp">
+                            @*<label for="exampleInputEmail1">Email address</label>*@
+                            @Html.Label("exampleInputEmail1", "Email Address")
+                            @*<input type="email" id="exampleInputEmail1">*@
+                            @Html.TextBoxFor(m => m.Email, new { id = "exampleInputName1" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            <i class="ti-email"></i>
+                        </div>
+                        <div class="form-gp">
+                            @*<label for="exampleInputPassword1">Password</label>*@
+                            @Html.Label("exampleInputPassword1", "Password")
+                            @*<input type="password" id="exampleInputPassword1">*@
+                            @Html.TextBoxFor(m => m.Password, new { id = "exampleInputPassword1" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            <i class="ti-lock"></i>
+                        </div>
+                        <div class="form-gp">
+                            @*<label for="exampleInputPassword2">Confirm Password</label>*@
+                            @Html.Label("exampleInputPassword2", "Confirm Password")
+                            @*<input type="password" id="exampleInputPassword2">*@
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { id = "exampleInputPassword2" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            <i class="ti-lock"></i>
+                        </div>
+                        <div class="submit-btn-area">
+                            <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
                             @*<div class="login-other row mt-4">
-                                <div class="col-6">
-                                    <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
-                                </div>
-                                <div class="col-6">
-                                    <a class="google-login" href="#">Sign up with <i class="fa fa-google"></i></a>
-                                </div>
-                            </div>*@
+                <div class="col-6">
+                    <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
+                </div>
+                <div class="col-6">
+                    <a class="google-login" href="#">Sign up with <i class="fa fa-google"></i></a>
+                </div>
+            </div>*@
+                        </div>
+                        <div class="form-footer text-center mt-5">
+                            <p class="text-muted">
+                                Don't have an account?
+                                @Html.ActionLink("Log In", "Login", "Account")
+                            </p>
+                        </div>
                     </div>
-                    <div class="form-footer text-center mt-5">
-                        <p class="text-muted">Don't have an account? 
-                            @Html.ActionLink("Log In", "Login", "Account")
-                        </p>
-                    </div>
-                 </div>
                 }
             </div>
         </div>

@@ -2,9 +2,11 @@
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -154,7 +156,14 @@ namespace rhBugTracker.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser 
-                { UserName = model.Email, Email = model.Email };
+                { 
+                    FName = model.FName,
+                    LName = model.LName,
+                    DisplayName = model.DisplayName,
+                    UserName = model.DisplayName, 
+                    Email = model.Email,
+                    
+                };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -167,14 +176,100 @@ namespace rhBugTracker.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { UserId = user.Id, code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    try
+                    {
+                        var from = $"BUGTRACKER ADMIN:<{WebConfigurationManager.AppSettings["emailfrom"]}>";
+                        var email = new MailMessage(from, model.Email)
+                        {
+                            Subject = "Confirm your account",
+                            Body = $"Please confirm your account by clicking <a href=\"{callbackUrl}\">here</a>",
+                            IsBodyHtml = true
+                        };
+                        var svc = new PersonalEmail();
+                        await svc.SendAsync(email);
+
+                    }catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        await Task.FromResult(0);
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
+
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        //GET NEW REGISTER
+        [AllowAnonymous]
+        public ActionResult NewRegister()
+        {
+            return View();
+        }
+
+        //POST NEW REGISTER
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NewRegister(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+
+                    FName = model.FName,
+                    LName = model.LName,
+                    DisplayName = model.DisplayName,
+                    UserName = model.DisplayName,
+                    Email = model.Email,
+
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    try
+                    {
+                        var from = $"Blog Admin<{WebConfigurationManager.AppSettings["emailto"]}>";
+                        var email = new MailMessage(from, model.Email)
+                        {
+                            Subject = "Confirm your account",
+                            Body = $"Please confirm your account by clicking <a href=\"{callbackUrl}\">here</a>",
+                            IsBodyHtml = true
+                        };
+                        var svc = new PersonalEmail();
+                        await svc.SendAsync(email);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        await Task.FromResult(0);
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+               
 
         //
         // GET: /Account/ConfirmEmail
@@ -219,6 +314,32 @@ namespace rhBugTracker.Controllers
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                try
+                {
+                    var from = $"BUGTRACKER ADMIN<{WebConfigurationManager.AppSettings["emailto"]}>";
+                    var mailMessage = new MailMessage(from, model.Email)
+                    {
+                        Subject = "Reset Password",
+                        Body = $"Please reset your password by clicking <a href\"{callbackUrl}\">here</a>",
+                        IsBodyHtml = true
+                    };
+                    var svc = new PersonalEmail();
+                    await svc.SendAsync(mailMessage);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    await Task.FromResult(0);
+                }
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+
+
+
             }
 
             // If we got this far, something failed, redisplay form
@@ -405,13 +526,38 @@ namespace rhBugTracker.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ResendEmailConfirmation()
+        {
+            return View();
+        }
+        //POST: Resend Email Confirmation
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResendEmailConfirmation(ForgotPasswordViewModel model)
+        {
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ConfirmationEmail", "Account",
+                    new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Confirm your account",
+                                                "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            }
+            return RedirectToAction("ConfirmationSent", "Account");
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
