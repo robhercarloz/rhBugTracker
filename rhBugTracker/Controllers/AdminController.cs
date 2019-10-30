@@ -12,45 +12,47 @@ namespace rhBugTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserRolesHelper roleHelper = new UserRolesHelper();
+       
 
         // GET: Admin
         public ActionResult ManageRoles()
         {
-            ViewBag.UserIds = new MultiSelectList(db.Users, "Id","Email");
+            ViewBag.UserIds = new MultiSelectList(db.Users, "Id", "Email");
+            ViewBag.DisplayName = new MultiSelectList(db.Users, "Id", "Username");
+            ViewBag.Email = new MultiSelectList(db.Users, "Id", "Email");
             ViewBag.Role = new SelectList(db.Roles, "Name", "Name");
 
             var users = new List<ManageRolesViewModel>();
-            foreach(var user in db.Users.ToList())
+            foreach (var user in db.Users.ToList())
             {
                 users.Add(new ManageRolesViewModel
                 {
-                    UserName = $"{user.LName}, {user.FName}",
+                    FullName = $"{user.LName}, {user.FName}",
+                    DisplayName = user.DisplayName,
+                    Email = user.Email,
                     RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault()
                 });
             }
-
-            
             return View(users);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         //POST : Admin
         public ActionResult ManageRoles(List<string> userIds, string role)
         {
-            
+
             //step 1 : Unenroll all the selected users from any roles
             //the may currently occupy
-            foreach(var userId in userIds)
+            foreach (var userId in userIds)
             {
                 //what is the role of this person
                 var userRole = roleHelper.ListUserRoles(userId).FirstOrDefault();
-                if(userRole != null)
+                if (userRole != null)
                 {
                     roleHelper.RemoveUserFromRole(userId, userRole);
                 }
             }
-
 
             //Step 2 : Add them back to the selected roles 
             if (!string.IsNullOrEmpty(role))
@@ -66,6 +68,31 @@ namespace rhBugTracker.Controllers
         }
 
 
+        //[Authorize(Roles = "Admin, Project_Manager")]
+        //public ActionResult ManageProjectUsers()
+        //{
+        //    ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
+        //    ViewBag.Developers = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
+        //    ViewBag.Submitters = new MultiSelectList(roleHelper.UsersInRole("Sumbitter"), "Id", "Email");
 
+        //    if (User.IsInRole("Admin"))
+        //    {
+        //        Viewbag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project_Manager"), "Id", "Email")
+        //    }
+
+        //    var myData = new List<UserProjectListViewModel>();
+
+        //    foreach(var user in db.Users.ToList())
+        //    {
+        //        userVm = new UserProjectListViewModel
+        //        {
+                    
+        //        }
+        //    }
+
+        //    return View();
+        //}
+
+        
     }
 }

@@ -4,10 +4,16 @@ using System.ComponentModel.DataAnnotations;
 namespace rhBugTracker.Models
 {
 
+
+
     public class ManageRolesViewModel
     {
-        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string DisplayName { get; set; }
+        public string Email { get; set; }
         public string RoleName { get; set; }
+        public string Projects { get; set; }
+
     }
 
     public class ExternalLoginConfirmationViewModel
@@ -73,9 +79,16 @@ namespace rhBugTracker.Models
     {
 
         [Required]
-        [Display(Name = "Full Name")]
-        public string Name { get; set; }
+        [Display(Name = "First Name")]
+        public string FName { get; set; }
 
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LName { get; set; }
+
+        [Required]
+        [Display(Name = "Display Name")]
+        public string DisplayName { get; set; }
 
         [Required]
         [EmailAddress]
@@ -126,7 +139,16 @@ namespace rhBugTracker.Models
         public string Email { get; set; }
     }
 
-    
+    public class UserProjectListViewModel
+    {
+        public string Name { get; set; }
+        public List<string> ProjectNames { get; set; }
+
+        public UserProjectListViewModel()
+        {
+            ProjectNames = new List<string>();
+        }
+    }
 
 
 }

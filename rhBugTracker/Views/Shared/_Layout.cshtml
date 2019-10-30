@@ -40,39 +40,9 @@
 
     <!-- page container area start --------------------->
     <div class="page-container">
-        <!-- sidebar menu area start --------------------------->
-        <div class="sidebar-menu">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <a href="#"><img src="~/Images/profile_Placeholder.png" alt="logo"></a>
-                </div>
-            </div>
-            <div class="main-menu">
-                <div class="menu-inner">
-                    <nav>
-                        <ul class="metismenu" id="menu">
-                            <!--DASHBOARD-->
-                            <li class="active">
-                                @Html.ActionLink(" Dashboard", "Index", "Home", new { @class = "ti-dashboard"})
-                            </li>
-                            <!--USERS-->
-                            <li>
-                                @Html.ActionLink(" Users", "Users", "Home", new { @class = "ti-user"})
-                            </li>
-                            <!--PROJECTS-->
-                            <li>
-                                @Html.ActionLink(" Projects", "Projects", "Home", new { @class = "ti-book"})
-                            </li>
-                            <!--TICKETS-->
-                            <li>
-                                @Html.ActionLink(" Tickets", "Tickets", "Home", new { @class = "ti-ticket"})
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- sidebar menu area end -->
+        
+        <!--TOOK OUT NAV AND PLACED INTO EACH INDIVIDUAL PAGE-->
+
         <!-- main content area start ----------------------------------->
         <div class="main-content">
             <!-- header area start ------------------------------>
@@ -127,6 +97,7 @@
                 </div>
             </div>
             <!-- header area end -->
+
             <!-- page title area start -->
             <div class="page-title-area">
                 <div class="row align-items-center">
@@ -155,14 +126,11 @@
                     }
                 </div>
             </div>
-
-
-
+            <!--page title area end-->
 
             <!--BODY----------------------------------->
             @RenderBody()
             <!--END BODY-->
-
 
         </div>
         <!-- main content area end -->
@@ -176,7 +144,7 @@
                 </p>
             </div>
         </footer>
-        <!-- footer area end-->
+        <!-- footer area end--------------------------------->
 
     </div>
     <!-- page container area end -->

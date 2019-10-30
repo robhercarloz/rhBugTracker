@@ -2,4 +2,38 @@
     ViewBag.Title = "Home Page";
 }
 
+<!-- sidebar Nav menu area start --------------------------->
+<div class="sidebar-menu">
+    <div class="sidebar-header">
+        <div class="logo">
+            <a href=@Url.Action("Index", "Home", null)><img src="~/Images/bugTrackerLogo.png" alt="logo"></a>
+        </div>
+    </div>
+    <div class="main-menu">
+        <div class="menu-inner">
+            <nav>
+                <ul class="metismenu" id="menu">
+                    <!--DASHBOARD-->
+                    <li class="active">
+                        <a href=@Url.Action("Index","Home", null) class="ti-dashboard"> Dashboard</a>
+                    </li>
+                    <!--USERS-->
+                    <li>
+                        <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Users</a>
+                    </li>
+                    <!--PROJECTS-->
+                    <li>
+                        <a href=@Url.Action("", "", null) class="ti-book"> Projects</a>
+                    </li>
+                    <!--TICKETS-->
+                    <li>
+                        <a href=@Url.Action("", "", null) class="ti-ticket"> Tickets</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- sidebar menu area end --------------------------------->
+
 <p style="text-align:center ">TEST</p>
