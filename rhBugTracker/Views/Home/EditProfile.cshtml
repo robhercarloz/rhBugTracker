@@ -14,44 +14,46 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">USER PROFILE</h4>
-                    <p class="text-muted font-14 mb-4"> You can edit your name or password by clicking on edit and then saving.<p>
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                            <fieldset disabled>
-                                <div class="form-group">
-                                   
-                                    @Html.Label("example-text-input", "First Name", new { @class = "col-form-label" })
-                                   
-                                    @Html.TextBoxFor(m => m.FName, new { @class = "form-control", id = "example-text-input", @type = "text" })
-                                </div>                               
-                                <div class="form-group">
-                                    
-                                    @Html.Label("example-text-input", "Last Name", new { @class = "col-form-label" })
-                                   
-                                    @Html.TextBoxFor(m => m.LName, new { @class = "form-control", id = "example-text-input", @type = "text" })
-                                </div>
-                                <div class="form-group">
-                                    
-                                    @Html.Label("disabledTextInput", "Display Name", new { @class = "col-form-label" })
-                                    
-                                    @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
-                                </div>
-                                <div class="form-group">                                    
-                                    @Html.Label("disabledTextInput", "Email", new { @class = "col-form-label" })
-                                   
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
-                                </div>
-                                <div class="form-group">                                    
-                                    @Html.Label("disabledTextInput", "Password", new { @class = "col-form-label" })
-                                    
-                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
-                                </div>
-                                <button type="submit">Submit</button>
-                            </fieldset>
-                        }
-                    </div>
-                <button type="button">Edit</button>
+                    <p class="text-muted font-14 mb-4"> You can edit your name or password by clicking on edit and then saving.</p>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <fieldset disabled>
+                            <div class="form-group">
+
+                                @Html.Label("example-text-input", "First Name", new { @class = "col-form-label" })
+
+                                @Html.TextBoxFor(m => m.FName, new { @class = "form-control", id = "example-text-input", @type = "text" })
+                            </div>
+                            <div class="form-group">
+
+                                @Html.Label("example-text-input", "Last Name", new { @class = "col-form-label" })
+
+                                @Html.TextBoxFor(m => m.LName, new { @class = "form-control", id = "example-text-input", @type = "text" })
+                            </div>
+                            <div class="form-group">
+
+                                @Html.Label("disabledTextInput", "Display Name", new { @class = "col-form-label" })
+
+                                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("disabledTextInput", "Email", new { @class = "col-form-label" })
+
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("disabledTextInput", "Password", new { @class = "col-form-label" })
+
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+                            </div>
+                            <button type="submit">Submit</button>
+                        </fieldset>
+                        
+                        <button type="button">Edit</button>
+                    }
+                </div>
+                
             </div> 
            
         </div>

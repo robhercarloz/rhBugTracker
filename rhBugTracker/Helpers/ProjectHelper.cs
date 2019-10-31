@@ -40,8 +40,28 @@ namespace rhBugTracker.Helpers
                 db.SaveChanges();
             }
         }
+        public void RemoveUserFromProject(string userId, int projectId)
+        {
+            if(IsUserOnProject(userId, projectId))
+            {
+                Project proj = db.Projects.Find(projectId);
+                var delUser = db.Users.Find(userId);
 
+                proj.Users.Remove(delUser);
+                db.Entry(proj).State = EntityState.Modified; //Saves instance
+                db.SaveChanges();
 
+            }
+        }
+
+        public ICollection<ApplicationUser>UsersOnProject(int projectId)
+        {
+            return db.Projects.Find(projectId).Users;
+        }
+        public ICollection<ApplicationUser> UsersNotOnProject(int projectId)
+        {
+            return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
+        }
 
     }
 }

@@ -12,6 +12,7 @@ namespace rhBugTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserRolesHelper roleHelper = new UserRolesHelper();
+        private ProjectHelper projHelper = new ProjectHelper();
        
         //--------------------------
         // GET: Admin
@@ -69,14 +70,52 @@ namespace rhBugTracker.Controllers
         }
         //=----------------------------------------
 
+        //GET : 
+        [Authorize(Roles = "Admin, Project Manager")]
+        public ActionResult ManageProjectsUsers()
+        {
+            //displaying all projects on the system in select list
+            ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
+            ViewBag.Developers = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
+            ViewBag.Submitters = new MultiSelectList(roleHelper.UsersInRole("Submitter"), "Id", "Email");
+
+            if (User.IsInRole("Admin"))
+            {
+                ViewBag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project_Manager"), "Id", "Email");
+
+            }
+
+            //Create a view model purposes of displaying Users and their associated projects
+            var myData = new List<UserProjectListViewModel>();
+            UserProjectListViewModel userVm = null;
+            foreach (var user in db.Users.ToList())
+            {
+                userVm = new UserProjectListViewModel
+                {
+                    Name = $"{user.LName}, {user.FName}",
+                    ProjectNames = projHelper.ListUserProjects(user.Id).Select(p => p.Name).ToList()
+                };
+            }
+
+            if (userVm.ProjectNames.Count() == 0)
+                userVm.ProjectNames.Add("N/A");
+
+            myData.Add(userVm);
+
+
+            return View();
+        }
+
+        //POST
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ManageProjectUsers(List<int> projects, string projectMangerId, List<string>developers, List<string>submitters)
+
         [Authorize]
         public ActionResult index()
         {
             return View();
         }
-
-        
-
-        
+            
     }
 }
