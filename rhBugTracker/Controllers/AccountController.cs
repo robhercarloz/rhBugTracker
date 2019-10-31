@@ -160,7 +160,7 @@ namespace rhBugTracker.Controllers
                     FName = model.FName,
                     LName = model.LName,
                     DisplayName = model.DisplayName,
-                    UserName = model.DisplayName, 
+                    UserName = model.Email, 
                     Email = model.Email,
                     
                 };
@@ -302,10 +302,10 @@ namespace rhBugTracker.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null )
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    return View("Register");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -336,7 +336,7 @@ namespace rhBugTracker.Controllers
                     Console.WriteLine(ex.Message);
                     await Task.FromResult(0);
                 }
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToAction("PasswordRecoverEmail", "Account");
 
 
 
@@ -555,6 +555,11 @@ namespace rhBugTracker.Controllers
                                                 "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
             }
             return RedirectToAction("ConfirmationSent", "Account");
+        }
+
+        public ActionResult PasswordRecoverEmail()
+        {
+            return View();
         }
 
 

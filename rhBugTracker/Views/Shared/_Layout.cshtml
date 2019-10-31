@@ -1,5 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
 @using rhBugTracker.Models
+@{ 
+    var db = new ApplicationDbContext();
+    var userid = User.Identity.GetUserId();
+    var user = db.Users.Find(userid);
+}
+
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -209,9 +215,9 @@
                             <div class="col-sm-6 clearfix">
                                 <div class="user-profile pull-right">
                                     <img class="avatar user-thumb" src="~/Images/profile_Placeholder.png" alt="avatar">
-                                    <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @User.Identity.Name <i class="fa fa-angle-down"></i></h4>
+                                    <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @user.FName <i class="fa fa-angle-down"></i></h4>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href=@Url.Action("About", "Home")>Profile</a>
+                                        <a class="dropdown-item" href=@Url.Action("EditProfile", "Home", new { Id = userid})>Profile</a>
                                         <a class="dropdown-item" href=@Url.Action("CustomLogOff", "Account")>Log Out</a>
                                     </div>
                                 </div>

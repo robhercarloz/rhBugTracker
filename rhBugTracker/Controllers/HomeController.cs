@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using rhBugTracker.Models;
+
 
 namespace rhBugTracker.Controllers
 {
@@ -10,7 +12,7 @@ namespace rhBugTracker.Controllers
     public class HomeController : Controller
     {
         //make and if else to see which role is being logged in 
-
+        private ApplicationDbContext db = new ApplicationDbContext();
 
 
 
@@ -46,12 +48,39 @@ namespace rhBugTracker.Controllers
 
             return View();
         }
-
-        public ActionResult Contact()
+        //Get
+        public ActionResult EditProfile(string Id)
         {
-            ViewBag.Message = "Your contact page.";
+            //Get specific user ID 
+            var userId = db.Users.Find(Id);
+            //Creating view model with info of user
+            var user = new UserInformationDisplay();
+            //assigning the value of properties
+            user.FName = userId.FName;
+            user.LName = userId.LName;
+            user.DisplayName = userId.DisplayName;
+            user.Email = userId.Email;
+            user.Password = userId.PasswordHash.ToString();
+            //all info passed in as user
+            return View(user);
+        }
 
-            return View();
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //Post
+        public ActionResult EditProfile(ApplicationUser user)
+        {
+            var editUser = db.Users.Find(user.Id);
+            editUser.Id = user.Id;
+            editUser.FName = user.FName;
+            editUser.LName = user.LName;
+            editUser.DisplayName = user.DisplayName;
+            editUser.Email = user.Email;
+            editUser.UserName = user.Email;
+            //db.Entry(editUser);
+            db.SaveChanges();
+            return RedirectToAction("EditProfile", "Home");
         }
     }
 }
