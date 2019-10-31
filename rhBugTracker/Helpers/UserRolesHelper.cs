@@ -34,7 +34,7 @@ namespace rhBugTracker.Helpers
             var result = userManager.RemoveFromRole(userId, roleName);
             return result.Succeeded;
         }
-        public ICollection<ApplicationUser> UsersNotInRole(string roleName)
+        public ICollection<ApplicationUser>UsersInRole(string roleName)
         {
             var resultList = new List<ApplicationUser>();
             var List = userManager.Users.ToList();
