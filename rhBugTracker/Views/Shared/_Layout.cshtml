@@ -78,16 +78,39 @@
                                     {
                                         <!--DASHBOARD-->
                                         <li>
-                                            <a href=@Url.Action("Index","Admin", null) class="ti-home"> Dashboard</a>
+                                            <a href=@Url.Action("Index","Admin", null)>
+                                                <i class="fa fa-home"></i> <span>
+                                                    DASHBOARD
+                                                </span>
+                                            </a>
                                         </li>
                                         <!--USERS-->
+
                                         <li>
-                                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> User Management</a>
+                                            <a href="javascript:void(0)" aria-expanded="true">
+                                                <i class="fa fa-user"></i> <span>
+                                                    USER MANAGEMENT
+                                                </span>
+                                            </a>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("ManageRoles", "Admin")>Manage User Roles</a></li>
+                                                <li><a href=@Url.Action("ManageUsers", "Admin")>Manage Users</a></li>
+
+                                            </ul>
                                         </li>
+
                                         <!--PROJECTS-->
                                         <li>
-                                            <a href=@Url.Action("Index", "Projects", null) class="ti-book"> Project Management</a>
-                                        </li>
+                                            <a href="javascript:void(0)" aria-expanded="true">
+                                                <i class="fa fa-book"></i> <span>
+                                                    Project Management
+                                                </span>
+                                            </a>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("Index", "Projects")>View Projects</a></li>
+                                                <li><a href=@Url.Action("ManageUsers", "Admin")>Manage Users</a></li>
+                                            </ul>
+                                        </li>                                        
                                         <!--TICKETS-->
                                         <li>
                                             <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> Tickets</a>

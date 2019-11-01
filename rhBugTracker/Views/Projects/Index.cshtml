@@ -4,12 +4,68 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>LIST OF PROJECTS</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<!-- Dark table start -->
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title">Projects</h4>
+            <div class="data-tables datatable-dark">
+                <table id="dataTable3" class="text-center">
+                    <thead class="text-capitalize">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Description</th>
+                            <th>Project Created On</th>
+                            <th>Project Ticket Count</th>
+                            <th>Users On Project</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var users in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => users.Name)</td>
+                                <td>@Html.DisplayFor(m => users.Description)</td>
+                                <td>@Html.DisplayFor(m => users.Created)</td>
+                                <td>@Html.DisplayFor(m => users.Tickets)</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Dark table end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -23,23 +79,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
-</table>
+</table>*@
