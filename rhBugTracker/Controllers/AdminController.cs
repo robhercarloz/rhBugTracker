@@ -68,8 +68,8 @@ namespace rhBugTracker.Controllers
             //Redirect to dashboard
             return RedirectToAction("ManageRoles", "Admin");
         }
+        
         //=----------------------------------------
-
         //GET : 
         [Authorize(Roles = "Admin, Project Manager")]
         public ActionResult ManageProjectsUsers()
@@ -103,14 +103,51 @@ namespace rhBugTracker.Controllers
             myData.Add(userVm);
 
 
-            return View();
+            return View(myData);
         }
 
         //POST
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ManageProjectUsers(List<int> projects, string projectMangerId, List<string>developers, List<string>submitters)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ManageProjectUsers(List<int> projects, string projectManagerId, List<string> developers, List<string> submitters)
+        {
+            //Remove users from every project I have selected
+            if (projects != null)
+            {
+                foreach(var projectId in projects)
+                {
+                    //Remove everone from this project
+                    foreach(var user in projHelper.UsersOnProject(projectId).ToList())
+                    {
+                        projHelper.RemoveUserFromProject(user.Id, projectId);
+                    }
+                    //add back project manager if possible
+                    if (!string.IsNullOrEmpty(projectManagerId))
+                    {
+                        projHelper.AddUserToProject(projectManagerId, projectId);
+                    }
 
+                    if(developers!= null)
+                    {
+                        foreach(var developerId in developers)
+                        {
+                            projHelper.AddUserToProject(developerId, projectId);
+                        }
+                    }
+
+                    if(submitters != null)
+                    {
+                        foreach(var submittersId in submitters)
+                        {
+                            projHelper.AddUserToProject(submittersId, projectId);
+                        }
+                    }
+                }
+            }
+            return RedirectToAction("ManageProjectUsers");
+        }
+        
+        //------------------------------------------------
         [Authorize]
         public ActionResult index()
         {

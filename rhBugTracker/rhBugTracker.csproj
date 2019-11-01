@@ -346,6 +346,7 @@
     <Content Include="Views\ProjectManager\Index.cshtml" />
     <Content Include="Views\Account\PasswordRecoverEmail.cshtml" />
     <Content Include="private.config" />
+    <Content Include="Views\Admin\ManageProjectsUsers.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
