@@ -14,6 +14,9 @@ namespace rhBugTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+
+
         // GET: Projects
         public ActionResult Index()
         {

@@ -78,7 +78,8 @@ namespace rhBugTracker.Controllers
             ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
             ViewBag.Developers = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
             ViewBag.Submitters = new MultiSelectList(roleHelper.UsersInRole("Submitter"), "Id", "Email");
-
+            
+            //Allow assign to user to project only admin
             if (User.IsInRole("Admin"))
             {
                 ViewBag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project_Manager"), "Id", "Email");
@@ -86,24 +87,27 @@ namespace rhBugTracker.Controllers
             }
 
             //Create a view model purposes of displaying Users and their associated projects
-            var myData = new List<UserProjectListViewModel>();
-            UserProjectListViewModel userVm = null;
+            var myData = new List<UserProjectListViewModel>(); //new list of type model 
+            
+            UserProjectListViewModel userVm = null; //temp variable 
+
+            //creating instance of model assigning properties and adding it to list called myData
             foreach (var user in db.Users.ToList())
             {
-                userVm = new UserProjectListViewModel
+                userVm = new UserProjectListViewModel //new instance with properties
                 {
                     Name = $"{user.LName}, {user.FName}",
                     ProjectNames = projHelper.ListUserProjects(user.Id).Select(p => p.Name).ToList()
                 };
-            }
-
+            //if the person is not on any project then display not available 
             if (userVm.ProjectNames.Count() == 0)
                 userVm.ProjectNames.Add("N/A");
 
+            //add to the list
             myData.Add(userVm);
-
-
-            return View(myData);
+            }
+           //passing into the view            
+           return View(myData);           
         }
 
         //POST
@@ -121,7 +125,8 @@ namespace rhBugTracker.Controllers
                     {
                         projHelper.RemoveUserFromProject(user.Id, projectId);
                     }
-                    //add back project manager if possible
+                    
+                    //add back project manager to list if chose manager
                     if (!string.IsNullOrEmpty(projectManagerId))
                     {
                         projHelper.AddUserToProject(projectManagerId, projectId);
