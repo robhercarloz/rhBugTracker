@@ -18,6 +18,7 @@ namespace rhBugTracker.Models
         public string LName { get; set; }
         [Display(Name = "Display Name")]
         public string DisplayName { get; set; }
+        public string AvatarPath { get; set; }
         
 
         public virtual ICollection<TicketComment> TicketComments { get; set; }

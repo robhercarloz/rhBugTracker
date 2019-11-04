@@ -3,16 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace rhBugTracker.Models
 {
-
-    public class ManageRolesViewModel
-    {
-        public string FullName { get; set; }
-        public string DisplayName { get; set; }
-        public string Email { get; set; }
-        public string RoleName { get; set; }
-        public string Projects { get; set; }
-
-    }
+      
 
     public class ExternalLoginConfirmationViewModel
     {

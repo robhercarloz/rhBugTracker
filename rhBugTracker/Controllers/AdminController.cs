@@ -14,9 +14,9 @@ namespace rhBugTracker.Controllers
         private UserRolesHelper roleHelper = new UserRolesHelper();
         private ProjectHelper projHelper = new ProjectHelper();
        
-        //--------------------------
+        //--------------MANAGE ROLES----------------------
         // GET: Admin
-        [Authorize]
+        [Authorize (Roles = "Admin")]
         public ActionResult ManageRoles()
         {
             ViewBag.UserIds = new MultiSelectList(db.Users, "Id", "Email");
@@ -68,8 +68,37 @@ namespace rhBugTracker.Controllers
             //Redirect to dashboard
             return RedirectToAction("ManageRoles", "Admin");
         }
+
+        //--------------MANAGE USERS----------------------
+        //GET: ADMIN
+        [Authorize(Roles = ("Admin"))]
+        public ActionResult ManageUsers()
+        {
+
+
+
+            var users = new List<ManageUsersViewModel>();
+            foreach (var user in db.Users.ToList())
+            {
+                users.Add(new ManageUsersViewModel
+                {
+                    FullName = $"{user.LName}, {user.FName}",                    
+                    Email = user.Email,
+                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault()
+                });
+            }
+
+            return View(users);
+        }
+
+        //POST: ADMIN
+        //public ActionResult ManageUsers()
+        //{
+
+        //}
+
         
-        //=----------------------------------------
+        //=-------------MANAGE PROJECT USERS--------------
         //GET : 
         [Authorize(Roles = "Admin, Project Manager")]
         public ActionResult ManageProjectsUsers()
