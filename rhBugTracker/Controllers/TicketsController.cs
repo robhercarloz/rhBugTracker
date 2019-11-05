@@ -126,8 +126,17 @@ namespace rhBugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
+
+                ticket.Updated = DateTime.Now;
+                
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
+
+
+
+
                 return RedirectToAction("Index");
             }
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName", ticket.AssignedToUserId);
@@ -136,6 +145,7 @@ namespace rhBugTracker.Controllers
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name", ticket.TicketStatusId);
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name", ticket.TicketTypeId);
+                                          
             return View(ticket);
         }
 

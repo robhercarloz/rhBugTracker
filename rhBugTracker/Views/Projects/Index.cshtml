@@ -1,7 +1,9 @@
-﻿@model IEnumerable<rhBugTracker.Models.Project>
+﻿@using rhBugTracker.Helpers;
+@model IEnumerable<rhBugTracker.Models.Project>
 
 @{
     ViewBag.Title = "Index";
+    var ticketHelper = new TicketHelper();
 }
 
 <h2>LIST OF PROJECTS</h2>
@@ -29,7 +31,7 @@
                                 <td>@Html.DisplayFor(m => users.Name)</td>
                                 <td>@Html.DisplayFor(m => users.Description)</td>
                                 <td>@Html.DisplayFor(m => users.Created)</td>
-                                <td>@Html.DisplayFor(m => users.Tickets)</td>
+                                <td>@ticketHelper.ListProjectTickets(users.Id).Count()</td>
                                 <td></td>
                                 <td></td>
                             </tr>

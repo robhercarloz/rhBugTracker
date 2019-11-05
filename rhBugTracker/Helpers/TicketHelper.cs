@@ -74,5 +74,12 @@ namespace rhBugTracker.Helpers
 
         }
 
+        public ICollection<Ticket> ListProjectTickets(int projectId)
+        {
+            Project project = db.Projects.Find(projectId);
+
+            var Tickets = project.Tickets.ToList();
+            return (Tickets);
+        }
     }
 }

@@ -32,7 +32,8 @@ namespace rhBugTracker.Controllers
                     FullName = $"{user.LName}, {user.FName}",
                     DisplayName = user.DisplayName,
                     Email = user.Email,
-                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault()
+                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
+                    Projects = db.Projects.ToList()
                 });
             }
             return View(users);
@@ -111,7 +112,7 @@ namespace rhBugTracker.Controllers
             //Allow assign to user to project only admin
             if (User.IsInRole("Admin"))
             {
-                ViewBag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project_Manager"), "Id", "Email");
+                ViewBag.ProjectManagerId = new SelectList(roleHelper.UsersInRole("Project Manager"), "Id", "Email");
 
             }
 
@@ -142,7 +143,7 @@ namespace rhBugTracker.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ManageProjectUsers(List<int> projects, string projectManagerId, List<string> developers, List<string> submitters)
+        public ActionResult ManageProjectsUsers(List<int> projects, string projectManagerId, List<string> developers, List<string> submitters)
         {
             //Remove users from every project I have selected
             if (projects != null)
@@ -178,7 +179,7 @@ namespace rhBugTracker.Controllers
                     }
                 }
             }
-            return RedirectToAction("ManageProjectUsers");
+            return RedirectToAction("ManageProjectsUsers");
         }
         
         //------------------------------------------------

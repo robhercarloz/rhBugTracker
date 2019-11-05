@@ -18,7 +18,12 @@ namespace rhBugTracker.Models
         public string DisplayName { get; set; }
         public string Email { get; set; }
         public string RoleName { get; set; }
-        public string Projects { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
+
+        public ManageRolesViewModel()
+        {
+            Projects = new HashSet<Project>();
+        }
 
     }
 

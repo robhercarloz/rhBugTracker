@@ -1,93 +1,92 @@
 ﻿@model IEnumerable<rhBugTracker.Models.UserProjectListViewModel>
 
-@{ 
+@{
     ViewBag.Title = "Manage Project Users";
 }
 
+<style>
+    .lstForProjects{
+        width: 100%;
+        text-align: center;
+    }
+    .btnSubmit{
+        width: 100%;
+        text-align: center;
+    }
 
-<h2>@ViewBag.Title</h2>
+</style>
 
 <div class="container">
+    <div class="col-12 mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 style="text-align: center">Assign Users to Projects</h1>
+                <div class="col-lg-12" id="lstForProjects">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken();
+                        //list box to display the users
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <p style="text-align:center">Choose a Project</p>
+                                @Html.ListBox("Projects", null, new { @class = "form-control" })
+                            </div>
+                            <br />
+                            <div class="row">
+                                <p>Choose a Project Manager</p>
+                                @Html.DropDownList("ProjectManagerId", null, "--Select--", new { @class = "form-control" })
+                            </div>
+                            <br />
+                            <div class="row">
+                                <p>Choose a Developer</p>
+                                @Html.ListBox("Developers", null, new { @class = "form-control" })
+                            </div>
+                            <br />
+                            <div class="row">
+                                <p>Choose a Submitter</p>
+                                @Html.ListBox("Submitters", null, new { @class = "form-control" })
+                            </div>
+                            <br />
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-large" id="btnSubmit">Assign</button>
+                            </div>
 
-    <div class="row">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            //List box to display the projects
-            <div class="col-md-12">
-                @Html.ListBox("Projects", null, new { @class = "form-control"})
-            </div>
-            //Submit button when clicked assigns roles
-            <div class="col-md-2 col-md-offset-1">
-                <button type="submit" class="btn btn-primary btn-large">Assign</button>
-            </div>
-            //
-            <div class="col-md-4">
-                @if (User.IsInRole("Admin"))
-                {
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Project Manager</h3>
+                        </div>
+                    }
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(m => m.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Projects")
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @foreach (var name in item.ProjectNames)
+                                            {
+                                                @name <br />
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @Html.DropDownList("ProjectManagerId", null, "--Select--", new { @class = "form-control"})
-                        </div>
-                    </div>
-                    <hr/>
-                }
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Developers</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @Html.ListBox("Developers", null, new { @class = "form-control"})
-                    </div>
-                </div>
-                <hr />
+                    
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Submitters</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @Html.ListBox("Submitters", null, new { @new = "form-control"})
-                    </div>
-                </div>
-            </div>                 
-        }
-    </div>
-    Displaying users with and their assigned projects
-    <div class="row">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(m => m.Name)
-                </th>
-                <th>
-                    @Html.DisplayName("Projects")
-                </th>
-            </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @foreach(var name in item.ProjectNames)
-                        {
-                            @name <br />
-                        }
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-</div>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>                

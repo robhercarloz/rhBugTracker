@@ -40,7 +40,7 @@ namespace rhBugTracker.Helpers
             var List = userManager.Users.ToList();
             foreach (var user in List)
             {
-                if (!IsUserInRole(user.Id, roleName))
+                if (IsUserInRole(user.Id, roleName))
                     resultList.Add(user);
             }
             return resultList;

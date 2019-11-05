@@ -1,8 +1,12 @@
-﻿@model IEnumerable<rhBugTracker.Models.ManageRolesViewModel>
+﻿@using rhBugTracker.Helpers;
+
+@model IEnumerable<rhBugTracker.Models.ManageRolesViewModel>
 
 @{ 
+    var ticketHelper = new TicketHelper();
     ViewBag.Title = "ManageRoles";
 }
+
 
 
 <style>
@@ -65,14 +69,15 @@
                         <tbody>
                             @foreach (var users in Model)
                             {
-                                <tr>
-                                    <td>@Html.DisplayFor(m => users.FullName)</td>
-                                    <td>@Html.DisplayFor(m => users.DisplayName)</td>
-                                    <td>@Html.DisplayFor(m => users.Email)</td>
-                                    <td>@Html.DisplayFor(m => users.RoleName)</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                          
+                            <tr>
+                                <td>@Html.DisplayFor(m => users.FullName)</td>
+                                <td>@Html.DisplayFor(m => users.DisplayName)</td>
+                                <td>@Html.DisplayFor(m => users.Email)</td>
+                                <td>@Html.DisplayFor(m => users.RoleName)</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             }
                         </tbody>
                     </table>
