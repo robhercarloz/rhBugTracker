@@ -65,8 +65,8 @@
                 <div class="sidebar-menu">
                     <div class="sidebar-header">
                         <div class="logo">
-                            @*<a href=@Url.Action("Index", "Home", null)><img src="~/Images/bugTrackerLogo.png" alt="logo"></a>*@
-                            <img src="~/Images/bugTrackerLogo.png" alt="logo">
+                            <a href="#"><img src="~/Images/bugTrackerLogo.png" alt="logo"></a>
+                            @*<img src="~/Images/bugTrackerLogo.png" alt="logo">*@
                         </div>
                     </div>
                     <div class="main-menu">
@@ -101,12 +101,12 @@
                                         <li>
                                             <a href="javascript:void(0)" aria-expanded="true">
                                                 <i class="fa fa-book"></i> <span>
-                                                    Project Management
+                                                    PROJECT MANAGEMENT
                                                 </span>
                                             </a>
                                             <ul class="collapse">
                                                 <li><a href=@Url.Action("Index", "Projects")>View All Projects</a></li>
-                                                <li><a href=@Url.Action("ManageProjectsUsers", "Admin")>Users on Projects</a></li>
+                                                <li><a href=@Url.Action("ManageProjectsUsers", "Admin")>Assign Users to Projects</a></li>
                                                 <li><a href=@Url.Action("Create", "Projects")>Create Project</a></li>
                                             </ul>
                                         </li>
@@ -114,34 +114,37 @@
                                         <li>
                                             <a href="javascript:void(0)" aria-expanded="true">
                                                 <i class="fa fa-ticket"></i> <span>
-                                                    Ticket Management
+                                                    TICKET MANAGEMENT
                                                 </span>
                                             </a>
                                             <ul class="collapse">
-                                                <li><a href=@Url.Action("Index", "Tickets")>View All Tickets</a></li>
-                                                <li><a href=@Url.Action("","")>My Tickets</a></li>
+                                                <li><a href=@Url.Action("Index", "Tickets")>View All Tickets</a></li>                                                
                                             </ul>
                                         </li>
 
                                     }
                                     //<!--PROJECT MANAGER------------------------------------------------------------------------------>
-                                    else if (User.IsInRole("Developer"))
+                                    else if (User.IsInRole("Project Manager"))
                                     {
                                         <!--DASHBOARD-->
                                         <li>
-                                            <a href=@Url.Action("Index","Developer", null) class="ti-home"> Dashboard</a>
-                                        </li>
+                                            <a href=@Url.Action("Index","ProjectManager", null)>
+                                                <i class="fa fa-home"></i> <span>
+                                                    DASHBOARD
+                                                </span>
+                                            </a>
+                                        </li>                                         
                                         <!--USERS-->
                                         <li>
-                                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Users</a>
+                                            <a href=@Url.Action("", "", null) class="ti-user"> Users</a>
                                         </li>
                                         <!--PROJECTS-->
                                         <li>
-                                            <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> My Projects</a>
+                                            <a href=@Url.Action("", "", null) class="ti-book"> My Projects</a>
                                         </li>
                                         <!--TICKETS-->
                                         <li>
-                                            <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> My Tickets</a>
+                                            <a href=@Url.Action("", "", null) class="ti-ticket"> My Tickets</a>
                                         </li>
 
                                     }
@@ -152,38 +155,32 @@
                                         <li>
                                             <a href=@Url.Action("Index","Developer", null) class="ti-home"> Dashboard</a>
                                         </li>
-                                        <!--USERS-->
-                                        <li>
-                                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Users</a>
-                                        </li>
+                                        
                                         <!--PROJECTS-->
                                         <li>
                                             <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> My Projects</a>
                                         </li>
                                         <!--TICKETS-->
                                         <li>
-                                            <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> My Tickets</a>
+                                            <a href=@Url.Action("Index", "Projects", null) class="ti-ticket"> My Tickets</a>
                                         </li>
 
                                     }
+
                                     //--SUBMITTER----------------------------------------------------------------------------------------->
                                     else
                                     {
                                         <!--DASHBOARD-->
                                         <li>
                                             <a href=@Url.Action("Index","Home", null) class="ti-home"> Dashboard</a>
-                                        </li>
-                                        <!--USERS-->
-                                        <li>
-                                            <a href=@Url.Action("ManageRoles", "Admin", null) class="ti-user"> Users</a>
-                                        </li>
+                                        </li>                                       
                                         <!--PROJECTS-->
                                         <li>
-                                            <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> Projects</a>
+                                            <a href=@Url.Action("Index", "Projects", null) class="ti-book"> My Projects</a>
                                         </li>
                                         <!--TICKETS-->
                                         <li>
-                                            <a href=@Url.Action("ManageTickets", "Admin", null) class="ti-ticket"> My Tickets</a>
+                                            <a href=@Url.Action("Index", "Tickets", null) class="ti-ticket"> My Tickets</a>
                                         </li>
 
                                     }

@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using rhBugTracker.Helpers;
+@using Microsoft.AspNet.Identity;
+
+@model rhBugTracker.Models.Dashboard
+
+@{ 
+    var userId = User.Identity.GetUserId();
+    var projHelper = new ProjectHelper();
+
+
+
+}
+
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -14,7 +28,14 @@
                         <div class="seo-fact sbg1">
                             <div class="p-4 d-flex justify-content-between align-items-center">
                                 <div class="seofct-icon"><i class="ti-ticket"></i>Unassigned Projects</div>
-                                <h2></h2>
+                                @if (projHelper.ListUserProjects(userId).Count() == 0)
+                                {
+                                    <h2>0</h2>    
+                                }else
+                                {
+                                    <h2>@projHelper.ListUserProjects(userId)</h2>
+                                }
+
                             </div>
                             @*<canvas id="seolinechart1" height="50"></canvas>*@
                         </div>
@@ -35,8 +56,15 @@
                     <div class="card">
                         <div class="seo-fact sbg1">
                             <div class="p-4 d-flex justify-content-between align-items-center">
-                                <div class="seofct-icon"><i class="ti-file"></i>All Projects</div>
-                                <h2></h2>
+                                <a href=@Url.Action("Index","Projects")><div class="seofct-icon"><i class="ti-file"></i>All Projects</div></a>
+                                @if (Model.myProjects.Count() == 0)
+                                {
+                                    <h2>0</h2>
+                                }
+                                else
+                                {
+                                    <h2>@Model.myProjects.Count()</h2>
+                                }
                             </div>
                             @*<canvas id="seolinechart1" height="50"></canvas>*@
                         </div>

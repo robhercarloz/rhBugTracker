@@ -7,6 +7,7 @@ namespace rhBugTracker.Models
 {
     public class Dashboard
     {
+        
         public virtual ICollection<Project> myProjects { get; set; }
         public virtual ICollection<Ticket> myTickets { get; set; }
         public virtual ICollection<ApplicationUser> myUsers { get; set; }

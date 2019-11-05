@@ -28,11 +28,11 @@ namespace rhBugTracker.Controllers
             }
             else if (User.IsInRole("Project Manager"))
             {
-                return RedirectToAction("", "", null);
+                return RedirectToAction("Index", "ProjectManager", null);
             }
             else if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("Index", "Admin", null);
             }
             else
             {

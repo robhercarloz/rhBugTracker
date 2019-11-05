@@ -185,7 +185,9 @@ namespace rhBugTracker.Controllers
         [Authorize]
         public ActionResult index()
         {
-            return View();
+            var data = new Dashboard();
+            data.myProjects = db.Projects.ToList();
+            return View(data);
         }
             
     }

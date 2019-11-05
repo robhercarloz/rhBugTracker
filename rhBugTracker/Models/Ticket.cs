@@ -13,8 +13,11 @@ namespace rhBugTracker.Models
         public int TicketTypeId { get; set; }
         public int TicketPriorityId { get; set; }
         public int TicketStatusId { get; set; }
+        //submitter
         public string OwnerUserId { get; set; }
+        //developer
         public string AssignedToUserId { get; set; }
+        
 
 
         //properties

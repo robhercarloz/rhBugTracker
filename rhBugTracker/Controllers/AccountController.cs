@@ -85,7 +85,7 @@ namespace rhBugTracker.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index","Home", null);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -164,7 +164,7 @@ namespace rhBugTracker.Controllers
                     DisplayName = model.DisplayName,
                     UserName = model.Email, 
                     Email = model.Email,
-                    AvatarPath = "~/Images/profile_Placeholder.png"                    
+                    AvatarPath = "~/Avatars/profile_Placeholder.png"                    
                 };
 
                 if(avatar != null)
@@ -177,7 +177,7 @@ namespace rhBugTracker.Controllers
                         fileName = $"{justFileName}_{DateTime.Now.Ticks}{Path.GetExtension(fileName)}";
 
                         avatar.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), fileName));
-                        user.AvatarPath = "/Uploads/" + fileName;
+                        user.AvatarPath = "/Avatars/" + fileName;
                     }
                 }
 

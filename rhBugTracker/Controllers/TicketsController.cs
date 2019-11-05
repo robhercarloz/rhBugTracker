@@ -6,19 +6,42 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using rhBugTracker.Models;
+using rhBugTracker.Helpers;
 
 namespace rhBugTracker.Controllers
 {
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private TicketHelper ticketHelper = new TicketHelper();
+        private UserRolesHelper roleHelper = new UserRolesHelper();
+
 
         // GET: Tickets
         public ActionResult Index()
         {
-            var tickets = db.Tickets.Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            return View(tickets.ToList());
+           // getting tickets with properties -->
+           // var tickets = db.Tickets.Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
+
+           // get persons id and assign to variable
+           // var userId = User.Identity.GetUserId();
+           // if (User.IsInRole("Developer"))
+           // {
+           // DEV: going to db where in tickets table where the assign usersid == the logged in user
+           //var devTickets = db.Tickets.Where(t => t.AssignedToUserId == userId);
+           //     return View(devTickets.ToList());
+
+
+           // }
+           // else if (User.IsInRole("Submitter"))
+           // {
+           //     var subTickets = db.Tickets.Where(t => t.OwnerUserId == userId);
+           //     return View(subTickets.ToList());
+           // }tickets.ToList()
+                                  
+            return View(ticketHelper.ListMyTickets());
         }
 
         // GET: Tickets/Details/5
@@ -37,6 +60,7 @@ namespace rhBugTracker.Controllers
         }
 
         // GET: Tickets/Create
+        [Authorize(Roles = "Submitter")]
         public ActionResult Create()
         {
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName");
@@ -52,6 +76,7 @@ namespace rhBugTracker.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Submitter")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId,Title,Description,Created,Updated")] Ticket ticket)
         {
