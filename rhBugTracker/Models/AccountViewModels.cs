@@ -138,6 +138,16 @@ namespace rhBugTracker.Models
             ProjectNames = new List<string>();
         }
     }
+    
+    public class UserTicketListViewModel
+    {
+        public string Name { get; set; }
+        public List<string> TicketNames { get; set; }
 
+        public UserTicketListViewModel()
+        {
+            TicketNames = new List<string>();
+        }
+    }
 
 }

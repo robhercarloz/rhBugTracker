@@ -1,0 +1,45 @@
+﻿@model IEnumerable<rhBugTracker.Models.ManageUsersViewModel>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Users</title>
+</head>
+<body>
+
+    <div class="col-12 mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">USERS ON SYSTEM</h4>
+                <div class="data-tables datatable-dark">
+                    <table id="dataTable3" class="text-center">
+                        <thead class="text-capitalize">
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var users in Model)
+                            {
+                                <tr>
+                                    @Html.AntiForgeryToken()
+                                    <td>@Html.DisplayFor(m => users.ImagePath)</td>
+                                    <td>@Html.DisplayFor(m => users.FullName)</td>
+                                    <td>@Html.DisplayFor(m => users.Email)</td>
+                                    <td>@Html.DisplayFor(m => users.RoleName)</td>                                   
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END TABLE FOR DISPLAYING THE USER ---------------->
+
+</body>
+</html>

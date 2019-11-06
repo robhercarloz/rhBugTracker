@@ -81,5 +81,25 @@ namespace rhBugTracker.Helpers
             var Tickets = project.Tickets.ToList();
             return (Tickets);
         }
+
+        public bool IsUserOnTicket(string userId, int ticketId)
+        {
+            var ticket= db.Tickets.Find(ticketId);
+            var flag = ticket.Project.Users.Any(u => u.Id == userId);
+            return (flag);
+        }
+
+        public void AddUserToTicket(string userId, int ticketId)
+        {
+            if (!IsUserOnTicket(userId, ticketId))
+            {
+                Ticket ticket = db.Tickets.Find(ticketId);
+                var newUser = db.Users.Find(userId);
+
+                ticket.Project.Users.Add(newUser);
+                db.SaveChanges();
+            }
+        }
+
     }
 }

@@ -356,6 +356,8 @@
     <Content Include="private.config" />
     <Content Include="Views\Admin\ManageProjectsUsers.cshtml" />
     <Content Include="Views\Admin\ManageUsers.cshtml" />
+    <Content Include="Views\Admin\ManageTicketsUsers.cshtml" />
+    <Content Include="Views\ProjectManager\Users.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

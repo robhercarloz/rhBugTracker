@@ -64,7 +64,7 @@ namespace rhBugTracker.Controllers
         public ActionResult Create()
         {
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName");
-            ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FName");
+           
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name");
@@ -82,6 +82,11 @@ namespace rhBugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                //assign value to ownere userid property of incoming ticket
+                ticket.OwnerUserId = User.Identity.GetUserId();
+                ticket.Created = DateTime.Now;
+
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");

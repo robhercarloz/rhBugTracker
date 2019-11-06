@@ -14,6 +14,7 @@ namespace rhBugTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ProjectHelper projHelper = new ProjectHelper();
+        private UserRolesHelper roleHelper = new UserRolesHelper();
 
         // GET: ProjectManager dashboard
         public ActionResult Index()
@@ -24,6 +25,22 @@ namespace rhBugTracker.Controllers
             data.myProjects = db.Projects.ToList();
 
             return View(data);
+        }
+
+        public ActionResult Users()
+        {
+            var users = new List<ManageUsersViewModel>();
+            foreach (var user in db.Users.ToList())
+            {
+                users.Add(new ManageUsersViewModel
+                {
+                    FullName = $"{user.LName}, {user.FName}",
+                    Email = user.Email,
+                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault()
+                });
+            }
+
+            return View(users);
         }
     }
 }

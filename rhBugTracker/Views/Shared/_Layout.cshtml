@@ -118,7 +118,8 @@
                                                 </span>
                                             </a>
                                             <ul class="collapse">
-                                                <li><a href=@Url.Action("Index", "Tickets")>View All Tickets</a></li>                                                
+                                                <li><a href=@Url.Action("Index", "Tickets")>View All Tickets</a></li>
+                                                <li><a href=@Url.Action("ManageTicketsUsers", "Admin")>Assign Ticket to User</a></li>
                                             </ul>
                                         </li>
 
@@ -133,19 +134,34 @@
                                                     DASHBOARD
                                                 </span>
                                             </a>
-                                        </li>                                         
-                                        <!--USERS-->
+                                        </li>                                       
+                                        <!--MY WORK-->
                                         <li>
-                                            <a href=@Url.Action("", "", null) class="ti-user"> Users</a>
+                                            <a href="javascript:void(0)" aria-expanded="true">
+                                                <i class="fa fa-user"></i> <span>
+                                                    MY WORK
+                                                </span>
+                                            </a>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("", "")>My Project</a></li>
+                                                <li><a href=@Url.Action("", "")>My Tickets</a></li>
+                                                <li><a href=@Url.Action("", "")>My Team Members</a></li>
+                                                <li><a href=@Url.Action("Create","Projects")>Create Project</a></li>
+                                            </ul>
                                         </li>
-                                        <!--PROJECTS-->
+                                        <!--VIEW ALL-->
                                         <li>
-                                            <a href=@Url.Action("", "", null) class="ti-book"> My Projects</a>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-home"></i> <span>
+                                                    VIEW ALL
+                                                </span>
+                                            </a>
+                                                <ul class="collapse">
+                                                    <li><a href=@Url.Action("Users", "ProjectManager")>VIEW USERS</a></li>
+                                                    <li><a href=@Url.Action("Index", "Projects")>VIEW PROJECTS</a></li>
+                                                </ul>
                                         </li>
-                                        <!--TICKETS-->
-                                        <li>
-                                            <a href=@Url.Action("", "", null) class="ti-ticket"> My Tickets</a>
-                                        </li>
+                                        
 
                                     }
                                     //---DEVELOPER-------------------------------------------------------------------------------------->
@@ -530,7 +546,7 @@
     <script>
         $('#dataTable3').DataTable();
     </script>
-
+    @RenderSection("scripts", false)
 </body>
 
 </html>

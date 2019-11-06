@@ -13,6 +13,7 @@ namespace rhBugTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserRolesHelper roleHelper = new UserRolesHelper();
         private ProjectHelper projHelper = new ProjectHelper();
+        private TicketHelper ticketHelper = new TicketHelper();
        
         //--------------MANAGE ROLES----------------------
         // GET: Admin
@@ -76,8 +77,6 @@ namespace rhBugTracker.Controllers
         public ActionResult ManageUsers()
         {
 
-
-
             var users = new List<ManageUsersViewModel>();
             foreach (var user in db.Users.ToList())
             {
@@ -92,11 +91,7 @@ namespace rhBugTracker.Controllers
             return View(users);
         }
 
-        //POST: ADMIN
-        //public ActionResult ManageUsers()
-        //{
-
-        //}
+      
 
         
         //=-------------MANAGE PROJECT USERS--------------
@@ -182,7 +177,44 @@ namespace rhBugTracker.Controllers
             return RedirectToAction("ManageProjectsUsers");
         }
         
-        //------------------------------------------------
+        //----------------MANAGE TICKET USERS-----------------
+        //GET:
+        [Authorize(Roles = "Admin")]
+        public ActionResult ManageTicketsUsers()
+        {
+            //Display all tickets in selectList
+            ViewBag.Tickets = new SelectList(db.Tickets, "Id", "Name");
+            //Display developer to choose from 
+            if (User.IsInRole("Admin"))
+            {
+                ViewBag.DeveloperId = new SelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
+
+            }
+            return View();
+        }
+
+        //POST:
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ManageTicketsUsers(int ticketId, string DeveloperId)
+        {
+            //assigning variables
+            var ticket = db.Tickets.Find(ticketId);
+            //helper to assign to ticket or unassign
+            ticket.AssignedToUserId = DeveloperId;
+            
+            
+
+
+
+            return RedirectToAction("Index", "Tickets");
+        }
+
+
+
+
+
         [Authorize]
         public ActionResult index()
         {
