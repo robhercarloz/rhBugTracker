@@ -32,14 +32,16 @@
                                 <td>@Html.DisplayFor(m => users.Description)</td>
                                 <td>@Html.DisplayFor(m => users.Created)</td>
                                 <td>@ticketHelper.ListProjectTickets(users.Id).Count()</td>
-                                <td></td>
+                                <td>
+                                    @foreach (var user in users.Users)
+                                    {
+                                        @user.FName @user.LName <br>
+                                    }
+                                </td>
                                 <td></td>
                             </tr>
                         }
-                    </tbody>
-
-
-                    
+                    </tbody>                    
                 </table>
             </div>
         </div>

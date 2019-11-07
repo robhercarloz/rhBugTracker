@@ -70,8 +70,6 @@ namespace rhBugTracker.Helpers
 
             return myTickets;
 
-
-
         }
 
         public ICollection<Ticket> ListProjectTickets(int projectId)

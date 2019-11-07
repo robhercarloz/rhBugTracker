@@ -22,26 +22,9 @@ namespace rhBugTracker.Controllers
         // GET: Tickets
         public ActionResult Index()
         {
-           // getting tickets with properties -->
-           // var tickets = db.Tickets.Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
+            
 
-           // get persons id and assign to variable
-           // var userId = User.Identity.GetUserId();
-           // if (User.IsInRole("Developer"))
-           // {
-           // DEV: going to db where in tickets table where the assign usersid == the logged in user
-           //var devTickets = db.Tickets.Where(t => t.AssignedToUserId == userId);
-           //     return View(devTickets.ToList());
-
-
-           // }
-           // else if (User.IsInRole("Submitter"))
-           // {
-           //     var subTickets = db.Tickets.Where(t => t.OwnerUserId == userId);
-           //     return View(subTickets.ToList());
-           // }tickets.ToList()
-                                  
-            return View(ticketHelper.ListMyTickets());
+            return View();
         }
 
         // GET: Tickets/Details/5
@@ -179,6 +162,30 @@ namespace rhBugTracker.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        
+        //GET: 
+        public ActionResult myTickets()
+        {
+            //var user = User.Identity.GetUserId();
+            var myData = ticketHelper.ListMyTickets();
+
+            var tickets = new List<TicketViewModel>();
+            foreach (var tick in myData.ToList())
+            {
+                tickets.Add(new TicketViewModel
+                {
+
+
+                    tTitle = tick.Title,
+                    tDescription = tick.Description,
+                    tCreated = tick.Created,
+
+                });
+            }
+
+            return View(myData);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

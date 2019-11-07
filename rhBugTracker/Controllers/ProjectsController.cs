@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using rhBugTracker.Helpers;
 using rhBugTracker.Models;
 
 namespace rhBugTracker.Controllers
@@ -13,9 +15,8 @@ namespace rhBugTracker.Controllers
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-
-
+        private ProjectHelper proHelper = new ProjectHelper();
+        private TicketHelper ticketHelper = new TicketHelper();
 
         // GET: Projects
         public ActionResult Index()
@@ -128,6 +129,30 @@ namespace rhBugTracker.Controllers
             return RedirectToAction("Index");
         }
                
+        //----------------MY PROJECTS-------------------//
+        //GET:
+        public ActionResult myProjects()
+        {
+            var user = User.Identity.GetUserId();
+            var mydata = proHelper.ListUserProjects(user);
+             
+            var projects = new List<ProjectViewModel>();
+            foreach (var pro in mydata.ToList())
+            {
+                projects.Add(new ProjectViewModel
+                {
+                    projName = pro.Name,
+                    projDescription = pro.Description,
+                    Users = proHelper.UsersOnProject(pro.Id)
+                });
+            }
+
+            return View(projects);
+        }
+        
+        //POST:
+        
+
 
         protected override void Dispose(bool disposing)
         {

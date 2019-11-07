@@ -1,0 +1,58 @@
+﻿@model IEnumerable<rhBugTracker.Models.TicketViewModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>myTickets</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <!--START DISPLAYING USER AND THEIR INFO------------->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">LIST OF MY TICKETS</h4>
+                    <div class="data-tables datatable-dark">
+                        <table id="dataTable3" class="text-center">
+                            <thead class="text-capitalize">
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Ticket Name</th>
+                                    <th>Ticket Status</th>
+                                    <th>Ticket Type</th>
+                                    <th>Ticket Priority</th>
+                                    <th>Ticket Description</th>
+                                    <th>Ticket Created On</th>
+                                    <th>Ticket Updated On</th>
+                                    <th>More..</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach(var ticket in Model)
+                                    {
+                                        <td>@Html.DisplayFor(t => ticket.tProjectName)</td>
+                                        <td>@Html.DisplayFor(t => ticket.tTitle)</td>
+                                        <td>@Html.DisplayFor(t => ticket.tTicketStatus)</td>
+                                        <td>@Html.DisplayFor(t => ticket.tTicketType)</td>
+                                        <td>@Html.DisplayFor(t => ticket.tTicketPriority)</td>
+                                        <td>@Html.DisplayFor(t => ticket.tDescription)</td>
+                                        <td>@Html.DisplayFor(t => ticket.tCreated)</td>
+                                        <td>@Html.DisplayFor(t => ticket.tUpdated)</td>
+                                        <td></td>
+                                    }                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END TABLE FOR DISPLAYING THE USER ---------------->
+    </div>
+
+</body>
+</html>

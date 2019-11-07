@@ -42,5 +42,8 @@ namespace rhBugTracker.Controllers
 
             return View(users);
         }
+
+
+        
     }
 }

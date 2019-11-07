@@ -134,7 +134,8 @@
                                                     DASHBOARD
                                                 </span>
                                             </a>
-                                        </li>                                       
+                                        </li>
+
                                         <!--MY WORK-->
                                         <li>
                                             <a href="javascript:void(0)" aria-expanded="true">
@@ -143,8 +144,8 @@
                                                 </span>
                                             </a>
                                             <ul class="collapse">
-                                                <li><a href=@Url.Action("", "")>My Project</a></li>
-                                                <li><a href=@Url.Action("", "")>My Tickets</a></li>
+                                                <li><a href=@Url.Action("myProjects", "Projects")>My Project</a></li>
+                                                <li><a href=@Url.Action("myTickets", "Tickets")>My Tickets</a></li>
                                                 <li><a href=@Url.Action("", "")>My Team Members</a></li>
                                                 <li><a href=@Url.Action("Create","Projects")>Create Project</a></li>
                                             </ul>
@@ -156,31 +157,46 @@
                                                     VIEW ALL
                                                 </span>
                                             </a>
-                                                <ul class="collapse">
-                                                    <li><a href=@Url.Action("Users", "ProjectManager")>VIEW USERS</a></li>
-                                                    <li><a href=@Url.Action("Index", "Projects")>VIEW PROJECTS</a></li>
-                                                </ul>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("Users", "ProjectManager")>VIEW USERS</a></li>
+                                                <li><a href=@Url.Action("Index", "Projects")>VIEW PROJECTS</a></li>
+                                            </ul>
                                         </li>
-                                        
-
                                     }
+
                                     //---DEVELOPER-------------------------------------------------------------------------------------->
                                     else if (User.IsInRole("Developer"))
                                     {
                                         <!--DASHBOARD-->
                                         <li>
-                                            <a href=@Url.Action("Index","Developer", null) class="ti-home"> Dashboard</a>
+                                            <a href=@Url.Action("Index","Developer", null)>
+                                                <i class="fa fa-home"></i> <span>
+                                                    DASHBOARD
+                                                </span>
+                                            </a>
                                         </li>
-                                        
-                                        <!--PROJECTS-->
+                                        <!--MY PROJECTS-->
                                         <li>
-                                            <a href=@Url.Action("ManageProjects", "Admin", null) class="ti-book"> My Projects</a>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-home"></i> <span>
+                                                    PROJECTS
+                                                </span>
+                                            </a>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("", "")>MY PROJECTS</a></li>
+                                            </ul>
                                         </li>
-                                        <!--TICKETS-->
+                                        <!--MY TICKETS-->
                                         <li>
-                                            <a href=@Url.Action("Index", "Projects", null) class="ti-ticket"> My Tickets</a>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-home"></i> <span>
+                                                    TICKETS
+                                                </span>
+                                            </a>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("","")>MY TICKETS</a></li>
+                                            </ul>
                                         </li>
-
                                     }
 
                                     //--SUBMITTER----------------------------------------------------------------------------------------->
@@ -188,17 +204,35 @@
                                     {
                                         <!--DASHBOARD-->
                                         <li>
-                                            <a href=@Url.Action("Index","Home", null) class="ti-home"> Dashboard</a>
-                                        </li>                                       
-                                        <!--PROJECTS-->
-                                        <li>
-                                            <a href=@Url.Action("Index", "Projects", null) class="ti-book"> My Projects</a>
-                                        </li>
-                                        <!--TICKETS-->
-                                        <li>
-                                            <a href=@Url.Action("Index", "Tickets", null) class="ti-ticket"> My Tickets</a>
+                                            <a href=@Url.Action("Index","Submitter", null)>
+                                                <i class="fa fa-home"></i> <span>
+                                                    DASHBOARD
+                                                </span>
+                                            </a>
                                         </li>
 
+                                        <!--MY PROJECTS-->
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-home"></i> <span>
+                                                    PROJECTS
+                                                </span>
+                                            </a>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("", "")>MY PROJECTS</a></li>
+                                            </ul>
+                                        </li>
+                                        <!--MY TICKETS-->
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-home"></i> <span>
+                                                    TICKETS
+                                                </span>
+                                            </a>
+                                            <ul class="collapse">
+                                                <li><a href=@Url.Action("","")>MY TICKETS</a></li>
+                                            </ul>
+                                        </li>
                                     }
 
 

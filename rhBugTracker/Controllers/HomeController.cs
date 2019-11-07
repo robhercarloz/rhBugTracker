@@ -13,9 +13,7 @@ namespace rhBugTracker.Controllers
     {
         //make and if else to see which role is being logged in 
         private ApplicationDbContext db = new ApplicationDbContext();
-
-
-
+               
         public ActionResult Index()
         {
             if (User.IsInRole("Submitter"))

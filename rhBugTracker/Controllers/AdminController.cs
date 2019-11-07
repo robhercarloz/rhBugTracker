@@ -90,10 +90,7 @@ namespace rhBugTracker.Controllers
 
             return View(users);
         }
-
-      
-
-        
+                
         //=-------------MANAGE PROJECT USERS--------------
         //GET : 
         [Authorize(Roles = "Admin, Project Manager")]
@@ -203,17 +200,9 @@ namespace rhBugTracker.Controllers
             var ticket = db.Tickets.Find(ticketId);
             //helper to assign to ticket or unassign
             ticket.AssignedToUserId = DeveloperId;
-            
-            
-
-
 
             return RedirectToAction("Index", "Tickets");
         }
-
-
-
-
 
         [Authorize]
         public ActionResult index()

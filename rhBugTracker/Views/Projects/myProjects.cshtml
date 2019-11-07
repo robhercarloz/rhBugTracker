@@ -1,0 +1,56 @@
+﻿@model IEnumerable<rhBugTracker.Models.ProjectViewModel>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>My Projects</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <!--START DISPLAYING USER AND THEIR INFO------------->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">LIST OF MY PROJECTS</h4>
+                    <div class="data-tables datatable-dark">
+                        <table id="dataTable3" class="text-center">
+                            <thead class="text-capitalize">
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>TEAM MEMBERS</th>
+                                    <th>EDIT | ASSIGN</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var project in Model)
+                                {
+                                <tr>
+                                    <td>@Html.DisplayFor(p => project.projName)</td>
+                                    <td>@Html.DisplayFor(p => project.projDescription)</td>
+                                    <td>
+                                        @foreach (var user in project.Users)
+                                        {
+                                            @user.FName @user.LName <br>
+                                        }
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END TABLE FOR DISPLAYING THE USER ---------------->
+    </div>
+</body>
+</html>
+
+<script>
+        $('#dataTable3').DataTable();
+</script>
