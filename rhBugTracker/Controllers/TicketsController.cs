@@ -22,9 +22,10 @@ namespace rhBugTracker.Controllers
         // GET: Tickets
         public ActionResult Index()
         {
-            
+            var tickets = db.Tickets;
+            var userID = User.Identity.GetUserId();
 
-            return View();
+            return View(tickets.ToList());
         }
 
         // GET: Tickets/Details/5
@@ -47,7 +48,7 @@ namespace rhBugTracker.Controllers
         public ActionResult Create()
         {
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName");
-           
+            ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FName");
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
             ViewBag.TicketStatusId = new SelectList(db.TicketStatus, "Id", "Name");
@@ -69,6 +70,7 @@ namespace rhBugTracker.Controllers
                 //assign value to ownere userid property of incoming ticket
                 ticket.OwnerUserId = User.Identity.GetUserId();
                 ticket.Created = DateTime.Now;
+                ticket.TicketStatusId = 1;
 
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
@@ -166,24 +168,8 @@ namespace rhBugTracker.Controllers
         //GET: 
         public ActionResult myTickets()
         {
-            //var user = User.Identity.GetUserId();
-            var myData = ticketHelper.ListMyTickets();
-
-            var tickets = new List<TicketViewModel>();
-            foreach (var tick in myData.ToList())
-            {
-                tickets.Add(new TicketViewModel
-                {
-
-
-                    tTitle = tick.Title,
-                    tDescription = tick.Description,
-                    tCreated = tick.Created,
-
-                });
-            }
-
-            return View(myData);
+            
+            return View(ticketHelper.ListMyTickets());
         }
 
 

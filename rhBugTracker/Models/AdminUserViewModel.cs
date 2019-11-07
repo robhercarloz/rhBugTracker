@@ -30,10 +30,13 @@ namespace rhBugTracker.Models
     //MODEL FOR MANAGE USERS
     public class ManageUsersViewModel
     {
+        public string UserId { get; set; }
         public string ImagePath { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public string RoleName { get; set; }
+        public virtual ApplicationUser User { get; set; }
+       
 
     }
 
@@ -47,7 +50,6 @@ namespace rhBugTracker.Models
         {
             Users = new HashSet<ApplicationUser>();
         }
-
     }
 
     //MODEL FOR MYTICKET
@@ -57,9 +59,7 @@ namespace rhBugTracker.Models
         public string tTicketPriority { get; set; }
         public string tTicketStatus { get; set; }
         public string tTicketType { get; set; }
-
-
-
+               
         public string tTitle { get; set; }
         public string tDescription { get; set; }
         public DateTime tCreated { get; set; }

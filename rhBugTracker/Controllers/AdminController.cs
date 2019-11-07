@@ -84,7 +84,7 @@ namespace rhBugTracker.Controllers
                 {
                     FullName = $"{user.LName}, {user.FName}",                    
                     Email = user.Email,
-                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault()
+                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
                 });
             }
 
@@ -180,7 +180,7 @@ namespace rhBugTracker.Controllers
         public ActionResult ManageTicketsUsers()
         {
             //Display all tickets in selectList
-            ViewBag.Tickets = new SelectList(db.Tickets, "Id", "Name");
+            ViewBag.Tickets = new SelectList(db.Tickets.ToList(), "Id", "Title");
             //Display developer to choose from 
             if (User.IsInRole("Admin"))
             {
@@ -194,15 +194,35 @@ namespace rhBugTracker.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ManageTicketsUsers(int ticketId, string DeveloperId)
+        public ActionResult ManageTicketsUsers(int tickets, string DeveloperId)
         {
             //assigning variables
-            var ticket = db.Tickets.Find(ticketId);
+            var ticket = db.Tickets.Find(tickets);
             //helper to assign to ticket or unassign
             ticket.AssignedToUserId = DeveloperId;
+            db.SaveChanges();
 
             return RedirectToAction("Index", "Tickets");
         }
+
+        //----------------------MANAGE USER ROLE ----------------
+        //GET: 
+        [Authorize]
+        public ActionResult ManageUserRole(string userId)
+        {
+            //var user = db.Users.Find(userId);
+
+            //ViewBag.Roles = 
+
+
+            return View();
+        }
+
+
+
+
+
+
 
         [Authorize]
         public ActionResult index()

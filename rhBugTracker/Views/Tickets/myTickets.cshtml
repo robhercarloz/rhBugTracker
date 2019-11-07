@@ -1,4 +1,4 @@
-﻿@model IEnumerable<rhBugTracker.Models.TicketViewModel>
+﻿@model IEnumerable<rhBugTracker.Models.Ticket>
 
 <!DOCTYPE html>
 
@@ -31,20 +31,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    @foreach(var ticket in Model)
-                                    {
-                                        <td>@Html.DisplayFor(t => ticket.tProjectName)</td>
-                                        <td>@Html.DisplayFor(t => ticket.tTitle)</td>
-                                        <td>@Html.DisplayFor(t => ticket.tTicketStatus)</td>
-                                        <td>@Html.DisplayFor(t => ticket.tTicketType)</td>
-                                        <td>@Html.DisplayFor(t => ticket.tTicketPriority)</td>
-                                        <td>@Html.DisplayFor(t => ticket.tDescription)</td>
-                                        <td>@Html.DisplayFor(t => ticket.tCreated)</td>
-                                        <td>@Html.DisplayFor(t => ticket.tUpdated)</td>
-                                        <td></td>
-                                    }                                    
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Project.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TicketStatus.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TicketType.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TicketPriority.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Created)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Updated)</td>
+                                        <td>@Html.ActionLink("Details", "Details", new { id = item.Id})</td>
+                                    </tr>
+
+
+                                }
                             </tbody>
                         </table>
                     </div>

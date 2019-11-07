@@ -93,7 +93,7 @@
                                             </a>
                                             <ul class="collapse">
                                                 <li><a href=@Url.Action("ManageRoles", "Admin")>Manage User Roles</a></li>
-                                                <li><a href=@Url.Action("ManageUsers", "Admin")>Manage Users</a></li>
+                                                <li><a href=@Url.Action("ManageUsers", "Admin")>View All Users</a></li>
 
                                             </ul>
                                         </li>
@@ -135,7 +135,6 @@
                                                 </span>
                                             </a>
                                         </li>
-
                                         <!--MY WORK-->
                                         <li>
                                             <a href="javascript:void(0)" aria-expanded="true">
@@ -146,7 +145,6 @@
                                             <ul class="collapse">
                                                 <li><a href=@Url.Action("myProjects", "Projects")>My Project</a></li>
                                                 <li><a href=@Url.Action("myTickets", "Tickets")>My Tickets</a></li>
-                                                <li><a href=@Url.Action("", "")>My Team Members</a></li>
                                                 <li><a href=@Url.Action("Create","Projects")>Create Project</a></li>
                                             </ul>
                                         </li>
@@ -204,13 +202,12 @@
                                     {
                                         <!--DASHBOARD-->
                                         <li>
-                                            <a href=@Url.Action("Index","Submitter", null)>
+                                            <a href=@Url.Action("Index","Home", null)>
                                                 <i class="fa fa-home"></i> <span>
                                                     DASHBOARD
                                                 </span>
                                             </a>
                                         </li>
-
                                         <!--MY PROJECTS-->
                                         <li>
                                             <a href="javascript:void(0)">
@@ -241,11 +238,8 @@
                         </div>
                     </div>
                 </div>
-            
-            
 
             <!--SIDEBAR END-->
-
 
             <!-- main content area start ----------------------------------->
             <div class="main-content">
