@@ -42,7 +42,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.Description)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Created)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Updated)</td>
-                                        <td>@Html.ActionLink("Details", "Details", new { id = item.Id})</td>
+                                        <td>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
                                     </tr>
 
 
@@ -56,5 +56,11 @@
         <!--END TABLE FOR DISPLAYING THE USER ---------------->
     </div>
 
+
+
+    <!--DATATABLE SCRIPT REFERENCE-->
+    <script>
+        $('#dataTable3').dataTable();
+    </script>
 </body>
 </html>

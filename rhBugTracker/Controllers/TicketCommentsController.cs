@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using rhBugTracker.Models;
 
 namespace rhBugTracker.Controllers
@@ -53,9 +54,12 @@ namespace rhBugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticketComment.OwnerUserId = User.Identity.GetUserId();
+                ticketComment.Created = DateTime.Now;
                 db.TicketComments.Add(ticketComment);
+                
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Tickets", new { id = ticketComment.TicketId});
             }
 
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FName", ticketComment.OwnerUserId);

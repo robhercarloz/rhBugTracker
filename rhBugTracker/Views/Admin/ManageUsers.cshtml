@@ -26,7 +26,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
-                                    <th>Assign to Role/Project</th>                                    
+                                                                        
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,7 +38,7 @@
                                         <td>@Html.DisplayFor(m => users.FullName)</td>
                                         <td>@Html.DisplayFor(m => users.Email)</td>
                                         <td>@Html.DisplayFor(m => users.RoleName)</td>
-                                        <td>@Html.ActionLink("Manage Role", "ManageUserRole", new { id = users.User.Id})</td>
+                                        
                                     </tr>
                                 }
                             </tbody>

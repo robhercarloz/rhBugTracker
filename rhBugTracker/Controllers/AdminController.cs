@@ -185,7 +185,6 @@ namespace rhBugTracker.Controllers
             if (User.IsInRole("Admin"))
             {
                 ViewBag.DeveloperId = new SelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
-
             }
             return View();
         }
@@ -204,25 +203,7 @@ namespace rhBugTracker.Controllers
 
             return RedirectToAction("Index", "Tickets");
         }
-
-        //----------------------MANAGE USER ROLE ----------------
-        //GET: 
-        [Authorize]
-        public ActionResult ManageUserRole(string userId)
-        {
-            //var user = db.Users.Find(userId);
-
-            //ViewBag.Roles = 
-
-
-            return View();
-        }
-
-
-
-
-
-
+        
 
         [Authorize]
         public ActionResult index()

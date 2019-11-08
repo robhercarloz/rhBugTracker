@@ -1,98 +1,285 @@
 ﻿@model rhBugTracker.Models.Ticket
+@using rhBugTracker.Helpers
 
 @{
     ViewBag.Title = "Details";
+    var ticketHelper = new TicketHelper();
+    var userRole = new UserRolesHelper();
+
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Ticket</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignedToUser.FName)
-        </dt>
+<head>
 
-        <dd>
-            @Html.DisplayFor(model => model.AssignedToUser.FName)
-        </dd>
+</head>
+<body>
+    <div class="col col-12">
+        <!-- Progress Table start -->
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">@Html.DisplayFor(model => model.Title),  TICKET STATUS</h4>
+                    <div class="single-table">
+                        <div class="table-responsive">
+                            <table class="table table-hover progress-table text-center">
+                                <thead class="text-uppercase">
+                                    <tr>
+                                        <th scope="col">Ticket Submitter</th>
+                                        <th>Description</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Priority</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">@Html.DisplayFor(model => model.OwnerUser.FName)</th>
+                                        <td>@Html.DisplayFor(model => model.Description)</td>
+                                        <td>@Html.DisplayFor(model => model.TicketType.Name)</td>
+                                        <td>
+                                            <!--WRITE AN IF STATEMENT TO CHECK THE STATUS OF THE PROJECT-->
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            Halfway done!
+                                        </td>
+                                        <td><span class="status-p bg-primary">pending</span></td>
+                                        <td>
+                                            <ul class="d-flex justify-content-center">
+                                                <li class="mr-3"><a href="@Url.Action("Edit","Tickets", new { id = Model.Id })" class="text-secondary"><i class="fa fa-edit"></i></a></li>
+                                                <li><a href="#" class="text-danger"><i class="ti-trash"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Progress Table end -->
+        <div class="row">
+            <!-- team member area start -->
+            <div class="col-xl-8 col-lg-8 col-md-12 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-sm-flex flex-wrap justify-content-between mb-4 align-items-center">
+                            <h4 class="header-title mb-0">PEOPLE ON TICKET</h4>
+                        </div>
+                        @foreach (var user in ticketHelper.UsersOnTicket(Model.Id))
+                        {
+                            <div class="member-box">
+                                <div class="s-member">
+                                    <div class="media align-items-center">
+                                        <img src="@user.AvatarPath" class="d-block ui-w-30 rounded-circle" alt="">
+                                        <div class="media-body ml-5">
+                                            <p>@user.FName @user.LName</p>
+                                            <p>@userRole.ListUserRoles(user.Id).FirstOrDefault()</p>
+                                        </div>
+                                        <div class="tm-social">
+                                            <a href="#"><i class="fa fa-phone"></i></a>
+                                            <a href="#"><i class="fa fa-envelope"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OwnerUser.FName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OwnerUser.FName)
-        </dd>
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.Name)
-        </dt>
+            <!-- team member area end -->
+            <!-- timeline area start -->
+            <div class="col-xl-4 col-ml-4 col-lg-4 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">TICKET TIMELINE</h4>
+                        <div class="timeline-area">
+                            <div class="timeline-task">
+                                <div class="icon bg3">
+                                    <i class="ti-signal"></i>
+                                </div>
+                                <div class="tm-title">
+                                    <h4>Rashed sent you an email</h4>
+                                    <span class="time"><i class="ti-time"></i>09:35</span>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- timeline area end -->
+        </div>
+        <div class="row">
+            <!-- Progress Table start -->
+            <div class="col-6 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12 " style="border: solid red 1px">
+                            <h3 style="text-align: center">Comments</h3>
+                            <hr style="border: 1px solid black" />
+                            <div id="addComment">
+                                @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("TicketId", Model.Id)
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @Html.TextArea("Comment", new { rows = 5, cols = 50, placeholder = "Add Comment" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-sm btn-dark">Add</button>
+                                        </div>
+                                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketPriority.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TicketPriority.Name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketStatus.Name)
-        </dt>
+                                }
+                            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TicketStatus.Name)
-        </dd>
+                            @foreach (var ticketComments in Model.TicketComments.OrderByDescending(c => c.Created))
+                            {
+                                <div class="container mt-3">
+                                    <h3>Author: @ticketComments.OwnerUser.FName @ticketComments.OwnerUser.LName</h3>
+                                    <div class="media">
+                                        <img src=@ticketComments.OwnerUser.AvatarPath class="align-self-start mr-3" style="width: 60px" />
+                                        <div class="media-body">
+                                            <h5>
+                                                Written: @ticketComments.Created.ToString("MMM dd, yyyy")
+                                            </h5>
+                                            <h4>@ticketComments.Comment</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketType.Name)
-        </dt>
+                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TicketType.Name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12 " style="border: solid red 1px">
+                            <h3 style="text-align: center">Attachments</h3>
+                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-3">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+</body>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Updated)
-        </dd>
+@*<h2>Details</h2>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <div>
+        <h4>Ticket</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AssignedToUser.FName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AssignedToUser.FName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OwnerUser.FName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OwnerUser.FName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Project.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Project.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketPriority.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TicketPriority.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketStatus.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TicketStatus.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketType.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TicketType.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Created)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Created)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Updated)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Updated)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

@@ -18,7 +18,6 @@ namespace rhBugTracker.Controllers
         private TicketHelper ticketHelper = new TicketHelper();
         private UserRolesHelper roleHelper = new UserRolesHelper();
 
-
         // GET: Tickets
         public ActionResult Index()
         {
@@ -171,7 +170,6 @@ namespace rhBugTracker.Controllers
             
             return View(ticketHelper.ListMyTickets());
         }
-
 
         protected override void Dispose(bool disposing)
         {

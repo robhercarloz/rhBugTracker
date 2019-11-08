@@ -98,5 +98,11 @@ namespace rhBugTracker.Helpers
             }
         }
 
+        public ICollection<ApplicationUser> UsersOnTicket(int ticketId)
+        {
+            return db.Tickets.Find(ticketId).Project.Users;
+        }
+
+
     }
 }
