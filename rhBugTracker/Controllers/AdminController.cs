@@ -34,7 +34,7 @@ namespace rhBugTracker.Controllers
                     DisplayName = user.DisplayName,
                     Email = user.Email,
                     RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
-                    Projects = db.Projects.ToList()
+                    
                 });
             }
             return View(users);
@@ -200,8 +200,8 @@ namespace rhBugTracker.Controllers
             //helper to assign to ticket or unassign
             ticket.AssignedToUserId = DeveloperId;
             db.SaveChanges();
-
             return RedirectToAction("Index", "Tickets");
+
         }
         
 

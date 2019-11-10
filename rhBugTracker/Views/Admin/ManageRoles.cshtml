@@ -4,7 +4,9 @@
 
 @{ 
     var ticketHelper = new TicketHelper();
+    var projHelper = new ProjectHelper();
     ViewBag.Title = "ManageRoles";
+    
 }
 
 
@@ -75,7 +77,7 @@
                                 <td>@Html.DisplayFor(m => users.DisplayName)</td>
                                 <td>@Html.DisplayFor(m => users.Email)</td>
                                 <td>@Html.DisplayFor(m => users.RoleName)</td>
-                                <td></td>
+                                <td>@Html.DisplayFor(m => users.Projects.Count)</td>
                                 <td></td>
                             </tr>
                             }

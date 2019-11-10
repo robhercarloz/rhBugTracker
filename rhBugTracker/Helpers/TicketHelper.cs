@@ -103,6 +103,15 @@ namespace rhBugTracker.Helpers
             return db.Tickets.Find(ticketId).Project.Users;
         }
 
+        public ICollection<Ticket> ListAllTickets()
+        {
+            var allTicketList = db.Tickets.ToList();
+            
+
+
+            return allTicketList;
+        }
+
 
     }
 }
