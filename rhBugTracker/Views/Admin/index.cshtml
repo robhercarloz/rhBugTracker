@@ -1,5 +1,6 @@
 ﻿@using rhBugTracker.Helpers;
 @using Microsoft.AspNet.Identity;
+@using rhBugTracker.Models;
 
 @model rhBugTracker.Models.Dashboard
 
@@ -92,36 +93,122 @@
         </div>
     </div>
     <!--SECTION END-->
-    <!-- SECTION 2 START -->
-    <div class="col-12 mt-3">
-    <div class="card ">
-        <div class="card-body">
-            <h4 class="header-title">Most Recent Tickets</h4>
-            <div class="table-responsive">
-                <table class="dbkit-table">
-                    <tbody>
-                        <tr class="heading-td">
-                            <th>Ticket Name</th>
-                            <th>Ticket Status</th>
-                            <th>Priority Status</th>
-                            <th>Ticket Type</th>
-                            <th>More..</th>                            
-                        </tr>
-                        <!--FOR EACH TO LOOP AROUND AND FILL IN // MAYBE CHANGE TO UNASSIGNED TICKETS-->
-                        <tr>
-                            <th></th>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+    <div class="row">
+        <!-- SECTION 2 START -->
+        <div class="col-lg-6 mt-3 md">
+            <div class="card ">
+                <div class="card-body">
+                    <h4 class="header-title">Unassigned Tickets</h4>
+                    <div class="table-responsive">
+                        <table class="dbkit-table">
+                            <tbody>
+                                <tr class="heading-td">
+                                    <th>Ticket Name</th>
+                                    <th>Ticket Status</th>
+                                    <th>Priority Status</th>
+                                    <th>Ticket Type</th>
+                                    <th>Assign Developer</th>
+                                </tr>
+                                <!--FOR EACH TO LOOP AROUND AND FILL IN // MAYBE CHANGE TO UNASSIGNED TICKETS-->
+                                @foreach (var tickets in ticketHelper.ListAllUnassignedTickets())
+                                {
+                                    <tr>
+                                        <td>@tickets.Title</td>
+
+                                        @if (tickets.TicketStatus.Name == "Open")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Open!
+                                            </td>
+                                        }
+                                        else if (tickets.TicketStatus.Name == "Assigned")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Assigned!
+                                            </td>
+                                        }
+                                        else if (tickets.TicketStatus.Name == "In Progress")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                In Progress!
+                                            </td>
+                                        }
+                                        else if (tickets.TicketStatus.Name == "Resolved")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Resolved!
+                                            </td>
+                                        }
+                                        else if (tickets.TicketStatus.Name == "Archived")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Archived!
+                                            </td>
+                                        }
+
+                                        @if (tickets.TicketPriority.Name == "None")
+                                        {
+                                            <td><span class="status-p bg-success">@Html.DisplayFor(t => tickets.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (tickets.TicketPriority.Name == "Low")
+                                        {
+                                            <td><span class="status-p bg-success">@Html.DisplayFor(t => tickets.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (tickets.TicketPriority.Name == "Medium")
+                                        {
+                                            <td><span class="status-p bg-warning">@Html.DisplayFor(t => tickets.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (tickets.TicketPriority.Name == "High")
+                                        {
+                                            <td><span class="status-p bg-warning">@Html.DisplayFor(t => tickets.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (tickets.TicketPriority.Name == "Highest")
+                                        {
+                                            <td><span class="status-p bg-danger">@Html.DisplayFor(t => tickets.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (tickets.TicketPriority.Name == "Immediate")
+                                        {
+                                            <td><span class="status-p bg-danger">@Html.DisplayFor(t => tickets.TicketPriority.Name)</span></td>
+                                        }
+
+                                        <td>@tickets.TicketType.Name</td>
+                                        <td><button type="button" class="btn btn-rounded btn-success">Assign</button></td>
+
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            
+            <!-- order list area end -->
+        </div>
+        <!--SECTION 2 END-->
+        <div class="col-lg-6 mt-3">
+            <div class="card">
+                <div class="card-body">
+
+                </div>
+            </div>
         </div>
     </div>
-    <!-- order list area end -->
-    </div>
-    <!--SECTION 2 END-->
 
 </body>
 </html>
-<a href="~/Controllers/TicketPrioritiesController.cs">~/Controllers/TicketPrioritiesController.cs</a>

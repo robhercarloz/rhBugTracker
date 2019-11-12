@@ -85,6 +85,7 @@ namespace rhBugTracker.Controllers
                     FullName = $"{user.LName}, {user.FName}",                    
                     Email = user.Email,
                     RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
+                    ImagePath = user.AvatarPath
                 });
             }
 
@@ -199,10 +200,13 @@ namespace rhBugTracker.Controllers
             var ticket = db.Tickets.Find(tickets);
             //helper to assign to ticket or unassign
             ticket.AssignedToUserId = DeveloperId;
-            //if(ticket.TicketStatus.Name = "Open")
-            //{
-            //    ticket.TicketStatus.Name = "Assigned";
-            //}
+            
+            if(ticket.AssignedToUserId != null)
+            {
+                ticket.TicketStatusId = db.TicketStatus.FirstOrDefault(t => t.Name == "Assigned").Id;
+            }
+
+
             db.SaveChanges();
             return RedirectToAction("Index", "Tickets");
 

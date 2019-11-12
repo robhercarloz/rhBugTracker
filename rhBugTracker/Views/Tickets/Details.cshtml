@@ -8,7 +8,6 @@
 
 }
 
-
 <head>
 
 </head>
@@ -111,7 +110,7 @@
                                         <td>
                                             <ul class="d-flex justify-content-center">
                                                 <li class="mr-3"><a href="@Url.Action("Edit","Tickets", new { id = Model.Id })" class="text-secondary"><i class="fa fa-edit"></i></a></li>
-                                                <li><a href="#" class="text-danger"><i class="ti-trash"></i></a></li>
+                                                <li><a href="@Url.Action("Delete", "Tickets", new { id = Model.Id})" class="text-danger"><i class="ti-trash"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -136,15 +135,20 @@
                             <div class="member-box">
                                 <div class="s-member">
                                     <div class="media align-items-center">
-                                        <img src="@user.AvatarPath" class="d-block ui-w-30 rounded-circle" alt="">
-                                        <div class="media-body ml-5">
-                                            <p>@user.FName @user.LName</p>
-                                            <p>@userRole.ListUserRoles(user.Id).FirstOrDefault()</p>
-                                        </div>
-                                        <div class="tm-social">
-                                            <a href="#"><i class="fa fa-phone"></i></a>
-                                            <a href="#"><i class="fa fa-envelope"></i></a>
-                                        </div>
+                                        @if (user.AvatarPath == null)
+                                        {
+                                            <img src="~/Images/profile_Placeholder.png" class="d-block ui-w-30 rounded-circle" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="@user.AvatarPath" class="d-block ui-w-30 rounded-circle" alt="">
+                                        }                                        
+                                    <div class="media-body ml-5">
+                                        <p>@user.FName @user.LName</p>
+                                        <p>@userRole.ListUserRoles(user.Id).FirstOrDefault()</p>
+                                        <a href="~/Views/Tickets/Details.cshtml">~/Views/Tickets/Details.cshtml</a>
+                                    </div>
+                                        
                                     </div>
                                 </div>
                             </div>

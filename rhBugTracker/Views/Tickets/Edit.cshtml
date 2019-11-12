@@ -18,6 +18,13 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Created)
+                    @Html.HiddenFor(m => m.ProjectId)
+                    @Html.HiddenFor(m => m.OwnerUserId)
+                    @Html.HiddenFor(m => m.AssignedToUserId)
+                    @Html.HiddenFor(m => m.Title)
+
+
                     <h5 style="text-align:center">EDITING TICKET: @Html.DisplayNameFor(m => m.Title)</h5>
                     <!--TYPE-->
                     <div class="form-group">

@@ -106,10 +106,16 @@ namespace rhBugTracker.Helpers
         public ICollection<Ticket> ListAllTickets()
         {
             var allTicketList = db.Tickets.ToList();
-            
-
-
             return allTicketList;
+        }
+
+        public ICollection<Ticket> ListAllUnassignedTickets()
+        {
+
+            var tickets = db.Tickets.ToList();
+            var unAssigned = tickets.Where(t => t.AssignedToUserId == null ).ToList();
+
+            return unAssigned;
         }
 
 

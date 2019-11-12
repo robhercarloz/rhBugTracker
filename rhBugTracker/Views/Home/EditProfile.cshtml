@@ -1,61 +1,84 @@
-﻿@model rhBugTracker.Models.UserInformationDisplay
+﻿@using Microsoft.AspNet.Identity
+@using rhBugTracker.Models
 @{
+    var db = new ApplicationDbContext();
+    var userid = User.Identity.GetUserId();
+    var user = db.Users.Find(userid);
     ViewBag.Title = "EditProfile";
-}
-    <div class="container-fluid">
-        <div class="col-md-6">
-            <div class="row">
 
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" width="device-width" />
+    <title>Profile</title>
+
+    <script type="text/javascript">
+
+        function disable() { document.getElementById("editButton").disabled = true; }
+        function enable() {
+            document.getElementById("example-text-input").disabled = false;
+            document.getElementById("saveButton").disabled = false;
+
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div class="col-12 mt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mt-3">
+                        <div class="card card-bordered">
+                            <img class="card-img-top img-fluid" src=@user.AvatarPath alt="image">
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 mt-3">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <fieldset disabled>
+                                <div class="form-group">
+
+                                    @Html.Label("example-text-input", "First Name", new { @class = "col-form-label" })
+
+                                    @Html.TextBoxFor(m => user.FName, new { @class = "form-control", id = "example-text-input", @type = "text" })
+
+
+                                    @Html.Label("example-text-input", "Last Name", new { @class = "col-form-label" })
+
+                                    @Html.TextBoxFor(m => user.LName, new { @class = "form-control", id = "example-text-input", @type = "text" })
+
+
+                                    @Html.Label("disabledTextInput", "Display Name", new { @class = "col-form-label" })
+
+                                    @Html.TextBoxFor(m => user.DisplayName, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+
+                                    @Html.Label("disabledTextInput", "Email", new { @class = "col-form-label" })
+
+                                    @Html.TextBoxFor(m => user.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+
+                                    <label>Click link to </label>
+                                    <a href="#">reset password</a>
+                                </div>
+                                <button id="saveButton" onclick="disable()" type="submit">Save changes</button>
+
+                            </fieldset>
+                            <button id="editButton" onclick="enable()" type="button">Edit</button>
+                        }
+
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Textual inputs start -->
-        <div class="col-12 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">USER PROFILE</h4>
-                    <p class="text-muted font-14 mb-4"> You can edit your name or password by clicking on edit and then saving.</p>
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        <fieldset disabled>
-                            <div class="form-group">
-
-                                @Html.Label("example-text-input", "First Name", new { @class = "col-form-label" })
-
-                                @Html.TextBoxFor(m => m.FName, new { @class = "form-control", id = "example-text-input", @type = "text" })
-                            </div>
-                            <div class="form-group">
-
-                                @Html.Label("example-text-input", "Last Name", new { @class = "col-form-label" })
-
-                                @Html.TextBoxFor(m => m.LName, new { @class = "form-control", id = "example-text-input", @type = "text" })
-                            </div>
-                            <div class="form-group">
-
-                                @Html.Label("disabledTextInput", "Display Name", new { @class = "col-form-label" })
-
-                                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
-                            </div>
-                            <div class="form-group">
-                                @Html.Label("disabledTextInput", "Email", new { @class = "col-form-label" })
-
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
-                            </div>
-                            <div class="form-group">
-                                @Html.Label("disabledTextInput", "Password", new { @class = "col-form-label" })
-
-                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
-                            </div>
-                            <button type="submit">Submit</button>
-                        </fieldset>
-                        
-                        <button type="button">Edit</button>
-                    }
-                </div>
-                
-            </div> 
-           
-        </div>
-        <!-- Textual inputs end -->
     </div>
+
+</body>
+</html>
+
+

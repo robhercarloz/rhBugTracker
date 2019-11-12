@@ -120,6 +120,7 @@
                                             <ul class="collapse">
                                                 <li><a href=@Url.Action("Index", "Tickets")>View All Tickets</a></li>
                                                 <li><a href=@Url.Action("ManageTicketsUsers", "Admin")>Assign Ticket to User</a></li>
+                                                
                                             </ul>
                                         </li>
 
@@ -311,7 +312,13 @@
                         {
                             <div class="col-sm-6 clearfix">
                                 <div class="user-profile pull-right">
-                                    <img class="avatar user-thumb" src=@user.AvatarPath alt="avatar">
+                                    @if (user.AvatarPath == null)
+                                    {
+                                        <img class="avatar user-thumb" src="~/Images/profile_Placeholder.png" alt="avatar">
+                                    }else 
+                                    {
+                                        <img class="avatar user-thumb" src=@user.AvatarPath alt="avatar">
+                                    }                                    
                                     <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @user.FName @user.LName <i class="fa fa-angle-down"></i></h4>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href=@Url.Action("EditProfile", "Home", new { Id = userid})>Profile</a>
