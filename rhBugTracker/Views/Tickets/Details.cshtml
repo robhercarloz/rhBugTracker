@@ -36,14 +36,78 @@
                                         <th scope="row">@Html.DisplayFor(model => model.OwnerUser.FName)</th>
                                         <td>@Html.DisplayFor(model => model.Description)</td>
                                         <td>@Html.DisplayFor(model => model.TicketType.Name)</td>
-                                        <td>
-                                            <!--WRITE AN IF STATEMENT TO CHECK THE STATUS OF THE PROJECT-->
-                                            <div class="progress" style="height: 8px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            Halfway done!
-                                        </td>
-                                        <td><span class="status-p bg-primary">pending</span></td>
+                                        <!--WRITE AN IF STATEMENT TO CHECK THE STATUS OF THE PROJECT-->
+                                        @if (Model.TicketStatus.Name == "Open")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Open!
+                                            </td>
+                                        }
+                                        else if (Model.TicketStatus.Name == "Assigned")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Assigned!
+                                            </td>
+                                        }
+                                        else if (Model.TicketStatus.Name == "In Progress")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                In Progress!
+                                            </td>
+                                        }
+                                        else if (Model.TicketStatus.Name == "Resolved")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Resolved!
+                                            </td>
+                                        }
+                                        else if (Model.TicketStatus.Name == "Archived")
+                                        {
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                Archived!
+                                            </td>
+                                        }
+
+                                        @if (Model.TicketPriority.Name == "None")
+                                        {
+                                            <td><span class="status-p bg-success">@Html.DisplayFor(model => model.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (Model.TicketPriority.Name == "Low")
+                                        {
+                                            <td><span class="status-p bg-success">@Html.DisplayFor(model => model.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (Model.TicketPriority.Name == "Medium")
+                                        {
+                                            <td><span class="status-p bg-warning">@Html.DisplayFor(model => model.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (Model.TicketPriority.Name == "High")
+                                        {
+                                            <td><span class="status-p bg-warning">@Html.DisplayFor(model => model.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (Model.TicketPriority.Name == "Highest")
+                                        {
+                                            <td><span class="status-p bg-danger">@Html.DisplayFor(model => model.TicketPriority.Name)</span></td>
+                                        }
+                                        else if (Model.TicketPriority.Name == "Immediate")
+                                        {
+                                            <td><span class="status-p bg-danger">@Html.DisplayFor(model => model.TicketPriority.Name)</span></td>
+                                        }
+
                                         <td>
                                             <ul class="d-flex justify-content-center">
                                                 <li class="mr-3"><a href="@Url.Action("Edit","Tickets", new { id = Model.Id })" class="text-secondary"><i class="fa fa-edit"></i></a></li>
@@ -117,7 +181,7 @@
             <!-- timeline area end -->
         </div>
         <div class="row">
-            <!-- Progress Table start -->
+            <!-- COMMENTS start -->
             <div class="col-6 mt-3">
                 <div class="card">
                     <div class="card-body">
@@ -168,6 +232,7 @@
                     </div>
                 </div>
             </div>
+            <!--Attachments Start-->
             <div class="col-6 mt-3">
                 <div class="card">
                     <div class="card-body">

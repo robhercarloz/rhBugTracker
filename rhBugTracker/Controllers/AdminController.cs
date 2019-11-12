@@ -199,6 +199,10 @@ namespace rhBugTracker.Controllers
             var ticket = db.Tickets.Find(tickets);
             //helper to assign to ticket or unassign
             ticket.AssignedToUserId = DeveloperId;
+            //if(ticket.TicketStatus.Name = "Open")
+            //{
+            //    ticket.TicketStatus.Name = "Assigned";
+            //}
             db.SaveChanges();
             return RedirectToAction("Index", "Tickets");
 

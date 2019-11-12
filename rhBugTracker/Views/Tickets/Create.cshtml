@@ -4,7 +4,102 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" width="device-width" />
+    <title>Create Ticket</title>
+</head>
+<body>
+    <div class="col-12 mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 style="text-align:center">Creating new ticket</h5>
+                <br />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div>
+                        <h6>Enter name for ticket</h6><hr />
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Type a description</h6><hr />
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <h6>Choose project for ticket</h6><hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Choose ticket type</h6><hr />
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DropDownList("TicketTypeId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TicketTypeId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Choose ticket priority</h6><hr />
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DropDownList("TicketPriorityId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TicketPriorityId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>Choose ticket status</h6><hr />
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-success" />
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+    <br />
+
+
+</body>
+</html>
+
+
+
+
+
+@*<h2>Create</h2>
 
 
 @using (Html.BeginForm()) 
@@ -39,15 +134,15 @@
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.OwnerUserId, "OwnerUserId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("OwnerUserId", null, htmlAttributes: new { @class = "form-control" })
@@ -61,7 +156,7 @@
                 @Html.DropDownList("AssignedToUserId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AssignedToUserId, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -79,7 +174,7 @@
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
@@ -93,7 +188,7 @@
                 @Html.EditorFor(model => model.Updated, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Updated, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -107,6 +202,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@*@section Scripts {
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }*@

@@ -16,18 +16,7 @@
                         <div class="card">
                             <div class="seo-fact sbg1">
                                 <div class="p-4 d-flex justify-content-between align-items-center">
-                                    <div class="seofct-icon"><i class="ti-ticket"></i>My Tickets</div>
-                                    <h2>db.myTickets.Count()</h2>
-                                </div>
-                                @*<canvas id="seolinechart1" height="50"></canvas>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="card">
-                            <div class="seo-fact sbg1">
-                                <div class="p-4 d-flex justify-content-between align-items-center">
-                                    <div class="seofct-icon"><i class="ti-blackboard"></i>My Projects</div>
+                                    <a href="@Url.Action("myTickets", "Tickets")"><div class="seofct-icon"><i class="ti-ticket"></i>My Tickets</div></a>
                                     <h2></h2>
                                 </div>
                                 @*<canvas id="seolinechart1" height="50"></canvas>*@
@@ -38,8 +27,18 @@
                         <div class="card">
                             <div class="seo-fact sbg1">
                                 <div class="p-4 d-flex justify-content-between align-items-center">
-                                    <div class="seofct-icon"><i class="ti-file"></i>Create Tickets</div>
+                                    <a href="@Url.Action("myProjects", "Projects")"><div class="seofct-icon"><i class="ti-blackboard"></i>My Projects</div></a>
                                     <h2></h2>
+                                </div>
+                                @*<canvas id="seolinechart1" height="50"></canvas>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="card">
+                            <div class="seo-fact sbg1">
+                                <div class="p-4 d-flex justify-content-between align-items-center">
+                                    <a href="@Url.Action("Create", "Tickets")"><div class="seofct-icon"><i class="ti-file"></i>Create Ticket</div></a>
                                 </div>
                                 @*<canvas id="seolinechart1" height="50"></canvas>*@
                             </div>
