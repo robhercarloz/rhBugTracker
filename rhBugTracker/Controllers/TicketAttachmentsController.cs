@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using rhBugTracker.Helpers;
 using rhBugTracker.Models;
 
 namespace rhBugTracker.Controllers
@@ -13,6 +15,7 @@ namespace rhBugTracker.Controllers
     public class TicketAttachmentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
 
         // GET: TicketAttachments
         public ActionResult Index()
@@ -49,11 +52,21 @@ namespace rhBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TicketId,UserId,FilePath,Description,Created,Updated")] TicketAttachment ticketAttachment)
+        public ActionResult Create([Bind(Include = "Id,TicketId,UserId,FilePath,Description,Created,Updated")] TicketAttachment ticketAttachment, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                ticketAttachment.Created = DateTime.Now;
+                if (ImageUploadValidator.IsWebFriendlyImage(upload))
+                {
+                    var fileName = Path.GetFileName(upload.FileName);
+                    fileName = Path.GetFileNameWithoutExtension(fileName) + "_" + DateTime.Now.Ticks + Path.GetExtension(fileName);
+                    upload.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                    ticketAttachment.FilePath = "/Uploads/" + fileName;
+                }
+
                 db.TicketAttachments.Add(ticketAttachment);
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

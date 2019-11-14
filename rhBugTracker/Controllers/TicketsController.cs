@@ -17,6 +17,7 @@ namespace rhBugTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private TicketHelper ticketHelper = new TicketHelper();
         private UserRolesHelper roleHelper = new UserRolesHelper();
+        private TicketHistoryHelper hisHelper = new TicketHistoryHelper();
 
         // GET: Tickets
         public ActionResult Index()
@@ -117,16 +118,17 @@ namespace rhBugTracker.Controllers
             {
 
                 var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
-
+                
                 ticket.Updated = DateTime.Now;
                 
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
 
+                var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
+                hisHelper.RecordHistoricalChanges(oldTicket, newTicket);
 
+                return RedirectToAction("Details", new { id = ticket.Id});
 
-
-                return RedirectToAction("Index");
             }
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FName", ticket.OwnerUserId);

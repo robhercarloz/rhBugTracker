@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 
 namespace rhBugTracker.Helpers
 {
@@ -17,18 +19,39 @@ namespace rhBugTracker.Helpers
             if (file.ContentLength > 2 * 1024 * 1024 || file.ContentLength < 1024)
                 return file.ContentLength == 1024 * 1024;
 
+
+            
             try
             {
-                using(var img = Image.FromStream(file.InputStream))
+                //var validExtensions = new List<string>();
+                foreach (var ext in WebConfigurationManager.AppSettings["validExtensions"].Split(','))
                 {
-                    return ImageFormat.Jpeg.Equals(img.RawFormat) ||
-                           ImageFormat.Png.Equals(img.RawFormat) ||
-                           ImageFormat.Gif.Equals(img.RawFormat);
+                    if (Path.GetExtension(file.FileName).Contains(ext))
+                        return true;
                 }
-            }catch
-            {                
+
+                return true;
+            }
+            catch
+            {
                 return false;
             }
+
+
+
+            //try
+            //{
+            //    using(var img = Image.FromStream(file.InputStream))
+            //    {
+            //        return ImageFormat.Jpeg.Equals(img.RawFormat) ||
+            //               ImageFormat.Png.Equals(img.RawFormat) ||
+            //               ImageFormat.Gif.Equals(img.RawFormat);
+
+            //    }
+            //}catch
+            //{                
+            //    return false;
+            //}
         }
     }
 }

@@ -5,7 +5,6 @@
     ViewBag.Title = "Details";
     var ticketHelper = new TicketHelper();
     var userRole = new UserRolesHelper();
-
 }
 
 <head>
@@ -122,6 +121,7 @@
             </div>
         </div>
         <!-- Progress Table end -->
+        <!--MIDDLE SECTION-->
         <div class="row">
             <!-- team member area start -->
             <div class="col-xl-8 col-lg-8 col-md-12 mt-3">
@@ -158,8 +158,8 @@
                     </div>
                 </div>
             </div>
-
             <!-- team member area end -->
+
             <!-- timeline area start -->
             <div class="col-xl-4 col-ml-4 col-lg-4 mt-3">
                 <div class="card">
@@ -167,16 +167,19 @@
                         <h4 class="header-title">TICKET TIMELINE</h4>
                         <div class="timeline-area">
                             <div class="timeline-task">
+
+                                @foreach (var history in Model.TicketHistories.OrderByDescending(t => t.Changed).Take(5))
+                                {                                                                                                         
                                 <div class="icon bg3">
                                     <i class="ti-signal"></i>
                                 </div>
                                 <div class="tm-title">
-                                    <h4>Rashed sent you an email</h4>
-                                    <span class="time"><i class="ti-time"></i>09:35</span>
+                                    <h4>@history.User.FName</h4>
+                                    <span class="time"><i class="ti-time"></i>@history.Changed</span>
                                 </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                                </p>
+
+                                <p>The @history.Property has been changed from @history.OldValue to @history.NewValue;</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -184,6 +187,7 @@
             </div>
             <!-- timeline area end -->
         </div>
+        <!--BOTTOM SECTION-->
         <div class="row">
             <!-- COMMENTS start -->
             <div class="col-6 mt-3">
@@ -243,112 +247,28 @@
                         <div class="col-12 " style="border: solid red 1px">
                             <h3 style="text-align: center">Attachments</h3>
                         </div>
+                        <!--Upload button-->
+                        @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { encType = "multipart/form-data" } ))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("TicketId", Model.Id);
 
+                            
+                            <input type="file" name="Upload" />
+                            <button type="submit" >Add Attachment</button>
+
+                        }
+
+                        <!--Showing uploads-->
+                        @foreach (var attach in Model.TicketAttachments)
+                        {
+                            <a href=@Url.Content(attach.FilePath) target="_blank">@attach.FilePath.Split('/')[2] </a>
+                        }
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 mt-3">
-
-        </div>
-    </div>
-
-
-
+    <br />
 </body>
-
-
-@*<h2>Details</h2>
-
-    <div>
-        <h4>Ticket</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.AssignedToUser.FName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AssignedToUser.FName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.OwnerUser.FName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.OwnerUser.FName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Project.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Project.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TicketPriority.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TicketPriority.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TicketStatus.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TicketStatus.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TicketType.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TicketType.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Created)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Created)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Updated)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Updated)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@
