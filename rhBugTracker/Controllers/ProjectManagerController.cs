@@ -36,7 +36,8 @@ namespace rhBugTracker.Controllers
                 {
                     FullName = $"{user.LName}, {user.FName}",
                     Email = user.Email,
-                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault()
+                    RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
+                    ImagePath = user.AvatarPath
                 });
             }
 

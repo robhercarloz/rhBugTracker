@@ -6,7 +6,7 @@
 @{ 
     var userId = User.Identity.GetUserId();
     var projHelper = new ProjectHelper();
-
+    var ticketHelper = new TicketHelper();
 
 
 }
@@ -26,58 +26,67 @@
             <div class="card-body">
                 <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-md-3 ">
+                        <div class="col-md-4 ">
                             <div class="card">
                                 <div class="seo-fact sbg1">
                                     <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <div class="seofct-icon"><i class="ti-ticket"></i>My Tickets</div>
-                                        
+                                        <a href= @Url.Action("myTickets", "Tickets")><div class="seofct-icon"><i class="ti-ticket"></i>My Tickets</div></a>                                     
+                                        @if (ticketHelper.ListUserTickets(userId).Count() == 0)
+                                        {
+                                            <h2>0</h2>
+                                        }
+                                        else
+                                        {
+                                            <h2>@ticketHelper.ListUserTickets(userId).Count()</h2>
+                                        }
+
 
                                     </div>
                                     @*<canvas id="seolinechart1" height="50"></canvas>*@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 ">
+                        <div class="col-md-4 ">
                             <div class="card">
                                 <div class="seo-fact sbg1">
                                     <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <div class="seofct-icon"><i class="ti-blackboard"></i>My Projects</div>
-                                        <h2></h2>
-                                    </div>
-                                    @*<canvas id="seolinechart1" height="50"></canvas>*@
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 ">
-                            <div class="card">
-                                <div class="seo-fact sbg1">
-                                    <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <a href=@Url.Action("Index","Projects")><div class="seofct-icon"><i class="ti-file"></i>All Projects</div></a>
-                                        @if (Model.myProjects.Count() == 0)
+                                        <a href=@Url.Action("myProjects", "Projects")><div class="seofct-icon"><i class="ti-blackboard"></i>My Projects</div></a>
+                                        @if (projHelper.ListUserProjects(userId).Count() == 0)
                                         {
                                             <h2>0</h2>
                                         }
                                         else
                                         {
-                                            <h2>@Model.myProjects.Count()</h2>
+                                            <h2>@projHelper.ListUserProjects(userId).Count()</h2>
                                         }
-                                    </div>
-                                    @*<canvas id="seolinechart1" height="50"></canvas>*@
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 ">
-                            <div class="card">
-                                <div class="seo-fact sbg1">
-                                    <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <div class="seofct-icon"><i class="ti-file"></i>My Team</div>
+
                                         <h2></h2>
                                     </div>
                                     @*<canvas id="seolinechart1" height="50"></canvas>*@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4 ">
+                            <div class="card">
+                                <div class="seo-fact sbg1">
+                                    <div class="p-4 d-flex justify-content-between align-items-center">
+                                        <a href=@Url.Action("Index","Projects")><div class="seofct-icon"><i class="ti-file"></i>All Projects</div></a>
+                                                                            
+                                        @if (projHelper.ListAllProjects().Count() == 0)
+                                        {
+                                            <h2>0</h2>
+                                        }
+                                        else
+                                        {
+                                            <h2>@projHelper.ListAllProjects().Count()</h2>
+                                        }
+
+                                    </div>
+                                    @*<canvas id="seolinechart1" height="50"></canvas>*@
+                                </div>
+                            </div>
+                        </div>
+                        
 
                     </div>
                 </div>

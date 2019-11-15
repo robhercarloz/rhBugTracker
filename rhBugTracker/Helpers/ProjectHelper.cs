@@ -14,6 +14,14 @@ namespace rhBugTracker.Helpers
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
+        public ICollection<Project> ListProjectsUserIsOn(string userId)
+        {
+            var projects = db.Projects.ToList();
+            
+
+            return (projects);
+        }
+
         public bool IsUserOnProject(string userId, int projectId)
         {
             var project = db.Projects.Find(projectId);
@@ -24,11 +32,8 @@ namespace rhBugTracker.Helpers
         public ICollection<Project> ListUserProjects(string userId)
         {
             ApplicationUser user = db.Users.Find(userId);
-
             var projects = user.Projects.ToList();
             
-
-
             return (projects);
         }
 
@@ -64,6 +69,11 @@ namespace rhBugTracker.Helpers
         public ICollection<ApplicationUser>UsersNotOnProject(int projectId)
         {
             return db.Users.Where(u => u.Projects.All(p => p.Id != projectId)).ToList();
+        }
+        public ICollection<Project> ListAllProjects()
+        {
+            var projects = db.Projects.ToList();
+            return projects;
         }
 
     }

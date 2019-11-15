@@ -176,25 +176,21 @@
                                         </li>
                                         <!--MY PROJECTS-->
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <i class="fa fa-home"></i> <span>
-                                                    PROJECTS
+                                            <a href="@Url.Action("myProjects", "Projects")">
+                                                <i class="fa fa-book"></i> <span>
+                                                    MY PROJECTS
                                                 </span>
                                             </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("myProjects", "Projects")>MY PROJECTS</a></li>
-                                            </ul>
+                                            
                                         </li>
                                         <!--MY TICKETS-->
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <i class="fa fa-home"></i> <span>
-                                                    TICKETS
+                                            <a href="@Url.Action("myTickets", "Tickets")">
+                                                <i class="fa fa-ticket"></i> <span>
+                                                    MY TICKETS
                                                 </span>
                                             </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("myTickets","Tickets")>MY TICKETS</a></li>
-                                            </ul>
+                                            
                                         </li>
                                     }
 
@@ -253,13 +249,7 @@
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                            </div>
-                            <div class="search-box pull-left">
-                                <form action="#">
-                                    <input type="text" name="search" placeholder="Search..." required>
-                                    <i class="ti-search"></i>
-                                </form>
-                            </div>
+                            </div>                            
                         </div>
                         <!-- profile info & task notification -->
                         <div class="col-md-6 col-sm-4 clearfix">
@@ -277,20 +267,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="dropdown">
-                                    <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown">
-                                        <span>0</span>
-                                    </i>
-                                    <div class="dropdown-menu notify-box nt-enveloper-box">
-                                        <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
-                                        <div class="nofity-list">
-                                            <!--EMAIL LIST-->
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="settings-btn">
-                                    <i class="ti-settings"></i>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>

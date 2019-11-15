@@ -14,10 +14,10 @@ namespace rhBugTracker.Controllers
         private UserRolesHelper roleHelper = new UserRolesHelper();
         private ProjectHelper projHelper = new ProjectHelper();
         private TicketHelper ticketHelper = new TicketHelper();
-       
+
         //--------------MANAGE ROLES----------------------
         // GET: Admin
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult ManageRoles()
         {
             ViewBag.UserIds = new MultiSelectList(db.Users, "Id", "Email");
@@ -34,7 +34,7 @@ namespace rhBugTracker.Controllers
                     DisplayName = user.DisplayName,
                     Email = user.Email,
                     RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
-                    
+
                 });
             }
             return View(users);
@@ -82,7 +82,7 @@ namespace rhBugTracker.Controllers
             {
                 users.Add(new ManageUsersViewModel
                 {
-                    FullName = $"{user.LName}, {user.FName}",                    
+                    FullName = $"{user.LName}, {user.FName}",
                     Email = user.Email,
                     RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
                     ImagePath = user.AvatarPath
@@ -91,7 +91,7 @@ namespace rhBugTracker.Controllers
 
             return View(users);
         }
-                
+
         //=-------------MANAGE PROJECT USERS--------------
         //GET : 
         [Authorize(Roles = "Admin, Project Manager")]
@@ -101,7 +101,7 @@ namespace rhBugTracker.Controllers
             ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
             ViewBag.Developers = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
             ViewBag.Submitters = new MultiSelectList(roleHelper.UsersInRole("Submitter"), "Id", "Email");
-            
+
             //Allow assign to user to project only admin
             if (User.IsInRole("Admin"))
             {
@@ -111,7 +111,7 @@ namespace rhBugTracker.Controllers
 
             //Create a view model purposes of displaying Users and their associated projects
             var myData = new List<UserProjectListViewModel>(); //new list of type model 
-            
+
             UserProjectListViewModel userVm = null; //temp variable 
 
             //creating instance of model assigning properties and adding it to list called myData
@@ -122,15 +122,15 @@ namespace rhBugTracker.Controllers
                     Name = $"{user.LName}, {user.FName}",
                     ProjectNames = projHelper.ListUserProjects(user.Id).Select(p => p.Name).ToList()
                 };
-            //if the person is not on any project then display not available 
-            if (userVm.ProjectNames.Count() == 0)
-                userVm.ProjectNames.Add("N/A");
+                //if the person is not on any project then display not available 
+                if (userVm.ProjectNames.Count() == 0)
+                    userVm.ProjectNames.Add("N/A");
 
-            //add to the list
-            myData.Add(userVm);
+                //add to the list
+                myData.Add(userVm);
             }
-           //passing into the view            
-           return View(myData);           
+            //passing into the view            
+            return View(myData);
         }
 
         //POST
@@ -141,31 +141,31 @@ namespace rhBugTracker.Controllers
             //Remove users from every project I have selected
             if (projects != null)
             {
-                foreach(var projectId in projects)
+                foreach (var projectId in projects)
                 {
                     //Remove everone from this project
-                    foreach(var user in projHelper.UsersOnProject(projectId).ToList())
+                    foreach (var user in projHelper.UsersOnProject(projectId).ToList())
                     {
                         projHelper.RemoveUserFromProject(user.Id, projectId);
                     }
-                    
+
                     //add back project manager to list if chose manager
                     if (!string.IsNullOrEmpty(projectManagerId))
                     {
                         projHelper.AddUserToProject(projectManagerId, projectId);
                     }
 
-                    if(developers!= null)
+                    if (developers != null)
                     {
-                        foreach(var developerId in developers)
+                        foreach (var developerId in developers)
                         {
                             projHelper.AddUserToProject(developerId, projectId);
                         }
                     }
 
-                    if(submitters != null)
+                    if (submitters != null)
                     {
-                        foreach(var submittersId in submitters)
+                        foreach (var submittersId in submitters)
                         {
                             projHelper.AddUserToProject(submittersId, projectId);
                         }
@@ -174,7 +174,7 @@ namespace rhBugTracker.Controllers
             }
             return RedirectToAction("ManageProjectsUsers");
         }
-        
+
         //----------------MANAGE TICKET USERS-----------------
         //GET:
         [Authorize(Roles = "Admin")]
@@ -200,8 +200,8 @@ namespace rhBugTracker.Controllers
             var ticket = db.Tickets.Find(tickets);
             //helper to assign to ticket or unassign
             ticket.AssignedToUserId = DeveloperId;
-            
-            if(ticket.AssignedToUserId != null)
+
+            if (ticket.AssignedToUserId != null)
             {
                 ticket.TicketStatusId = db.TicketStatus.FirstOrDefault(t => t.Name == "Assigned").Id;
             }
@@ -211,8 +211,24 @@ namespace rhBugTracker.Controllers
             return RedirectToAction("Index", "Tickets");
 
         }
-        
 
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult manageTicket()
+        //{
+        //    return View();
+        //}
+        
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult manageTicket(int ticket, string DeveloperId)
+        //{
+
+
+
+
+        //    return RedirectToAction("ManageTicketsUsers", "Admin");
+        //}
+        
         [Authorize]
         public ActionResult index()
         {

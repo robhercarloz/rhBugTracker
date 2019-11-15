@@ -118,6 +118,13 @@ namespace rhBugTracker.Helpers
             return unAssigned;
         }
 
+        public ICollection<Ticket> ListUserTickets(string userId)
+        {
+            ApplicationUser user = db.Users.Find(userId);
+            var tickets = user.Tickets.ToList();
+
+            return (tickets);
+        }
 
     }
 }

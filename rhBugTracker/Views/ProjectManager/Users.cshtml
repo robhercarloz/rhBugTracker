@@ -25,13 +25,22 @@
                         <tbody>
                             @foreach (var users in Model)
                             {
-                                <tr>
-                                    @Html.AntiForgeryToken()
-                                    <td>@Html.DisplayFor(m => users.ImagePath)</td>
-                                    <td>@Html.DisplayFor(m => users.FullName)</td>
-                                    <td>@Html.DisplayFor(m => users.Email)</td>
-                                    <td>@Html.DisplayFor(m => users.RoleName)</td>                                   
-                                </tr>
+                            <tr>
+                                @Html.AntiForgeryToken()
+                                @if (users.ImagePath == null)
+                                {
+                                    <td><img src="~/Images/profile_Placeholder.png" class="d-block ui-w-30 rounded-circle" style="max-width: 75px; height: 75px" alt=""></td>
+                                }
+                                else
+                                {
+                                    <td><img src="@Html.DisplayFor(m => users.ImagePath)" class="d-block ui-w-30 rounded-circle" style="max-width: 75px; height: 75px" alt=""></td>
+                                }
+
+
+                                <td>@Html.DisplayFor(m => users.FullName)</td>
+                                <td>@Html.DisplayFor(m => users.Email)</td>
+                                <td>@Html.DisplayFor(m => users.RoleName)</td>
+                            </tr>
                             }
                         </tbody>
                     </table>
