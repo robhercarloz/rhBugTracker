@@ -26,8 +26,8 @@
                                 <tr>
                                     <th>NAME</th>
                                     <th>DESCRIPTION</th>
-                                    <th>PEOPLE ON PROJECT</th>
-                                    <th>EDIT | ASSIGN</th>
+                                    <th>Created On</th>
+                                    <th>Tickets on project</th>
                                     
                                 </tr>
                             </thead>
@@ -38,6 +38,8 @@
                                     <tr>
                                         <td>@projects.Name</td>
                                         <td>@projects.Description</td>
+                                        <td>@projects.Created</td>
+                                        <td>@projects.Tickets.Count()</td>
                                     </tr>
                                 }
 

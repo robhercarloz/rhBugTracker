@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNet.Identity
+@using rhBugTracker.Helpers
+
+@model rhBugTracker.Models.Dashboard
+
+@{ 
+    var projectHelper = new ProjectHelper();
+    var userId = User.Identity.GetUserId();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>My Created Projects</title>
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <!--stylesheets-->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/metisMenu.css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+    <!--START DATATABLES CSS-->
+    <link href="~/Content/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/datatable/jquery.dataTables.css" rel="stylesheet" />
+
+    <!--END DATATABLES CSS-->
+    <!-- others css -->
+    <link rel="stylesheet" href="~/Content/typography.css">
+    <link rel="stylesheet" href="~/Content/default-css.css">
+    <link rel="stylesheet" href="~/Content/styles.css">
+    <link rel="stylesheet" href="~/Content/responsive.css">
+    <!-- modernizr css -->
+    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+
+    <!--JQUERY START DATATABLES-->
+    <script src="~/Content/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatable/jquery.dataTables.js"></script>
+
+    <!--JQUERY END DATATABLES-->
+
+
+</head>
+<body>
+    <div class="main-content-inner">
+        <div class="row">
+            <!-- data table start -->
+            <div class="col-12 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">My created projects</h4>
+                        <div class="data-tables">
+                            <table id="dataTable" class="text-center">
+                                <thead class="bg-light text-capitalize">
+                                    <tr>
+                                        <th>Project Name</th>
+                                        <th>Project Description</th>
+                                        <th>Created On</th>
+                                        <th>Developers on Projects</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @*@foreach(var projects in Model.createdProjects())
+                                    { 
+                                        <tr>
+                                            <td>@projects.Name</td>
+                                            <td>@projects.Description</td>
+                                            <td>@projects.Created</td>
+                                            <td>@projects.Users</td>
+                                            <td>2008/11/28</td>
+                                            <td>$162,700</td>
+                                        </tr>
+                                    }*@
+
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- data table end -->
+        </div>
+    </div>
+
+    <!-- jquery latest version -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/metisMenu.min.js"></script>
+    <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/jquery.slicknav.min.js"></script>
+
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- start zingchart js -->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+    <!-- start amchart js -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+    <!-- all line chart activation -->
+    <script src="~/Scripts/line-chart.js"></script>
+    <!-- all bar chart activation -->
+    <script src="~/Scripts/bar-chart.js"></script>
+    <!-- all pie chart -->
+    <script src="~/Scripts/pie-chart.js"></script>
+    <!-- others plugins -->
+    <script src="~/Scripts/plugins.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+
+    <!--Jquery Datatable-->
+    <script src="~/Content/datatable/jquery.dataTables.js"></script>
+    <script src="~/Content/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatable/dataTables.bootstrap4.js"></script>
+    <script src="~/Content/datatable/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/Content/datatable/dataTables.bootstrap.js"></script>
+    <script src="~/Content/datatable/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Content/datatable/dataTables.jqueryui.js"></script>
+    <script src="~/Content/datatable/dataTables.jqueryui.min.js"></script>
+
+
+    <script>
+        $('#dataTable').DataTable();
+    </script>
+
+</body>
+</html>
