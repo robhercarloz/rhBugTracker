@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace rhBugTracker.Controllers
 {
@@ -206,22 +207,15 @@ namespace rhBugTracker.Controllers
                 ticket.TicketStatusId = db.TicketStatus.FirstOrDefault(t => t.Name == "Assigned").Id;
             }
 
-
             db.SaveChanges();
             return RedirectToAction("Index", "Tickets");
-
         }
-
-        //[Authorize(Roles = "Admin")]
-        //public ActionResult manageTicket()
-        //{
-        //    return View();
-        //}
         
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult manageTicket(int ticket, string DeveloperId)
-        //{
+        [Authorize(Roles = "Admin, Project Manager")]
+        public ActionResult MyCreatedProjects()
+        {
+            return View();
+        }
 
 
 
@@ -232,8 +226,12 @@ namespace rhBugTracker.Controllers
         [Authorize]
         public ActionResult index()
         {
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
             var data = new Dashboard();
             data.myProjects = db.Projects.ToList();
+            data.createdProjects = db.Projects.Where(p => p.ProjectOwnerId == user.Id).ToList();
+
             return View(data);
         }
             

@@ -14,12 +14,24 @@ namespace rhBugTracker.Helpers
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
+
+        
         public ICollection<Project> ListProjectsUserIsOn(string userId)
         {
             var projects = db.Projects.ToList();
             
 
-            return (projects);
+            var projList = new List<Project>();
+            foreach(var proj in projects)
+            {
+                if (IsUserOnProject(userId, proj.Id))
+                {
+                    projList.Add(proj);
+                }
+                               
+            }
+
+            return projList;
         }
 
         public bool IsUserOnProject(string userId, int projectId)

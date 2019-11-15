@@ -61,8 +61,8 @@ namespace rhBugTracker.Controllers
                     ModelState.AddModelError("Name", "Invalid Title");
                     return View(project);
                 }
-                
 
+                project.ProjectOwnerId = User.Identity.GetUserId();
                 project.Created = DateTime.Now;
                 db.Projects.Add(project);
                 db.SaveChanges();
@@ -75,6 +75,8 @@ namespace rhBugTracker.Controllers
         // GET: Projects/Edit/5
         public ActionResult Edit(int? id)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

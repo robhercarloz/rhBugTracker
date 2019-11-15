@@ -33,11 +33,11 @@
                             </thead>
                             <tbody>
 
-                                @foreach (var projects in projectHelper.ListUserProjects(userId))
+                                @foreach (var projects in projectHelper.ListProjectsUserIsOn(userId))
                                 {
                                     <tr>
-                                        <td>@Html.DisplayFor(p => projects.Name)</td>
-                                        <td></td>
+                                        <td>@projects.Name</td>
+                                        <td>@projects.Description</td>
                                     </tr>
                                 }
 

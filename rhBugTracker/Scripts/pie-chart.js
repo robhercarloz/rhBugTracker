@@ -80,37 +80,37 @@ if ($('#coin_distribution').length) {
 }
 /*--------------  coin distrubution chart END ------------*/
 
-/*-------------- 1 Pie chart amchart start ------------*/
-if ($('#ampiechart1').length) {
-    var chart = AmCharts.makeChart("ampiechart1", {
-        "type": "pie",
-        "labelRadius": -35,
-        "labelText": "[[percents]]%",
-        "dataProvider": [{
-            "country": "Lithuania",
-            "litres": 501.9,
-            "backgroundColor": "#815DF6"
-        }, {
-            "country": "Czech Republic",
-            "litres": 301.9,
-            "backgroundColor": "#67B7DC"
-        }, {
-            "country": "Ireland",
-            "litres": 201.1,
-            "backgroundColor": "#9c82f4"
-        }, {
-            "country": "The Netherlands",
-            "litres": 150,
-            "backgroundColor": "#FDD400"
-        }],
-        "color": "#fff",
-        "colorField": "backgroundColor",
-        "valueField": "litres",
-        "titleField": "country"
-    });
-}
+///*-------------- 1 Pie chart amchart start ------------*/
+//if ($('#ampiechart1').length) {
+//    var chart = AmCharts.makeChart("ampiechart1", {
+//        "type": "pie",
+//        "labelRadius": -35,
+//        "labelText": "[[percents]]%",
+//        "dataProvider": [{
+//            "country": "Lithuania",
+//            "litres": 501.9,
+//            "backgroundColor": "#815DF6"
+//        }, {
+//            "country": "Czech Republic",
+//            "litres": 301.9,
+//            "backgroundColor": "#67B7DC"
+//        }, {
+//            "country": "Ireland",
+//            "litres": 201.1,
+//            "backgroundColor": "#9c82f4"
+//        }, {
+//            "country": "The Netherlands",
+//            "litres": 150,
+//            "backgroundColor": "#FDD400"
+//        }],
+//        "color": "#fff",
+//        "colorField": "backgroundColor",
+//        "valueField": "litres",
+//        "titleField": "country"
+//    });
+//}
 
-/*-------------- 1 Pie chart amchart end ------------*/
+///*-------------- 1 Pie chart amchart end ------------*/
 
 /*-------------- 2 Pie chart amchart start ------------*/
 if ($('#ampiechart2').length) {

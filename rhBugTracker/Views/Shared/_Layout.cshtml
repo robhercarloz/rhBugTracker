@@ -60,271 +60,270 @@
     <div class="page-container">
 
         <!--SIDEBAR START-->
-            
-                <!-- sidebar Nav menu area start --------------------------->
-                <div class="sidebar-menu">
-                    <div class="sidebar-header">
-                        <div class="logo">
-                            <a href="#"><img src="~/Images/bugTrackerLogo.png" alt="logo"></a>
-                            @*<img src="~/Images/bugTrackerLogo.png" alt="logo">*@
-                        </div>
-                    </div>
-                    <div class="main-menu">
-                        <div class="menu-inner">
-                            <nav>
-                                <ul class="metismenu" id="menu">
-                                    <!--ADMIN------------------------------------------------------------------------------>
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <!--DASHBOARD-->
-                                        <li>
-                                            <a href=@Url.Action("Index","Admin", null)>
-                                                <i class="fa fa-home"></i> <span>
-                                                    DASHBOARD
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <!--USERS-->
-                                        <li>
-                                            <a href="javascript:void(0)" aria-expanded="true">
-                                                <i class="fa fa-user"></i> <span>
-                                                    USER MANAGEMENT
-                                                </span>
-                                            </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("ManageRoles", "Admin")>Manage User Roles</a></li>
-                                                <li><a href=@Url.Action("ManageUsers", "Admin")>View All Users</a></li>
-
-                                            </ul>
-                                        </li>
-                                        <!--PROJECTS-->
-                                        <li>
-                                            <a href="javascript:void(0)" aria-expanded="true">
-                                                <i class="fa fa-book"></i> <span>
-                                                    PROJECT MANAGEMENT
-                                                </span>
-                                            </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("Index", "Projects")>View All Projects</a></li>
-                                                <li><a href=@Url.Action("ManageProjectsUsers", "Admin")>Assign Users to Projects</a></li>
-                                                <li><a href=@Url.Action("Create", "Projects")>Create Project</a></li>
-                                            </ul>
-                                        </li>
-                                        <!--TICKETS-->
-                                        <li>
-                                            <a href="javascript:void(0)" aria-expanded="true">
-                                                <i class="fa fa-ticket"></i> <span>
-                                                    TICKET MANAGEMENT
-                                                </span>
-                                            </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("Index", "Tickets")>View All Tickets</a></li>
-                                                <li><a href=@Url.Action("ManageTicketsUsers", "Admin")>Assign Ticket to User</a></li>
-                                                
-                                            </ul>
-                                        </li>
-
-                                    }
-                                    //<!--PROJECT MANAGER------------------------------------------------------------------------------>
-                                    else if (User.IsInRole("Project Manager"))
-                                    {
-                                        <!--DASHBOARD-->
-                                        <li>
-                                            <a href=@Url.Action("Index","ProjectManager", null)>
-                                                <i class="fa fa-home"></i> <span>
-                                                    DASHBOARD
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <!--MY WORK-->
-                                        <li>
-                                            <a href="javascript:void(0)" aria-expanded="true">
-                                                <i class="fa fa-user"></i> <span>
-                                                    MY WORK
-                                                </span>
-                                            </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("myProjects", "Projects")>My Project</a></li>
-                                                <li><a href=@Url.Action("myTickets", "Tickets")>My Tickets</a></li>
-                                                <li><a href=@Url.Action("Create","Projects")>Create Project</a></li>
-                                            </ul>
-                                        </li>
-                                        <!--VIEW ALL-->
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <i class="fa fa-home"></i> <span>
-                                                    VIEW ALL
-                                                </span>
-                                            </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("Users", "ProjectManager")>VIEW USERS</a></li>
-                                                <li><a href=@Url.Action("Index", "Projects")>VIEW PROJECTS</a></li>
-                                            </ul>
-                                        </li>
-                                    }
-
-                                    //---DEVELOPER-------------------------------------------------------------------------------------->
-                                    else if (User.IsInRole("Developer"))
-                                    {
-                                        <!--DASHBOARD-->
-                                        <li>
-                                            <a href=@Url.Action("Index","Developer", null)>
-                                                <i class="fa fa-home"></i> <span>
-                                                    DASHBOARD
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <!--MY PROJECTS-->
-                                        <li>
-                                            <a href="@Url.Action("myProjects", "Projects")">
-                                                <i class="fa fa-book"></i> <span>
-                                                    MY PROJECTS
-                                                </span>
-                                            </a>
-                                            
-                                        </li>
-                                        <!--MY TICKETS-->
-                                        <li>
-                                            <a href="@Url.Action("myTickets", "Tickets")">
-                                                <i class="fa fa-ticket"></i> <span>
-                                                    MY TICKETS
-                                                </span>
-                                            </a>
-                                            
-                                        </li>
-                                    }
-
-                                    //--SUBMITTER----------------------------------------------------------------------------------------->
-                                    else
-                                    {
-                                        <!--DASHBOARD-->
-                                        <li>
-                                            <a href=@Url.Action("Index","Home", null)>
-                                                <i class="fa fa-home"></i> <span>
-                                                    DASHBOARD
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <!--MY PROJECTS-->
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <i class="fa fa-home"></i> <span>
-                                                    PROJECTS
-                                                </span>
-                                            </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("myProjects", "Projects")>MY PROJECTS</a></li>
-                                            </ul>
-                                        </li>
-                                        <!--MY TICKETS-->
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <i class="fa fa-home"></i> <span>
-                                                    TICKETS
-                                                </span>
-                                            </a>
-                                            <ul class="collapse">
-                                                <li><a href=@Url.Action("myTickets","Tickets")>MY TICKETS</a></li>
-                                            </ul>
-                                        </li>
-                                    }
-
-
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+        <!-- sidebar Nav menu area start --------------------------->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="#"><img src="~/Images/bugTrackerLogo.png" alt="logo"></a>
+                    @*<img src="~/Images/bugTrackerLogo.png" alt="logo">*@
                 </div>
-
-            <!--SIDEBAR END-->
-
-            <!-- main content area start ----------------------------------->
-            <div class="main-content">
-                <!-- header area start ------------------------------>
-                <div class="header-area">
-                    <div class="row align-items-center">
-                        <!-- nav and search button -->
-                        <div class="col-md-6 col-sm-8 clearfix">
-                            <div class="nav-btn pull-left">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>                            
-                        </div>
-                        <!-- profile info & task notification -->
-                        <div class="col-md-6 col-sm-4 clearfix">
-                            <ul class="notification-area pull-right">
-                                <li id="full-view"><i class="ti-fullscreen"></i></li>
-                                <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                                <li class="dropdown">
-                                    <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                        <span>0</span>
-                                    </i>
-                                    <div class="dropdown-menu bell-notify-box notify-box">
-                                        <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
-                                        <div class="nofity-list">
-                                            <!--LIST OF NOTIFICATIONS-->
-                                        </div>
-                                    </div>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <nav>
+                        <ul class="metismenu" id="menu">
+                            <!--ADMIN------------------------------------------------------------------------------>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <!--DASHBOARD-->
+                                <li>
+                                    <a href=@Url.Action("Index","Admin", null)>
+                                        <i class="fa fa-home"></i> <span>
+                                            DASHBOARD
+                                        </span>
+                                    </a>
                                 </li>
-                                
-                            </ul>
+                                <!--USERS-->
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="fa fa-user"></i> <span>
+                                            USER MANAGEMENT
+                                        </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href=@Url.Action("ManageRoles", "Admin")>Manage User Roles</a></li>
+                                        <li><a href=@Url.Action("ManageUsers", "Admin")>View All Users</a></li>
+
+                                    </ul>
+                                </li>
+                                <!--PROJECTS-->
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="fa fa-book"></i> <span>
+                                            PROJECT MANAGEMENT
+                                        </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href=@Url.Action("Index", "Projects")>View All Projects</a></li>
+                                        <li><a href=@Url.Action("ManageProjectsUsers", "Admin")>Assign Users to Projects</a></li>
+                                        <li><a href=@Url.Action("Create", "Projects")>Create Project</a></li>
+                                    </ul>
+                                </li>
+                                <!--TICKETS-->
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="fa fa-ticket"></i> <span>
+                                            TICKET MANAGEMENT
+                                        </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href=@Url.Action("Index", "Tickets")>View All Tickets</a></li>
+                                        <li><a href=@Url.Action("ManageTicketsUsers", "Admin")>Assign Ticket to User</a></li>
+
+                                    </ul>
+                                </li>
+
+                            }
+                            //<!--PROJECT MANAGER------------------------------------------------------------------------------>
+                            else if (User.IsInRole("Project Manager"))
+                            {
+                                <!--DASHBOARD-->
+                                <li>
+                                    <a href=@Url.Action("Index","ProjectManager", null)>
+                                        <i class="fa fa-home"></i> <span>
+                                            DASHBOARD
+                                        </span>
+                                    </a>
+                                </li>
+                                <!--MY WORK-->
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="fa fa-user"></i> <span>
+                                            MY WORK
+                                        </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href=@Url.Action("myProjects", "Projects")>My Project</a></li>
+                                        <li><a href=@Url.Action("myTickets", "Tickets")>My Tickets</a></li>
+                                        <li><a href=@Url.Action("Create","Projects")>Create Project</a></li>
+                                    </ul>
+                                </li>
+                                <!--VIEW ALL-->
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="fa fa-home"></i> <span>
+                                            VIEW ALL
+                                        </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href=@Url.Action("Users", "ProjectManager")>VIEW USERS</a></li>
+                                        <li><a href=@Url.Action("Index", "Projects")>VIEW PROJECTS</a></li>
+                                    </ul>
+                                </li>
+                            }
+
+                            //---DEVELOPER-------------------------------------------------------------------------------------->
+                            else if (User.IsInRole("Developer"))
+                            {
+                                <!--DASHBOARD-->
+                                <li>
+                                    <a href=@Url.Action("Index","Developer", null)>
+                                        <i class="fa fa-home"></i> <span>
+                                            DASHBOARD
+                                        </span>
+                                    </a>
+                                </li>
+                                <!--MY PROJECTS-->
+                                <li>
+                                    <a href="@Url.Action("myProjects", "Projects")">
+                                        <i class="fa fa-book"></i> <span>
+                                            MY PROJECTS
+                                        </span>
+                                    </a>
+
+                                </li>
+                                <!--MY TICKETS-->
+                                <li>
+                                    <a href="@Url.Action("myTickets", "Tickets")">
+                                        <i class="fa fa-ticket"></i> <span>
+                                            MY TICKETS
+                                        </span>
+                                    </a>
+
+                                </li>
+                            }
+
+                            //--SUBMITTER----------------------------------------------------------------------------------------->
+                            else
+                            {
+                                <!--DASHBOARD-->
+                                <li>
+                                    <a href=@Url.Action("Index","Home", null)>
+                                        <i class="fa fa-home"></i> <span>
+                                            DASHBOARD
+                                        </span>
+                                    </a>
+                                </li>
+                                <!--MY PROJECTS-->
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="fa fa-home"></i> <span>
+                                            PROJECTS
+                                        </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href=@Url.Action("myProjects", "Projects")>MY PROJECTS</a></li>
+                                    </ul>
+                                </li>
+                                <!--MY TICKETS-->
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="fa fa-home"></i> <span>
+                                            TICKETS
+                                        </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href=@Url.Action("myTickets","Tickets")>MY TICKETS</a></li>
+                                    </ul>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!--SIDEBAR END-->
+        <!-- main content area start ----------------------------------->
+        <div class="main-content">
+            <!-- header area start ------------------------------>
+            <div class="header-area">
+                <div class="row align-items-center">
+                    <!-- nav and search button -->
+                    <div class="col-md-6 col-sm-8 clearfix">
+                        <div class="nav-btn pull-left">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
                     </div>
+                    <!-- profile info & task notification -->
+                    <div class="col-md-6 col-sm-4 clearfix">
+                        <ul class="notification-area pull-right">
+                            <li id="full-view"><i class="ti-fullscreen"></i></li>
+                            <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
+                            <li class="dropdown">
+                                <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
+                                    <span>0</span>
+                                </i>
+                                <div class="dropdown-menu bell-notify-box notify-box">
+                                    <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
+                                    <div class="nofity-list">
+                                        <!--LIST OF NOTIFICATIONS-->
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
-                <!-- header area end -->
-                <!-- page title area start -->
-                <div class="page-title-area">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            <div class="breadcrumbs-area clearfix">
-                                <h4 class="page-title pull-left">Dashboard</h4>
-                                @*<ul class="breadcrumbs pull-left">
+            </div>
+            <!-- header area end -->
+            <!-- page title area start -->
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="breadcrumbs-area clearfix">
+                            <h4 class="page-title pull-left">Dashboard</h4>
+                            @*<ul class="breadcrumbs pull-left">
                                     <li><a href="index.html">Home</a></li>
                                     <li><span>Dashboard</span></li>
                                 </ul>*@
-                            </div>
                         </div>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <div class="col-sm-6 clearfix">
-                                <div class="user-profile pull-right">
-                                    @if (user.AvatarPath == null)
-                                    {
-                                        <img class="avatar user-thumb" src="~/Images/profile_Placeholder.png" alt="avatar">
-                                    }else 
-                                    {
-                                        <img class="avatar user-thumb" src=@user.AvatarPath alt="avatar">
-                                    }                                    
-                                    <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @user.FName @user.LName <i class="fa fa-angle-down"></i></h4>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href=@Url.Action("EditProfile", "Home", new { Id = userid})>Profile</a>
-                                        <a class="dropdown-item" href=@Url.Action("CustomLogOff", "Account")>Log Out</a>
-                                    </div>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="col-sm-6 clearfix">
+                            <div class="user-profile pull-right">
+                                @if (user.AvatarPath == null)
+                                {
+                                    <img class="avatar user-thumb" src="~/Images/profile_Placeholder.png" alt="avatar">
+                                }
+                                else
+                                {
+                                    <img class="avatar user-thumb" src=@user.AvatarPath alt="avatar">
+                                }
+                                <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @user.FName @user.LName <i class="fa fa-angle-down"></i></h4>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href=@Url.Action("EditProfile", "Home", new { Id = userid})>Profile</a>
+                                    <a class="dropdown-item" href=@Url.Action("CustomLogOff", "Account")>Log Out</a>
                                 </div>
                             </div>
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
-                <!--page title area end-->
-                <!--BODY----------------------------------->
-                @RenderBody()
-                <!--END BODY-->
-
             </div>
-            <!-- main content area end -->
-            <!-- footer area start-------------------------------->
-            <footer>
-                <div class="footer-area">
-                    <p>
-                        © Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>|
-                        Modified by: <a href="https://robertochprofile.azurewebsites.net">Roberto Hernandez</a>
-                    </p>
-                </div>
-            </footer>
-            <!-- footer area end--------------------------------->
+            <!--page title area end-->
+            <!--BODY----------------------------------->
+            @RenderBody()
+            <!--END BODY-->
 
         </div>
+        <!-- main content area end -->
+        <!-- footer area start-------------------------------->
+        <footer>
+            <div class="footer-area">
+                <p>
+                    © Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>|
+                    Modified by: <a href="https://robertochprofile.azurewebsites.net">Roberto Hernandez</a>
+                </p>
+            </div>
+        </footer>
+        <!-- footer area end--------------------------------->
+
+    </div>
     <!-- page container area end -->
     <!-- offset area start  SETTINGS -------------------------------->
     <div class="offset-area">
@@ -532,6 +531,14 @@
         zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
         ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
     </script>
+    <!-- start amchart js -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
     <!-- all line chart activation -->
     <script src="~/Scripts/line-chart.js"></script>
     <!-- all bar chart activation -->

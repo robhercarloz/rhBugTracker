@@ -12,11 +12,12 @@ namespace rhBugTracker.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
+        public string ProjectOwnerId { get; set; }
 
         //ICollection
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
-
+        public virtual ApplicationUser ProjectOwner { get; set; }
 
         //Constructor
         public Project()
