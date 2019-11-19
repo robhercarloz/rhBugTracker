@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,10 +18,11 @@ namespace rhBugTracker.Models
         public string OwnerUserId { get; set; }
         //developer
         public string AssignedToUserId { get; set; }
-        
+
 
 
         //properties
+        [StringLength(15, MinimumLength = 2, ErrorMessage = "First name must contain 2 - 10 characters.")]
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }

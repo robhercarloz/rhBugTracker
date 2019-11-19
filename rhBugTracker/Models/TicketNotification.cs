@@ -15,10 +15,14 @@ namespace rhBugTracker.Models
         //properties
         public string NotificationBody { get; set; }
         public Boolean IsRead { get; set; }
+        public string RecipientId { get; set; }
+        public DateTime Created { get; set; }
+
 
         //Foreign Key Reference
         public virtual Tickets Ticket { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser Sender { get; set; }
 
 
     }

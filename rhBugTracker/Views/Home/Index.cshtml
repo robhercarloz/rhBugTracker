@@ -6,6 +6,7 @@
     ViewBag.Title = "Home Page";
     var userId = User.Identity.GetUserId();
     var ticketHelper = new TicketHelper();
+    var projectHelper = new ProjectHelper();
     
 
     }
@@ -24,7 +25,15 @@
                             <div class="seo-fact sbg1">
                                 <div class="p-4 d-flex justify-content-between align-items-center">
                                     <a href="@Url.Action("myTickets", "Tickets")"><div class="seofct-icon"><i class="ti-ticket"></i>My Tickets</div></a>
-                                    <h2></h2>
+                                    @if (ticketHelper.ListUserTickets(userId).Count() == 0)
+                                    {
+                                        <h2>0</h2>
+                                    }
+                                    else
+                                    {
+                                        <h2>@ticketHelper.ListUserTickets(userId).Count();</h2>
+                                    }
+
                                 </div>
                                 @*<canvas id="seolinechart1" height="50"></canvas>*@
                             </div>
@@ -35,7 +44,14 @@
                             <div class="seo-fact sbg1">
                                 <div class="p-4 d-flex justify-content-between align-items-center">
                                     <a href="@Url.Action("myProjects", "Projects")"><div class="seofct-icon"><i class="ti-blackboard"></i>My Projects</div></a>
-                                    <h2></h2>
+                                    @if (projectHelper.ListUserProjects(userId).Count() == 0)
+                                    {
+                                        <h2>0</h2>
+                                    }
+                                    else
+                                    {
+                                        <h2>@projectHelper.ListUserProjects(userId).Count()</h2>
+                                    }
                                 </div>
                                 @*<canvas id="seolinechart1" height="50"></canvas>*@
                             </div>

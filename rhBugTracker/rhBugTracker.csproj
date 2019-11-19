@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DashboardCountsController.cs" />
     <Compile Include="Controllers\DeveloperController.cs" />
+    <Compile Include="Controllers\GraphingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectManagerController.cs" />
@@ -187,7 +188,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ImageUploadValidator.cs" />
-    <Compile Include="Helpers\NotificationHelper.cs" />
+    <Compile Include="Helpers\NotificationsHelper.cs" />
     <Compile Include="Helpers\ProjectHelper.cs" />
     <Compile Include="Helpers\StringUtilities.cs" />
     <Compile Include="Helpers\TicketHelper.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MorrisBarData.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Tickets.cs" />
     <Compile Include="Models\TicketAttachment.cs" />
@@ -228,8 +230,10 @@
     <Content Include="Content\datatable\jquery.dataTables.min.css" />
     <Content Include="Content\datatable\jquery.dataTables.min.js" />
     <Content Include="Content\default-css.css" />
+    <Content Include="Content\example.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\metisMenu.css" />
+    <Content Include="Content\morris.css" />
     <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\slicknav.min.css" />
@@ -246,12 +250,15 @@
     <Content Include="Images\profile_Placeholder.png" />
     <Content Include="Scripts\bar-chart.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\example.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery.slicknav.min.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\line-chart.js" />
     <Content Include="Scripts\metisMenu.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.min.js" />
+    <Content Include="Scripts\morris.js" />
+    <Content Include="Scripts\morris.min.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\pie-chart.js" />
     <Content Include="Scripts\plugins.js" />
@@ -340,6 +347,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Graphing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\fontawesome-webfont.eot" />

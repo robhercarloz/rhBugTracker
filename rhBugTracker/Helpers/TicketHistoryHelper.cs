@@ -46,8 +46,8 @@ namespace rhBugTracker.Helpers
                 {
                     Property = "DeveloperId",
                     TicketId = oldTicket.Id,
-                    OldValue = oldTicket.AssignedToUserId == null ? "UnAssigned" : oldTicket.AssignedToUserId,
-                    NewValue = newTicket.AssignedToUserId == null ? "UnAssigned" : oldTicket.AssignedToUserId,
+                    OldValue = oldTicket.AssignedToUserId == null ? "UnAssigned" : $"{oldTicket.AssignedToUser.FName}, {oldTicket.AssignedToUser.LName}",
+                    NewValue = newTicket.AssignedToUserId == null ? "UnAssigned" : $"{newTicket.AssignedToUser.FName}, {newTicket.AssignedToUser.LName}",
                     Changed = (DateTime)newTicket.Updated,
                     UserId = HttpContext.Current.User.Identity.GetUserId()
                 };

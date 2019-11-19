@@ -18,6 +18,7 @@ namespace rhBugTracker.Controllers
         private TicketHelper ticketHelper = new TicketHelper();
         private UserRolesHelper roleHelper = new UserRolesHelper();
         private TicketHistoryHelper hisHelper = new TicketHistoryHelper();
+        private NotificationsHelper notHelper = new NotificationsHelper();
 
         // GET: Tickets
         public ActionResult Index()
@@ -44,7 +45,7 @@ namespace rhBugTracker.Controllers
         }
 
         // GET: Tickets/Create
-        [Authorize(Roles = "Submitter, Admin")]
+        [Authorize(Roles = "Submitter")]
         public ActionResult Create()
         {
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName");
@@ -98,7 +99,9 @@ namespace rhBugTracker.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName", ticket.AssignedToUserId);
+
+            var devs = roleHelper.UsersInRole("Developer").ToList();
+            ViewBag.Developer = new SelectList(devs, "Id", "FName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);
@@ -112,25 +115,35 @@ namespace rhBugTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId,Title,Description,Created,Updated")] Tickets ticket)
+        public ActionResult Edit([Bind(Include = "Id,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId,Title,Description,Created,Updated")] Tickets ticket, string developer)
         {
             if (ModelState.IsValid)
             {
 
+                
+
                 var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
                 
                 ticket.Updated = DateTime.Now;
-                
+                if(developer != null)
+                {
+
+                ticket.AssignedToUserId = developer;
+                }
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();
 
                 var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
                 hisHelper.RecordHistoricalChanges(oldTicket, newTicket);
+                notHelper.ManageNotifications(oldTicket, newTicket);
+
 
                 return RedirectToAction("Details", new { id = ticket.Id});
 
             }
-            ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName", ticket.AssignedToUserId);
+            var devs = roleHelper.UsersInRole("Developer").ToList();
+            //ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FName", ticket.AssignedToUserId);
+            ViewBag.Developer = new SelectList(devs, "Id", "FName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);

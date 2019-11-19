@@ -19,7 +19,12 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+    
+    <link rel="stylesheet" href="~/Content/example.css">
+    <link rel="stylesheet" href="~/Content/morris.css">
+
+
 
 </head>
 <body>
@@ -210,76 +215,71 @@
     </div>
     <!-- TABLE END -->
 
-    <div class="row">
-
-        <div class="col-7 mt-3 ml-5 ">
-            <div class="card">
-                <div class="card-body">
-                    <h6 style="text-align: center">Test</h6>
-                    <div id="ambarchart5"></div>
+    <div class="col-lg-12 mt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="barChart1"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="barChart2"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-
-        <div class="col-4 mt-1 mr-1">
-            <div class="card-body">
-                <div class="card">
-                    <h6 style="text-align: center">TICKET PRIORITIES </h6>
-                    <div id="ampiechart1"></div>
-                </div>             
-            </div>
-        </div>
-
-    </div>    
-    <div class="row">
-        <div class="col-12">
-
         </div>
     </div>
 
     <br />
 
 
+    @section scripts{
+        <!-- main content area end -->
+        
+        @*<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>*@
+        <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+        <script src="~/Scripts/morris.min.js"></script>
+       
 
-    <!-- main content area end -->
+
+        <script>
+             $(function () {
+                    var url = '@Url.Action("ProduceChart1Data", "Graphing")';
+                    $.post(url).then(function (response) {
+                        new Morris.Bar({
+                            element: 'barChart1',
+                            data: response,
+                            xKey: 'label',
+                            ykeys: ['value'],
+                            labels: ['Ticket Count'],
+                            resize: true
+
+                        });
+                    });
+
+                    var url = @Url.Action("ProduceChart2Data", "Graphing");
+                    $.post(url).then(function (response) {
+                        new Morris.donut({
+                            element: 'donutChart2',
+                            data: response,
+                            xKey: 'label',
+                            ykeys: ['value'],
+                            labels: ['Ticket Count'],
+                            resize: true
+
+                        });
+                    });
 
 
-    <script>
-        /*-------------- 1 Pie chart amchart start ------------*/
-        if ($('#ampiechart1').length) {
+              });
 
 
-            var chart = AmCharts.makeChart("ampiechart1", {
-                "type": "pie",
-                "labelRadius": -35,
-                "labelText": "[[percents]]%",
-                "dataProvider": [{
-                    "Priorities": "Immediate",
-                    "Tickets": ,
-                    "backgroundColor": "#815DF6"
-                }, {
-                    "Priorities": "High",
-                    "High": ,
-                    "backgroundColor": "#67B7DC"
-                }, {
-                    "Priorities": "Medium",
-                    "Tickets": ,
-                    "backgroundColor": "#9c82f4"
-                }, {
-                    "Priorities": "Low",
-                    "Tickets": ,
-                    "backgroundColor": "#FDD400"
-                }],
-                "color": "#fff",
-                "colorField": "backgroundColor",
-                "valueField": "Tickets",
-                "titleField": "Priorities"
-            });
-        }
+        </script>
 
-        /*-------------- 1 Pie chart amchart end ------------*/
-    </script>
+
+    }
+
 
 </body>
 </html>
