@@ -1,0 +1,107 @@
+﻿@using rhBugTracker.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DemoLogin</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <!--Admin Login-->
+                    <div class="col-md-3">
+                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoAdminEmail")
+
+                            <section class="panel">
+                                <header class="panel-heading bg-white">
+                                    <div class="panel-heading-icon bg-primary mt-sm">
+                                        <i class="fa-user"></i>
+                                    </div>
+                                </header>
+                                <div class="panel-body">
+                                    <p>Admin Login</p>
+                                    <button type="submit" class="btn btn-xs btn-primary">Admin Login</button>
+                                </div>
+                            </section>
+
+                        }
+                    </div>
+                    <!--Project Manager Login-->
+                    <div class="col-md-3">
+                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoPMEmail")
+
+                            <section class="panel">
+                                <header class="panel-heading bg-white">
+                                    <div class="panel-heading-icon bg-primary mt-sm">
+                                        <i class="fa-user"></i>
+                                    </div>
+                                </header>
+                                <div class="panel-body">
+                                    <p>Project Manager</p>
+                                    <button type="submit" class="btn btn-xs btn-primary">Login</button>
+                                </div>
+                            </section>
+
+                        }
+                    </div>
+                    <!--Developer Login-->
+                    <div class="col-md-3">
+                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoDeveloperEmail")
+
+                            <section class="panel">
+                                <header class="panel-heading bg-white">
+                                    <div class="panel-heading-icon bg-primary mt-sm">
+                                        <i class="fa-user"></i>
+                                    </div>
+                                </header>
+                                <div class="panel-body">
+                                    <p>Developer Login</p>
+                                    <button type="submit" class="btn btn-xs btn-primary">Login</button>
+                                </div>
+                            </section>
+
+                        }
+                    </div>
+                    <!--Submitter Login-->
+                    <div class="col-md-3">
+                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("emailKey", "DemoSubmitterEmail")
+                            
+                            <section class="panel">
+                                <header class="panel-heading bg-white">
+                                    <div class="panel-heading-icon bg-primary mt-sm">
+                                        <i class="fa-user"></i>
+                                    </div>
+                                </header>
+                                <div class="panel-body">
+                                    <p>Submitter login</p>
+                                    <button type="submit" class="btn btn-xs btn-primary">Login</button>
+                                </div>
+                            </section>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

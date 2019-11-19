@@ -18,7 +18,7 @@ using rhBugTracker.Models;
 namespace rhBugTracker.Controllers
 {
     [RequireHttps]
-    [Authorize]
+
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -526,7 +526,36 @@ namespace rhBugTracker.Controllers
             return View(model);
         }
 
-        //
+        //DEMO LOGIN
+        //GET
+        public ActionResult DemoUserAccess()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DemoUserAccess(string emailKey)
+        {
+            var email = WebConfigurationManager.AppSettings[emailKey];
+            var password = WebConfigurationManager.AppSettings["DemoUserPassword"];
+
+            var result = await SignInManager.PasswordSignInAsync(email, password, false, shouldLockout: false);
+
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToAction("Index", "Home");
+                case SignInStatus.Failure:
+                default:
+                    return RedirectToAction("Login", "Account");
+            }
+
+
+        }
+
+        
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]

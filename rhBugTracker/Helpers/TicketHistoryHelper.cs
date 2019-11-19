@@ -10,7 +10,7 @@ namespace rhBugTracker.Helpers
     public class TicketHistoryHelper
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        public void RecordHistoricalChanges(Ticket oldTicket, Ticket newTicket)
+        public void RecordHistoricalChanges(Tickets oldTicket, Tickets newTicket)
         {
             if (oldTicket.TicketStatusId != newTicket.TicketStatusId)
             {

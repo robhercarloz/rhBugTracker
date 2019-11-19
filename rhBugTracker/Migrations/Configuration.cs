@@ -16,8 +16,6 @@ namespace rhBugTracker.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        public object WebConfiguration { get; private set; }
-
         protected override void Seed(rhBugTracker.Models.ApplicationDbContext context)
         {
             //Role Creation 
@@ -50,16 +48,17 @@ namespace rhBugTracker.Migrations
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             //AdminUser
-            if (!context.Users.Any(u => u.Email == "rboH@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "rboHernandez@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "rboH@Mailinator.com",
-                    Email = "rboH@Mailinator.com",
+                    UserName = "rboHernandez@Mailinator.com",
+                    Email = "rboHernandez@Mailinator.com",
                     FName = "Roberto",
                     LName = "Hernandez",
-                    DisplayName = "DemoAdmin"
-                }, WebConfigurationManager.AppSettings["AdminPassword"]);
+                    DisplayName = "Admin",
+                    AvatarPath = "/Avatars/profile_Placeholder.png"
+                }, "psWord0101! ");
             }
             //ProjectManagerUser
             if (!context.Users.Any(u => u.Email == "coderhcarlos@Gmail.com"))
@@ -70,7 +69,9 @@ namespace rhBugTracker.Migrations
                     Email = "coderhcarlos@Gmail.com",
                     FName = "Rob",
                     LName = "Carlos",
-                    DisplayName = "DemoProjectManager"
+                    DisplayName = "DemoProjectManager",
+                    AvatarPath = "/Avatars/profile_Placeholder.png"
+
                 }, WebConfigurationManager.AppSettings["ProjectManagerPassword"]);
             }
             //DeveloperUser
@@ -82,10 +83,11 @@ namespace rhBugTracker.Migrations
                     Email = "DemoDev@Mailinator.com",
                     FName = "Dev",
                     LName = "Eloper",
-                    DisplayName = "DemoDeveloper"
+                    DisplayName = "DemoDeveloper",
+                    AvatarPath = "/Avatars/profile_Placeholder.png"
+
                 }, WebConfigurationManager.AppSettings["DeveloperPassword"]);
             }
-
             //Submitter
             //user1
             if (!context.Users.Any(u => u.Email == "DemoUser1@Mailinator.com"))
@@ -96,7 +98,9 @@ namespace rhBugTracker.Migrations
                     Email = "DemoUser1@Mailinator.com",
                     FName = "Bill",
                     LName = "Nye",
-                    DisplayName = "DemoUser1"
+                    DisplayName = "DemoUser1",
+                    AvatarPath = "/Avatars/profile_Placeholder.png"
+
                 }, WebConfigurationManager.AppSettings["User1Password"]);
             }
             //user2
@@ -120,21 +124,80 @@ namespace rhBugTracker.Migrations
                     Email = "DemoUser3@Mailinator.com",
                     FName = "Tech",
                     LName = "Lead",
-                    DisplayName = "DemoUser3"
+                    DisplayName = "DemoUser3",
+                    AvatarPath = "/Avatars/profile_Placeholder.png"
+
                 }, WebConfigurationManager.AppSettings["User3Password"]);
             }
+
+            //DEMO LOGIN USERS
+            //Admin DEMO
+            if (!context.Users.Any(u => u.Email == "DemoAdminEmail@Mailinator.com"))
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoAdminEmail@Mailinator.com",
+                    Email = "DemoAdminEmail@Mailinator.com",
+                    FName = "Demo",
+                    LName = "Admin",
+                    DisplayName = "DemoAdmin",
+                    AvatarPath = "/Avatars/profile_Placeholder.png"
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
+            }
+            //PM DEMO
+            if (!context.Users.Any(u => u.Email == "DemoPMEmail@Mailinator.com"))
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoPMEmail@Mailinator.com",
+                    Email = "DemoPMEmail@Mailinator.com",
+                    FName = "Demo",
+                    LName = "PM",
+                    DisplayName = "DemoPM",
+                    AvatarPath = "~/Avatars/profile_Placeholder.png"
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
+            }
+            //Developer Demo
+            if (!context.Users.Any(u => u.Email == "DemoDeveloperEmail@Mailinator.com"))
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoDeveloperEmail@Mailinator.com",
+                    Email = "DemoDeveloperEmail@Mailinator.com",
+                    FName = "Demo",
+                    LName = "Developer",
+                    DisplayName = "DemoDeveloper",
+                    AvatarPath = "~/Avatars/profile_Placeholder.png"
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
+            }
+
+            if (!context.Users.Any(u => u.Email == "DemoSubmitterEmail@Mailinator.com"))
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = "DemoSubmitterEmail@Mailinator.com",
+                    Email = "DemoSubmitterEmail@Mailinator.com",
+                    FName = "Demo",
+                    LName = "Submitter",
+                    DisplayName = "DemoSubmitter",
+                    AvatarPath = "~/Avatars/profile_Placeholder.png"
+                }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
+            }
+
+
+            context.SaveChanges();
             #endregion
 
             //Assigning Roles
             #region
-            var adminId = userManager.FindByEmail("rboH@Mailinator.com").Id;
-            userManager.AddToRole(adminId, "Admin");
+            var adminId = userManager.FindByEmail("rboHernandez@Mailinator.com").Id;
+            userManager.AddToRole(adminId, "Admin");            
 
             var proMgrId = userManager.FindByEmail("coderhcarlos@Gmail.com").Id;
-            userManager.AddToRole(proMgrId, "Project Manager");
+            userManager.AddToRole(proMgrId, "Project Manager");            
 
             var developerId = userManager.FindByEmail("DemoDev@Mailinator.com").Id;
-            userManager.AddToRole(developerId, "Developer");
+            userManager.AddToRole(developerId, "Developer");            
 
             var user1Id = userManager.FindByEmail("DemoUser1@Mailinator.com").Id;
             userManager.AddToRole(user1Id, "Submitter");
@@ -144,6 +207,23 @@ namespace rhBugTracker.Migrations
 
             var user3Id = userManager.FindByEmail("DemoUser3@Mailinator.com").Id;
             userManager.AddToRole(user3Id, "Submitter");
+
+            //DEMO
+            //Demo Admin
+            var dAdminId = userManager.FindByEmail("DemoAdminEmail@Mailinator.com").Id;
+            userManager.AddToRole(dAdminId, "Admin");
+
+            //////Demo Project Manager
+            var demoProMgrId = userManager.FindByEmail("DemoPMEmail@Mailinator.com").Id;
+            userManager.AddToRole(demoProMgrId, "Project Manager");
+            //Demo Developer
+            var demoDeveloperId = userManager.FindByEmail("DemoDeveloperEmail@Mailinator.com").Id;
+            userManager.AddToRole(demoDeveloperId, "Developer");
+            //DemoSubmitter
+            var DemoUserId = userManager.FindByEmail("DemoSubmitterEmail@Mailinator.com").Id;
+            userManager.AddToRole(DemoUserId, "Submitter");
+
+
             #endregion
 
             //Seeding in ticket status, priority  and typess
@@ -174,10 +254,12 @@ namespace rhBugTracker.Migrations
                     new TicketType { Name = "Defect", Description = "A defect in the software has been identified"},
                     new TicketType { Name = "Feature Request", Description = "The client has called and requested a new feature be added"},
                     new TicketType { Name = "Documentation Request", Description = "The client has called requesting documentation for a specific project" },
-                    new TicketType { Name = "Training Request", Description = "The client has called requesting training on the software" }
-                    
+                    new TicketType { Name = "Training Request", Description = "The client has called requesting training on the software" }                 
 
                 );
+
+
+            //ADD PROJECTS AND TICKETS WHEN EVERYTHING WORKS!!!
             #endregion
 
         }

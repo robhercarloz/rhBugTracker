@@ -12,18 +12,17 @@ namespace rhBugTracker.Models
     public class ApplicationUser : IdentityUser
     {
         [Display(Name = "First Name")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "First name must contain 2 - 50 characters.")]
+        [StringLength(15, MinimumLength = 2, ErrorMessage = "First name must contain 2 - 10 characters.")]
         public string FName { get; set; }
         [Display(Name = "Last Name")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Last name must contain 2 - 50 characters.")]
+        [StringLength(15, MinimumLength = 2, ErrorMessage = "Last name must contain 2 - 10 characters.")]
         public string LName { get; set; }
         [Display(Name = "Display Name")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Display Name must be 2 - 50 characters.")]
+        [StringLength(25, MinimumLength = 2, ErrorMessage = "Display Name must be 2 - 10 characters.")]
         public string DisplayName { get; set; }
         public string AvatarPath { get; set; }
-        
-        
-        public virtual ICollection<Ticket> Tickets { get; set; }
+
+        public virtual ICollection<Tickets> Tickets { get; set; }
         public virtual ICollection<TicketComment> TicketComments { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<TicketAttachment> TicketAttachments { get; set; }
@@ -37,7 +36,7 @@ namespace rhBugTracker.Models
             TicketAttachments = new HashSet<TicketAttachment>();
             TicketHistories = new HashSet<TicketHistory>();
             TicketNotifications = new HashSet<TicketNotification>();
-            Tickets = new HashSet<Ticket>();
+            Tickets = new HashSet<Tickets>();
         }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -59,11 +58,10 @@ namespace rhBugTracker.Models
             return new ApplicationDbContext();
         }
 
+
         public System.Data.Entity.DbSet<rhBugTracker.Models.Project> Projects { get; set; }
 
-        public System.Data.Entity.DbSet<rhBugTracker.Models.Ticket> Tickets { get; set; }
-
-        
+        public System.Data.Entity.DbSet<rhBugTracker.Models.Tickets> Tickets { get; set; }        
 
         public System.Data.Entity.DbSet<rhBugTracker.Models.TicketPriority> TicketPriorities { get; set; }
 

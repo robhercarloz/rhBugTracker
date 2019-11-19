@@ -19,7 +19,7 @@ namespace rhBugTracker.Models
         public DateTime Changed { get; set; }
 
         //Foregin Key Referemce
-        public virtual Ticket Ticket { get; set; }
+        public virtual Tickets Ticket { get; set; }
         public virtual ApplicationUser User { get; set; }
 
     }

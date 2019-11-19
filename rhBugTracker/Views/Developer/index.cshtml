@@ -32,7 +32,7 @@
                                         }
                                         else
                                         {
-                                            @projectHelper.ListUserProjects(userId).Count()
+                                            <h2>@projectHelper.ListUserProjects(userId).Count()</h2>
                                         }
                                     </div>
                                     @*<canvas id="seolinechart1" height="50"></canvas>*@
@@ -50,7 +50,7 @@
                                         }
                                         else
                                         {
-                                            ticketHelper.ListUserTickets(userId).Count();
+                                            <h2>@ticketHelper.ListUserTickets(userId).Count();</h2>
                                         }
 
 
@@ -59,13 +59,9 @@
                                 </div>
                             </div>
                         </div>
-                        
-
                     </div>
                 </div>
                 <!-- seo fact area end -->
-
-
             </div>
         </div>
     </div>

@@ -47,10 +47,10 @@
         <div class="container">
             <div class="login-box ptb--100">
                 <!--USING C# TO BEGIN FORM-->
+                    <!--Login page header-->
                 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <!--Login page header-->
                     <div class="login-form-head">
                         <h4>Sign In</h4>
                         <p>Hello there, sign in and get started tracking bugs</p>
@@ -89,16 +89,22 @@
                             </div>
                         </div>
                         <div class="submit-btn-area">
-                            <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
+                            <button type="submit">Submit <i class="ti-arrow-right"></i></button>
                         </div>
                         <div class="form-footer text-center mt-5">
                             <p class="text-muted">
                                 Don't have an account?
                                 @Html.ActionLink("Sign Up", "Register", "Account", null)
                             </p>
+                            <br />
+                            <p>
+                                Login as a demo user?
+                                @Html.ActionLink("Demo User", "DemoUserAccess", "Account" ,null)
+                            </p>
                         </div>
                     </div>
                 }
+                        
             </div>
         </div>
     </div>

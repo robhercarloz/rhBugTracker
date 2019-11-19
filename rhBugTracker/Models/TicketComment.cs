@@ -17,7 +17,7 @@ namespace rhBugTracker.Models
         public DateTime Created { get; set; }
         
         //Foreign Key Reference
-        public virtual Ticket Ticket { get; set; }
+        public virtual Tickets Ticket { get; set; }
         public virtual ApplicationUser OwnerUser { get; set; }
     }
 }

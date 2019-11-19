@@ -15,14 +15,14 @@ namespace rhBugTracker.Models
         public string ProjectOwnerId { get; set; }
 
         //ICollection
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<Tickets> Tickets { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
         public virtual ApplicationUser ProjectOwner { get; set; }
 
         //Constructor
         public Project()
         {
-            Tickets = new HashSet<Ticket>();
+            Tickets = new HashSet<Tickets>();
             Users = new HashSet<ApplicationUser>();
         }
     }

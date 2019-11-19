@@ -15,11 +15,11 @@ namespace rhBugTracker.Models
         public string Description { get; set; }
 
         //Foreign Key
-        public virtual ICollection<Ticket> Tickets{ get; set; }
+        public virtual ICollection<Tickets> Tickets{ get; set; }
 
         public TicketType()
         {
-            Tickets = new HashSet<Ticket>();
+            Tickets = new HashSet<Tickets>();
         }
     }
 }

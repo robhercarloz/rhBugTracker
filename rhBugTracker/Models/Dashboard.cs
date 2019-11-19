@@ -9,14 +9,14 @@ namespace rhBugTracker.Models
     {
         
         public virtual ICollection<Project> myProjects { get; set; }
-        public virtual ICollection<Ticket> myTickets { get; set; }
+        public virtual ICollection<Tickets> myTickets { get; set; }
         public virtual ICollection<ApplicationUser> myUsers { get; set; }
         public virtual ICollection<Project> createdProjects { get; set; }
         
         public Dashboard()
         {
             myProjects = new HashSet<Project>();
-            myTickets = new HashSet<Ticket>();
+            myTickets = new HashSet<Tickets>();
             myUsers = new HashSet<ApplicationUser>();
             createdProjects = new HashSet<Project>();
         }

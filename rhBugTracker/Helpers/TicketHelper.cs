@@ -20,10 +20,10 @@ namespace rhBugTracker.Helpers
         }
 
         //Method to list the tickets that belong to the user that is signed in
-        public List<Ticket> ListMyTickets()
+        public List<Tickets> ListMyTickets()
         {
             //List of all tickets
-            var myTickets = new List<Ticket>();
+            var myTickets = new List<Tickets>();
             //Get the id of the current user id whoever is signed in
             var userId = HttpContext.Current.User.Identity.GetUserId();
             //Get the current user by id and assign to his role 
@@ -71,7 +71,7 @@ namespace rhBugTracker.Helpers
             return myTickets;
         }
 
-        public ICollection<Ticket> ListProjectTickets(int projectId)
+        public ICollection<Tickets> ListProjectTickets(int projectId)
         {
             Project project = db.Projects.Find(projectId);
 
@@ -90,7 +90,7 @@ namespace rhBugTracker.Helpers
         {
             if (!IsUserOnTicket(userId, ticketId))
             {
-                Ticket ticket = db.Tickets.Find(ticketId);
+                Tickets ticket = db.Tickets.Find(ticketId);
                 var newUser = db.Users.Find(userId);
 
                 ticket.Project.Users.Add(newUser);
@@ -103,13 +103,13 @@ namespace rhBugTracker.Helpers
             return db.Tickets.Find(ticketId).Project.Users;
         }
 
-        public ICollection<Ticket> ListAllTickets()
+        public ICollection<Tickets> ListAllTickets()
         {
             var allTicketList = db.Tickets.ToList();
             return allTicketList;
         }
 
-        public ICollection<Ticket> ListAllUnassignedTickets()
+        public ICollection<Tickets> ListAllUnassignedTickets()
         {
 
             var tickets = db.Tickets.ToList();
@@ -118,13 +118,12 @@ namespace rhBugTracker.Helpers
             return unAssigned;
         }
 
-        public ICollection<Ticket> ListUserTickets(string userId)
+        public ICollection<Tickets> ListUserTickets(string userId)
         {
             ApplicationUser user = db.Users.Find(userId);
             var tickets = user.Tickets.ToList();
 
             return (tickets);
         }
-
     }
 }

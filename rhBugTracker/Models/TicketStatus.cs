@@ -15,12 +15,12 @@ namespace rhBugTracker.Models
         public string Description { get; set; }
 
         //Key Reference
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<Tickets> Tickets { get; set; }
 
         //Constructor 
         public TicketStatus()
         {
-            Tickets = new HashSet<Ticket>();
+            Tickets = new HashSet<Tickets>();
         }
     }
 }

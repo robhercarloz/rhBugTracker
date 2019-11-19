@@ -10,7 +10,7 @@ namespace rhBugTracker.Helpers
     {
         private static ApplicationDbContext db = new ApplicationDbContext();
 
-        public void ManageNotifications(Ticket oldTicket,  Ticket newTicket)
+        public void ManageNotifications(Tickets oldTicket,  Tickets newTicket)
         {
             var ticketHasBeenAssigned = oldTicket.AssignedToUserId == null && newTicket.AssignedToUser != null;
         }

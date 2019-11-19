@@ -5,7 +5,7 @@ using System.Web;
 
 namespace rhBugTracker.Models
 {
-    public class Ticket
+    public class Tickets
     {
         //Keys
         public int Id { get; set; }
@@ -33,7 +33,7 @@ namespace rhBugTracker.Models
         public virtual TicketPriority TicketPriority { get; set; }
         public virtual TicketStatus TicketStatus { get; set; }               
         public virtual ApplicationUser OwnerUser { get; set; }
-        public virtual ApplicationUser AssignedToUser { get; set; }
+        public virtual ApplicationUser AssignedToUser { get; set; } 
 
         //Children
         public virtual ICollection<TicketAttachment> TicketAttachments {get; set;}
@@ -42,7 +42,7 @@ namespace rhBugTracker.Models
         public virtual ICollection<TicketNotification> TicketNotifications { get; set; }
 
         //constructor
-        public Ticket()
+        public Tickets()
         {
             TicketAttachments = new HashSet<TicketAttachment>();
             TicketComments = new HashSet<TicketComment>();

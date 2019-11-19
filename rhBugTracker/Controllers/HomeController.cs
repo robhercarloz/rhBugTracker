@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using rhBugTracker.Models;
-
+using Microsoft.AspNet.Identity;
+using rhBugTracker.Helpers;
+using System.IO;
 
 namespace rhBugTracker.Controllers
 {
@@ -13,9 +15,52 @@ namespace rhBugTracker.Controllers
     {
         //make and if else to see which role is being logged in 
         private ApplicationDbContext db = new ApplicationDbContext();
-               
+        private TicketHelper ticketHelper = new TicketHelper();
+        private ProjectHelper projectHelper = new ProjectHelper();
+        private UserRolesHelper roleHelper = new UserRolesHelper();
+
+
         public ActionResult Index()
         {
+            //if (User.IsInRole("Submitter"))
+            //{
+            //    var userId = User.Identity.GetUserId();
+
+            //    var data = new Dashboard();
+            //    data.myTickets = db.Tickets.Where(t => t.OwnerUserId == userId).ToList();
+            //    data.myProjects = db.Projects.Where(t => t.ProjectOwnerId == userId).ToList();
+            //    data.myUsers = db.Users.ToList();
+            //    return View(data);
+            //}
+            //else if (User.IsInRole("Developer"))
+            //{
+            //    var userId = User.Identity.GetUserId();
+
+            //    var data = new Dashboard();
+            //    data.myTickets = db.Tickets.Where(t => t.OwnerUserId == userId).ToList();
+            //    data.myProjects = db.Projects.Where(t => t.ProjectOwnerId == userId).ToList();                
+            //    return View(data);
+            //}
+            //else if (User.IsInRole("Project Manager"))
+            //{
+            //    var userId = User.Identity.GetUserId();
+            //    var data = new Dashboard();
+            //    data.myTickets = db.Tickets.Where(t => t.OwnerUserId == userId).ToList();
+            //    data.myProjects = db.Projects.Where(t => t.ProjectOwnerId == userId).ToList();
+            //    data.myUsers = db.Users.ToList();                
+            //    return View(data);
+            //}
+            //else if (User.IsInRole("Admin"))
+            //{
+            //    var userId = User.Identity.GetUserId();
+            //    var data = new Dashboard();
+
+            //    data.myProjects = db.Projects.ToList();
+            //    data.myTickets = db.Tickets.ToList();
+            //    data.myUsers = db.Users.ToList();
+            //    return View(data);
+            //}
+
             if (User.IsInRole("Submitter"))
             {
                 return View();
@@ -35,9 +80,9 @@ namespace rhBugTracker.Controllers
             else
             {
                 return View();
-            }           
-            
-            
+            }
+
+
         }
 
         public ActionResult About()
@@ -46,37 +91,50 @@ namespace rhBugTracker.Controllers
 
             return View();
         }
+
         //Get
         public ActionResult EditProfile(string Id)
         {
+            var userId = User.Identity.GetUserId();
             //Get specific user ID 
-            var userId = db.Users.Find(Id);
+            var user = db.Users.Find(Id);           
             //Creating view model with info of user
-            var user = new UserInformationDisplay();
+            var profile = new UserInformationDisplay();
             //assigning the value of properties
-            user.FName = userId.FName;
-            user.LName = userId.LName;
-            user.DisplayName = userId.DisplayName;
-            user.Email = userId.Email;
-            user.Password = userId.PasswordHash.ToString();
+            profile.FName = user.FName;
+            profile.LName = user.LName;
+            profile.DisplayName = user.DisplayName;
+            profile.Email = user.Email;
+            //profile.Password = user.PasswordHash.ToString();
             //all info passed in as user
-            return View(user);
+            return View(profile);
         }
-
-        [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         //Post
-        public ActionResult EditProfile(ApplicationUser user)
+        
+        [HttpPost]           
+        public ActionResult EditProfile(UserInformationDisplay model, HttpPostedFileBase avatar)
         {
-            var editUser = db.Users.Find(user.Id);
-            editUser.Id = user.Id;
-            editUser.FName = user.FName;
-            editUser.LName = user.LName;
-            editUser.DisplayName = user.DisplayName;
-            editUser.Email = user.Email;
-            editUser.UserName = user.Email;
+
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);            
+            user.FName = model.FName;
+            user.LName = model.LName;
+            user.DisplayName = model.DisplayName;
+            user.Email = model.Email;
+            user.UserName = model.Email;
             //db.Entry(editUser);
+
+            if(avatar != null)
+            {
+                if (ImageUploadValidator.IsWebFriendlyImage(avatar))
+                {
+                    var filename = Path.GetFileName(avatar.FileName);
+                    avatar.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), filename));
+                    user.AvatarPath = "/Avatars/" + filename;
+                }
+            }
+
             db.SaveChanges();
             return RedirectToAction("EditProfile", "Home");
         }

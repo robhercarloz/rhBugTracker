@@ -15,11 +15,11 @@ namespace rhBugTracker.Models
         public string Description { get; set; }
 
         //Children
-        public virtual ICollection<Ticket> Tickets { get; set; } 
+        public virtual ICollection<Tickets> Tickets { get; set; } 
 
         public TicketPriority()
         {
-            Tickets = new HashSet<Ticket>();
+            Tickets = new HashSet<Tickets>();
         }
 
     }

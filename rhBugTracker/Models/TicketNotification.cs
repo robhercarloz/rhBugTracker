@@ -17,7 +17,7 @@ namespace rhBugTracker.Models
         public Boolean IsRead { get; set; }
 
         //Foreign Key Reference
-        public virtual Ticket Ticket { get; set; }
+        public virtual Tickets Ticket { get; set; }
         public virtual ApplicationUser User { get; set; }
 
 

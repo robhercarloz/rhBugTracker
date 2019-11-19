@@ -1,7 +1,14 @@
 ﻿@model rhBugTracker.Models.Dashboard
+@using Microsoft.AspNet.Identity
+@using rhBugTracker.Helpers
+
 @{
     ViewBag.Title = "Home Page";
-}
+    var userId = User.Identity.GetUserId();
+    var ticketHelper = new TicketHelper();
+    
+
+    }
 
 <!--SUBMITTER DASHBOARD-->
     
