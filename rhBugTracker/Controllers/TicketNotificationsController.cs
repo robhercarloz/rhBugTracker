@@ -14,6 +14,14 @@ namespace rhBugTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult Dismiss(int id)
+        {
+            var notification = db.TicketNotifications.Find(id);
+            notification.IsRead = true;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: TicketNotifications
         public ActionResult Index()
         {

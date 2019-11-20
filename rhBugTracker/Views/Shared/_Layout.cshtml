@@ -278,20 +278,41 @@
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                             <li class="dropdown">
                                 <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>0</span>
+                                    <span>@NotificationsHelper.GetUnreadNotifications().Count()</span>
                                 </i>
                                 <div class="dropdown-menu bell-notify-box notify-box">
-                                    <span class="notify-title">You have 0 new notifications <a href="#">view all</a></span>
+                                    <span class="notify-title">You have @NotificationsHelper.GetUnreadNotifications().Count() new notifications</span>
                                     <div class="nofity-list">
                                         <!--LIST OF NOTIFICATIONS-->
+                                        <ul id="menu1" class="dropdown-menu list-unstyled msg_lst" role="menu">
+                                            @foreach (var unreadNotification in NotificationsHelper.GetUnreadNotifications())
+                                            {
+                                                <li>
+                                                    @using (Html.BeginForm("Dismiss", "TicketNotifictations", FormMethod.Post))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.Hidden("Id", unreadNotification.Id)
 
+                                                        <!--THIS IS THE IMAGE OF THE PERSON WHO MADE THE NOTIFICATION-->
+                                                        <span class="image"><img src="@unreadNotification.Sender.AvatarPath" alt="Sender" /></span>
+                                                        <span>
+                                                            <span>@unreadNotification.Sender.FName</span>
+                                                            <span class="time">Created: @unreadNotification.Created.ToString("MMM dd, yyyy")</span>
+                                                        </span>
+                                                        <span class="message">
+                                                            @unreadNotification.NotificationBody
+                                                        </span>
+                                                        <br />
+                                                        <button type="submit">Dismiss</button>
 
+                                                    }
 
-
+                                                </li>
+                                            }
+                                        </ul>
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -323,12 +344,12 @@
                                 }
                                 <h4 class="user-name dropdown-toggle" data-toggle="dropdown"> @user.FName @user.LName <i class="fa fa-angle-down"></i></h4>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href=@Url.Action("EditProfile", "Home", new { Id = userid})>Profile</a>
+                                    <a class="dropdown-item" href=@Url.Action("EditProfile", "Home", new { Id = userid })>Profile</a>
                                     <a class="dropdown-item" href=@Url.Action("CustomLogOff", "Account")>Log Out</a>
                                 </div>
                             </div>
                         </div>
-                    }
+                        }
                 </div>
             </div>
             <!--page title area end-->

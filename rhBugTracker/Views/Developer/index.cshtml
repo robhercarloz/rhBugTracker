@@ -14,6 +14,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>index</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
 </head>
 <body>
     <div class="col-12 mt-5">
@@ -65,6 +67,65 @@
             </div>
         </div>
     </div>
+
+    <!--CHARTS-->
+    <div class="col-lg-12 mt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="barChart1"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="donutChart2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    @section scripts{
+        <!-- main content area end -->
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+        <script>
+             $(function () {
+                    var url = '@Url.Action("ProduceChart1Data", "Graphing")';
+                    $.post(url).then(function (response) {
+                        new Morris.Bar({
+                            element: 'barChart1',
+                            data: response,
+                            xkey: 'label',
+                            ykeys: ['value'],
+                            labels: ['Ticket Count'],
+                            resize: true
+                        });
+                    });
+
+                    var url = '@Url.Action("ProduceChart2Data", "Graphing")';
+                    $.post(url).then(function (response) {
+                        new Morris.Donut({
+                            element: 'donutChart2',
+                            data: response,
+                            xkey: 'label',
+                            ykeys: ['value'],
+                            labels: ['Ticket Count'],
+                            resize: true
+                        });
+                    });
+              });
+
+        </script>
+
+
+    }
+
 
 
 </body>
