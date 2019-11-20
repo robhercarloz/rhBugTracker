@@ -119,8 +119,7 @@ namespace rhBugTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                
+                              
 
                 var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
                 

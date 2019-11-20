@@ -284,11 +284,12 @@
                                     <span class="notify-title">You have @NotificationsHelper.GetUnreadNotifications().Count() new notifications</span>
                                     <div class="nofity-list">
                                         <!--LIST OF NOTIFICATIONS-->
-                                        <ul id="menu1" class="dropdown-menu list-unstyled msg_lst" role="menu">
-                                            @foreach (var unreadNotification in NotificationsHelper.GetUnreadNotifications())
-                                            {
+                                        @foreach (var unreadNotification in NotificationsHelper.GetUnreadNotifications())
+                                        {
+                                            <ul id="menu1" class="dropdown-menu list-unstyled msg_lst" role="menu">
+
                                                 <li>
-                                                    @using (Html.BeginForm("Dismiss", "TicketNotifictations", FormMethod.Post))
+                                                    @using (Html.BeginForm("Dismiss", "TicketNotifictations", FormMethod.Get))
                                                     {
                                                         @Html.AntiForgeryToken()
                                                         @Html.Hidden("Id", unreadNotification.Id)
@@ -304,12 +305,10 @@
                                                         </span>
                                                         <br />
                                                         <button type="submit">Dismiss</button>
-
                                                     }
-
                                                 </li>
-                                            }
-                                        </ul>
+                                            </ul>
+                                         }
                                     </div>
                                 </div>
                             </li>

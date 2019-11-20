@@ -10,7 +10,7 @@ namespace rhBugTracker.Models
         //Key
         public int Id { get; set; }
         public int TicketId { get; set; }
-        public string UserId { get; set; }
+        public string SenderId { get; set; }
 
         //properties
         public string NotificationBody { get; set; }
@@ -21,7 +21,7 @@ namespace rhBugTracker.Models
 
         //Foreign Key Reference
         public virtual Tickets Ticket { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser Recipient { get; set; }
         public virtual ApplicationUser Sender { get; set; }
 
 

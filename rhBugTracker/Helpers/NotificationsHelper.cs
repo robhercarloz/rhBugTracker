@@ -32,6 +32,8 @@ namespace rhBugTracker.Helpers
         {
             var notification = new TicketNotification
             {
+                Created = DateTime.Now,
+                SenderId = HttpContext.Current.User.Identity.GetUserId(),
                 TicketId = newTicket.Id,
                 IsRead = false,
                 RecipientId = newTicket.AssignedToUserId,

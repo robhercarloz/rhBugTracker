@@ -25,7 +25,7 @@ namespace rhBugTracker.Controllers
         // GET: TicketNotifications
         public ActionResult Index()
         {
-            var ticketNotifications = db.TicketNotifications.Include(t => t.Ticket).Include(t => t.User);
+            var ticketNotifications = db.TicketNotifications.Include(t => t.Ticket).Include(t => t.Recipient);
             return View(ticketNotifications.ToList());
         }
 
@@ -67,7 +67,7 @@ namespace rhBugTracker.Controllers
             }
 
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "OwnerUserId", ticketNotification.TicketId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FName", ticketNotification.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FName", ticketNotification.SenderId);
             return View(ticketNotification);
         }
 
@@ -84,7 +84,7 @@ namespace rhBugTracker.Controllers
                 return HttpNotFound();
             }
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "OwnerUserId", ticketNotification.TicketId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FName", ticketNotification.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FName", ticketNotification.SenderId);
             return View(ticketNotification);
         }
 
@@ -102,7 +102,7 @@ namespace rhBugTracker.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "OwnerUserId", ticketNotification.TicketId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "FName", ticketNotification.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "FName", ticketNotification.SenderId);
             return View(ticketNotification);
         }
 
