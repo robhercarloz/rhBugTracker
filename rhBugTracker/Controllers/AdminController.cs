@@ -214,7 +214,10 @@ namespace rhBugTracker.Controllers
         [Authorize(Roles = "Admin, Project Manager")]
         public ActionResult MyCreatedProjects()
         {
-            return View();
+            var myData = new Dashboard();
+            var userId = User.Identity.GetUserId();
+            myData.createdProjects = db.Projects.Where(p => p.ProjectOwnerId == userId).ToList();                
+            return View(myData);
         }
 
 

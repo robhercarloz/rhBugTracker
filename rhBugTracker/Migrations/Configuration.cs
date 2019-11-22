@@ -58,7 +58,7 @@ namespace rhBugTracker.Migrations
                     LName = "Hernandez",
                     DisplayName = "Admin",
                     AvatarPath = "/Avatars/profile_Placeholder.png"
-                }, "psWord0101! ");
+                }, WebConfigurationManager.AppSettings["Admin"]);
             }
             //ProjectManagerUser
             if (!context.Users.Any(u => u.Email == "coderhcarlos@Gmail.com"))

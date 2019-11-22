@@ -72,7 +72,6 @@ namespace rhBugTracker.Models
         public System.Data.Entity.DbSet<rhBugTracker.Models.TicketComment> TicketComments { get; set; }
 
         public System.Data.Entity.DbSet<rhBugTracker.Models.TicketAttachment> TicketAttachments { get; set; }
-
        
         public System.Data.Entity.DbSet<rhBugTracker.Models.TicketHistory> TicketHistories { get; set; }
 

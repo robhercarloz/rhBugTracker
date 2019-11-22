@@ -245,7 +245,7 @@ namespace rhBugTracker.Controllers
                     FName = model.FName,
                     LName = model.LName,
                     DisplayName = model.DisplayName,
-                    UserName = model.DisplayName,
+                    UserName = model.Email,
                     Email = model.Email,
 
                 };

@@ -107,28 +107,19 @@
                             <i class="ti-lock"></i>
                         </div>
                         <div class="form-gp">
-                            <div class="custom-file">
+                            <p>Upload profile picture!</p>
+                            <div class="custom-file">                                
                                 @*<input type="file" class="custom-file-input" id="inputGroupFile02">*@
                                 @Html.TextBox("Avatar", null, new { @class = "custom-file-input", id = "inputGroupFile02", @type = "file"})
                                 @*<label class="custom-file-label" for="inputGroupFile02">Choose file</label>*@
                                 @Html.Label("inputGroupFile02", "Choose File", new { @class = "custom-file-label"})
-                            </div>
-                            @*<div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
-                            </div>*@
+                            </div>                           
                         </div>
 
 
                         <div class="submit-btn-area">
                             <button type="submit">Submit <i class="ti-arrow-right"></i></button>
-                            @*<div class="login-other row mt-4">
-                <div class="col-6">
-                    <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
-                </div>
-                <div class="col-6">
-                    <a class="google-login" href="#">Sign up with <i class="fa fa-google"></i></a>
-                </div>
-            </div>*@
+                            
                         </div>
                         <div class="form-footer text-center mt-5">
                             <p class="text-muted">

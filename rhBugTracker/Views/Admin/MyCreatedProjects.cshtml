@@ -62,9 +62,8 @@
                                         <th>Project Name</th>
                                         <th>Project Description</th>
                                         <th>Created On</th>
-                                        <th>Developers on Projects</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>Tickets on project</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,13 +73,9 @@
                                             <td>@projects.Name</td>
                                             <td>@projects.Description</td>
                                             <td>@projects.Created</td>
-                                            <td>@projects.Users</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
+                                            <td>@projects.Tickets.Count()</td>                                            
                                         </tr>
-                                    }
-
-                                    
+                                    }                                    
                                 </tbody>
                             </table>
                         </div>
