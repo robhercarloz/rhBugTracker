@@ -7,125 +7,312 @@
     Layout = null;
 }
 
-<!doctype html>
-<html class="no-js" lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login - BugTracker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
-    <link rel="stylesheet" href="~/Content/themify-icons.css">
-    <link rel="stylesheet" href="~/Content/metisMenu.css">
-    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/Content/slicknav.min.css">
-    <!-- amchart css -->
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-    <!-- others css -->
-    <link rel="stylesheet" href="~/Content/typography.css">
-    <link rel="stylesheet" href="~/Content/default-css.css">
-    <link rel="stylesheet" href="~/Content/styles.css">
-    <link rel="stylesheet" href="~/Content/responsive.css">
-    <!-- modernizr css -->
-    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        RH Bugtracker
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/paper-dashboard.min.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/Content/demo.css" rel="stylesheet" />
 </head>
 
-<body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- preloader area start -->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-    <!-- preloader area end -->
-    <!-- login area start -->
-    <div class="login-area login-bg">
+<body class="login-page">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
         <div class="container">
-            <div class="login-box ptb--100">
-                <!--USING C# TO BEGIN FORM-->
-                    <!--Login page header-->
-                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    <div class="login-form-head">
-                        <h4>Sign In</h4>
-                        <p>Hello there, sign in and get started tracking bugs</p>
-                    </div>
-
-                    <!--Login page Body-->
-                    <div class="login-form-body">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-gp">
-                            @*<label for="exampleInputEmail1">Email address</label>*@
-                            @Html.Label("exampleInputEmail1", "Email Address")
-                            @*<input type="email" id="exampleInputEmail1" name="Email">*@
-                            @Html.TextBoxFor(m => m.Email, new { id = "exampleInputEmail1" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                            <i class="ti-email"></i>
-                        </div>
-                        <div class="form-gp">
-                            @*<label for="exampleInputPassword1">Password</label>*@
-                            @Html.Label("exampleInputPassword1", "Password")
-                            @*<input type="password" name="Password" id="exampleInputPassword1" required="required">*@
-                            @Html.PasswordFor(m => m.Password, new { id = "exampleInputPassword1" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            <i class="ti-lock"></i>
-                        </div>
-                        <div class="row mb-4 rmber-area">
-                            <div class="col-6">
-                                <div class="custom-control custom-checkbox mr-sm-2">
-                                    @*<input type="checkbox" class="custom-control-input" id="customControlAutosizing">*@
-                                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input" })
-                                    @*<label class="custom-control-label" for="customControlAutosizing">Remember Me</label>*@
-                                    @Html.LabelFor(m => m.RememberMe, new { @class = "custom-control-label"})
-                                </div>
-                            </div>
-                            <div class="col-6 text-right">
-                                @Html.ActionLink("Forgot Password?", "ForgotPassword", "Account", null)
-                            </div>
-                        </div>
-                        <div class="submit-btn-area">
-                            <button type="submit">Submit <i class="ti-arrow-right"></i></button>
-                        </div>
-                        <div class="form-footer text-center mt-5">
-                            <p class="text-muted">
-                                Don't have an account?
-                                @Html.ActionLink("Sign Up", "Register", "Account", null)
-                            </p>
-                            <br />
-                            <p>
-                                Login as a demo user?
-                                @Html.ActionLink("Demo User", "DemoUserAccess", "Account" ,null)
-                            </p>
-                        </div>
-                    </div>
-                }
-                        
+            <div class="navbar-wrapper">
+                <div class="navbar-toggle">
+                    
+                </div>
+                <a class="navbar-brand" href="#pablo">RH Bugtracker</a>
+            </div>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <ul class="navbar-nav">
+                    
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link">
+                            <i class="nc-icon nc-book-bookmark"></i>
+                        </a>
+                    </li>    
+                    
+                </ul>
             </div>
         </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="wrapper wrapper-full-page ">
+        <div class="full-page section-image" filter-color="black" style="background-image:url('../../Images/registerLeafBK.jpg')"">
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="content">
+                <div class="container">
+                    <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                        <!--BEGIN FORM-->
+                        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="card card-login">
+                                <div class="card-header ">
+                                    <div class="card-header ">
+                                        <h3 class="header text-center">Login</h3>
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <label style="text-align:center">Welcome and sign in to begin tracking bugs!</label>
+                                    </div>
+                                </div>
+                                <div class="card-body ">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="nc-icon nc-email-85"></i>
+                                            </span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        @*<input type="text" class="form-control" placeholder="First Name...">*@
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="nc-icon nc-key-25"></i>
+                                            </span>
+                                        </div>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        @*<input type="password" placeholder="Password" class="form-control">*@
+                                    </div>
+                                    <div class="row mb-4 rmber-area">
+                                        <div class="col-6">
+                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input" })
+                                                <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            @Html.ActionLink("Forgot Password?", "ForgotPassword", "Account", null)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    @*<a href="#pablo" class="btn btn-warning btn-round btn-block mb-3">Get Started</a>*@
+                                    <div class="submit-btn-area">
+                                        <button type="submit" class="btn btn-warning btn-round btn-block mb-1">Submit <i class="ti-arrow-right"></i></button>
+                                    </div>                                    
+                                </div>
+                                <div class="form-footer text-center mt-1">
+                                <p class="text-muted">
+                                    Don't have an account?
+                                    @Html.ActionLink("Sign Up", "Register", "Account", null)
+                                </p>                                
+                                <p>
+                                    Login as a demo user?
+                                    @Html.ActionLink("Demo User", "DemoUserAccess", "Account" ,null)
+                                </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <footer class="footer footer-black  footer-white ">
+                <div class="container-fluid">
+                    <div class="row">                        
+                        <div class="credits ml-auto">
+                            <span class="copyright">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                                | Edited by: <a href="https://robertochprofile.azurewebsites.net/">Roberto Hernandez</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
-    <!-- login area end -->
-    <!-- jquery latest version -->
-    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
-    <!-- bootstrap 4 js -->
-    <script src="~/Scripts/popper.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/owl.carousel.min.js"></script>
-    <script src="~/Scripts/metisMenu.min.js"></script>
-    <script src="~/Scripts/jquery.slimscroll.min.js"></script>
-    <script src="~/Scripts/jquery.slicknav.min.js"></script>
-
-    <!-- others plugins -->
-    <script src="~/Scripts/plugins.js"></script>
-    <script src="~/Scripts/scripts.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../../assets/js/core/jquery.min.js"></script>
+    <script src="../../assets/js/core/popper.min.js"></script>
+    <script src="../../assets/js/core/bootstrap.min.js"></script>
+    <script src="../../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../../assets/js/plugins/moment.min.js"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="../../assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="../../assets/js/plugins/jquery.validate.min.js"></script>
+    <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="../../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="../../assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="../../assets/js/plugins/bootstrap-datetimepicker.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
+    <script src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="../../assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="../../assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="../../assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="../../assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Bootstrap Table -->
+    <script src="../../assets/js/plugins/nouislider.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+    <script src="../../assets/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+    <script src="../../assets/demo/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            demo.checkFullPageBackgroundImage();
+        });
+    </script>
 </body>
 
 </html>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@*<!doctype html>
+    <html class="no-js" lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Login - BugTracker</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+        <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+        <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+        <link rel="stylesheet" href="~/Content/themify-icons.css">
+        <link rel="stylesheet" href="~/Content/metisMenu.css">
+        <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+        <link rel="stylesheet" href="~/Content/slicknav.min.css">
+         amchart css
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+         others css
+        <link rel="stylesheet" href="~/Content/typography.css">
+        <link rel="stylesheet" href="~/Content/default-css.css">
+        <link rel="stylesheet" href="~/Content/styles.css">
+        <link rel="stylesheet" href="~/Content/responsive.css">
+         modernizr css
+        <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+    </head>
+
+    <body>
+        [if lt IE 8]>
+                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            <![endif]
+         preloader area start
+        <div id="preloader">
+            <div class="loader"></div>
+        </div>
+         preloader area end
+         login area start
+        <div class="login-area login-bg">
+            <div class="container">
+                <div class="login-box ptb--100">
+                    USING C# TO BEGIN FORM
+                        Login page header
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="login-form-head">
+                            <h4>Sign In</h4>
+                            <p>Hello there, sign in and get started tracking bugs</p>
+                        </div>
+
+                        Login page Body
+                        <div class="login-form-body">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-gp">
+                                <label for="exampleInputEmail1">Email address</label>
+                                @Html.Label("exampleInputEmail1", "Email Address")
+                                <input type="email" id="exampleInputEmail1" name="Email">
+                                @Html.TextBoxFor(m => m.Email, new { id = "exampleInputEmail1" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                <i class="ti-email"></i>
+                            </div>
+                            <div class="form-gp">
+                                <label for="exampleInputPassword1">Password</label>
+                                @Html.Label("exampleInputPassword1", "Password")
+                                <input type="password" name="Password" id="exampleInputPassword1" required="required">
+                                @Html.PasswordFor(m => m.Password, new { id = "exampleInputPassword1" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                <i class="ti-lock"></i>
+                            </div>
+                            <div class="row mb-4 rmber-area">
+                                <div class="col-6">
+                                    <div class="custom-control custom-checkbox mr-sm-2">
+                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input" })
+                                        <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
+                                        @Html.LabelFor(m => m.RememberMe, new { @class = "custom-control-label"})
+                                    </div>
+                                </div>
+                                <div class="col-6 text-right">
+                                    @Html.ActionLink("Forgot Password?", "ForgotPassword", "Account", null)
+                                </div>
+                            </div>
+                            <div class="submit-btn-area">
+                                <button type="submit">Submit <i class="ti-arrow-right"></i></button>
+                            </div>
+                            <div class="form-footer text-center mt-5">
+                                <p class="text-muted">
+                                    Don't have an account?
+                                    @Html.ActionLink("Sign Up", "Register", "Account", null)
+                                </p>
+                                <br />
+                                <p>
+                                    Login as a demo user?
+                                    @Html.ActionLink("Demo User", "DemoUserAccess", "Account" ,null)
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+         login area end
+         jquery latest version
+        <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+         bootstrap 4 js
+        <script src="~/Scripts/popper.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/owl.carousel.min.js"></script>
+        <script src="~/Scripts/metisMenu.min.js"></script>
+        <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+        <script src="~/Scripts/jquery.slicknav.min.js"></script>
+
+         others plugins
+        <script src="~/Scripts/plugins.js"></script>
+        <script src="~/Scripts/scripts.js"></script>
+    </body>
+
+    </html>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

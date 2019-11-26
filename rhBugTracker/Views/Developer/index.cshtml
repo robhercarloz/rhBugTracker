@@ -2,99 +2,112 @@
 @using rhBugTracker.Helpers
 
 
-@{ 
+@{
     var projectHelper = new ProjectHelper();
     var ticketHelper = new TicketHelper();
     var userId = User.Identity.GetUserId();
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>index</title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-
-</head>
-<body>
-    <div class="col-12 mt-5">
-        <div class="card">
-            <div class="card-body">
-                <div class="col-lg-12">
+<div class="content">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-body ">
                     <div class="row">
-                        <div class="col-lg-5 ">
-                            <div class="card">
-                                <div class="seo-fact sbg1">
-                                    <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <a href=@Url.Action("myProjects", "Projects")><div class="seofct-icon"><i class="ti-ticket"></i>My Projects</div></a>
-                                        @if (projectHelper.ListUserProjects(userId).Count() == 0)
-                                        {
-                                            <h2>0</h2>
-                                        }
-                                        else
-                                        {
-                                            <h2>@projectHelper.ListUserProjects(userId).Count()</h2>
-                                        }
-                                    </div>
-                                    @*<canvas id="seolinechart1" height="50"></canvas>*@
+                        <div class="col-5 col-md-4">
+                            <div class="icon-big text-center icon-warning">
+                                <i class="nc-icon nc-book-bookmark text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="numbers">
+                                <p class="card-category">My Projects</p>
+                                <p class="card-title">
+                                    @if (projectHelper.ListUserProjects(userId).Count() == 0)
+                                    {
+                                    <p>0</p>
+                                }
+                                else
+                                {
+                                    <p>@projectHelper.ListUserProjects(userId).Count()</p>
+                                }
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 ">
-                            <div class="card">
-                                <div class="seo-fact sbg1">
-                                    <div class="p-4 d-flex justify-content-between align-items-center">
-                                        <div class="seofct-icon"><i class="ti-blackboard"></i>My Tickets</div>
+                    </div>
+                    <div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+                            <a href="@Url.Action("myProjects", "Projects")"><i class="fa fa-clock-o"></i> View All </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5 col-md-4">
+                                <div class="icon-big text-center icon-warning">
+                                    <i class="nc-icon nc-paper text-success"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 col-md-8">
+                                <div class="numbers">
+                                    <p class="card-category">My Tickets</p>
+                                    <p class="card-title">
                                         @if (ticketHelper.ListUserTickets(userId).Count() == 0)
                                         {
-                                            <h2>0</h2>
-                                        }
-                                        else
-                                        {
-                                            <h2>@ticketHelper.ListUserTickets(userId).Count();</h2>
-                                        }
-
-
+                                        <p>0</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@ticketHelper.ListUserTickets(userId).Count()</p>
+                                    }
+                                        </p>
                                     </div>
-                                    @*<canvas id="seolinechart1" height="50"></canvas>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer ">
+                            <hr>
+                            <div class="stats">
+                                <a href="#"><i class="fa fa-clock-o"></i> View All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--CHARTS-->
+                <div class="col-lg-12 mt-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="barChart1"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="donutChart2"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- seo fact area end -->
+
+
             </div>
         </div>
-    </div>
 
-    <!--CHARTS-->
-    <div class="col-lg-12 mt-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div id="barChart1"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div id="donutChart2"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <br />
-
-    @section scripts{
-        <!-- main content area end -->
+        @section scripts{
+            <!-- main content area end -->
 
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
-        <script>
+            <script>
              $(function () {
                     var url = '@Url.Action("ProduceChart1Data", "Graphing")';
                     $.post(url).then(function (response) {
@@ -121,12 +134,18 @@
                     });
               });
 
-        </script>
+            </script>
 
 
-    }
+        }
 
 
 
-</body>
-</html>
+
+
+
+
+
+
+
+

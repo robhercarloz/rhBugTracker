@@ -1,16 +1,10 @@
 ﻿@model IEnumerable<rhBugTracker.Models.UserTicketListViewModel>
 
-@{ 
+@{
     ViewBag.Title = "Manage Tickets Users";
 }
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Manage Tickets Users</title>
-</head>
-<body>
+<div class="content">
     <div class="col-12 mt-5">
         <div class="card">
             <div class="card-body">
@@ -20,22 +14,17 @@
                     @Html.AntiForgeryToken();
                     <h4>Choose Ticket</h4>
                     @Html.DropDownList("Tickets", null, "--SELECT--", new { @class = "form-control" })
-                    
+
                     <br />
                     <h4>Choose Developer</h4>
                     @Html.DropDownList("DeveloperId", null, "--SELECT--", new { @class = "form-control" })
 
                     <br />
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-large" id="btnSubmit">Assign</button>
+                        <button type="submit" class="btn btn-success btn-large" id="btnSubmit">Assign</button>
                     </div>
-
                 }
-
-
             </div>
         </div>
     </div>
-
-</body>
-</html>
+</div>

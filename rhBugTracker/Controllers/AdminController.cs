@@ -74,7 +74,7 @@ namespace rhBugTracker.Controllers
 
         //--------------MANAGE USERS----------------------
         //GET: ADMIN
-        [Authorize(Roles = ("Admin"))]
+        [Authorize(Roles = ("Admin, Project Manager"))]
         public ActionResult ManageUsers()
         {
 

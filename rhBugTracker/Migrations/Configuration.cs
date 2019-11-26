@@ -141,7 +141,7 @@ namespace rhBugTracker.Migrations
                     FName = "Demo",
                     LName = "Admin",
                     DisplayName = "DemoAdmin",
-                    AvatarPath = "/Avatars/profile_Placeholder.png"
+                    AvatarPath = "/Avatars/adminAvatar.png"
                 }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
             //PM DEMO
@@ -154,7 +154,7 @@ namespace rhBugTracker.Migrations
                     FName = "Demo",
                     LName = "PM",
                     DisplayName = "DemoPM",
-                    AvatarPath = "~/Avatars/profile_Placeholder.png"
+                    AvatarPath = "/Avatars/pmAvatar.png"
                 }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
             //Developer Demo
@@ -167,7 +167,7 @@ namespace rhBugTracker.Migrations
                     FName = "Demo",
                     LName = "Developer",
                     DisplayName = "DemoDeveloper",
-                    AvatarPath = "~/Avatars/profile_Placeholder.png"
+                    AvatarPath = "/Avatars/developerAvatar.png"
                 }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
 
@@ -180,7 +180,7 @@ namespace rhBugTracker.Migrations
                     FName = "Demo",
                     LName = "Submitter",
                     DisplayName = "DemoSubmitter",
-                    AvatarPath = "~/Avatars/profile_Placeholder.png"
+                    AvatarPath = "/Avatars/submitterAvatar.png"
                 }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
 

@@ -12,10 +12,10 @@ namespace rhBugTracker.Models
     public class ApplicationUser : IdentityUser
     {
         [Display(Name = "First Name")]
-        [StringLength(15, MinimumLength = 2, ErrorMessage = "First name must contain 2 - 10 characters.")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "First name must contain 2 - 10 characters.")]
         public string FName { get; set; }
         [Display(Name = "Last Name")]
-        [StringLength(15, MinimumLength = 2, ErrorMessage = "Last name must contain 2 - 10 characters.")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "Last name must contain 2 - 10 characters.")]
         public string LName { get; set; }
         [Display(Name = "Display Name")]
         [StringLength(25, MinimumLength = 2, ErrorMessage = "Display Name must be 2 - 10 characters.")]

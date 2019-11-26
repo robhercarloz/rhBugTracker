@@ -35,7 +35,7 @@ namespace rhBugTracker.Controllers
         public JsonResult ProduceChart2Data()
         {
             var myData = new List<MorrisBarData>();
-            MorrisBarData data = null;
+            //MorrisBarData data = null;
             foreach(var status in db.TicketStatus.ToList())
             {
                 myData.Add(new MorrisBarData

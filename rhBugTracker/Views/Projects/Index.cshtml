@@ -5,29 +5,39 @@
     ViewBag.Title = "Index";
     var ticketHelper = new TicketHelper();
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>All Projects</title>
-</head>
-<body>
-    <!-- Dark table start -->
-    <div class="col-12 mt-5">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="header-title">All Projects</h4>
-                <div class="data-tables datatable-dark">
-                    <table id="dataTable3" class="text-center">
-                        <thead class="text-capitalize">
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">ALL PROJECTS</h4>
+                </div>
+                <div class="card-body">
+                    <div class="toolbar">
+                        <!--        Here you can write extra buttons/actions for the toolbar              -->
+                    </div>
+                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
                             <tr>
                                 <th>Project Name</th>
                                 <th>Description</th>
                                 <th>Created On</th>
-                                <th>Ticket Count</th>                                
+                                <th>Ticket Count</th>
                                 <th>Project Team</th>
+                                <th>DETAILS</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>PROJECT NAME</th>
+                                <th>DESCRIPTION</th>
+                                <th>CREATED ON</th>
+                                <th>TICKET COUNT</th>
+                                <th>PROJECT TEAM</th>
+                                <th>DETAILS</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                             @foreach (var users in Model)
                             {
@@ -42,18 +52,25 @@
                                             @user.FName @user.LName <br>
                                         }
                                     </td>
+                                    <td>@Html.ActionLink("Details", "Details", new { id = users.Id})</td>
                                     @*<td>@Html.ActionLink("Details", "Details", new { id = })</td>*@
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
+                <!-- end content-->
             </div>
+            <!--  end card  -->
         </div>
+        <!-- end col-md-12 -->
     </div>
-    <!-- Dark table end -->
+    <!-- end row -->
+</div>
+
+@section scripts{
     <script>
-        $('#dataTable3').DataTable();
+        $('#datatable').DataTable();
     </script>
-</body>
-</html>
+}
+

@@ -2,37 +2,42 @@
 @using Microsoft.AspNet.Identity
 @model IEnumerable<rhBugTracker.Models.ProjectViewModel>
 
-@{ 
+@{
     var userId = User.Identity.GetUserId();
     var projectHelper = new ProjectHelper();
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>My Projects</title>
-</head>
-<body>
-    <div class="container-fluid">
-        <!--START DISPLAYING USER AND THEIR INFO------------->
-        <div class="col-12 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Projects Assigned to</h4>
-                    <div class="data-tables datatable-dark">
-                        <table id="dataTable3" class="text-center">
-                            <thead class="text-capitalize">
+
+    <div class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Projects I'm on</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
                                 <tr>
                                     <th>NAME</th>
                                     <th>DESCRIPTION</th>
-                                    <th>Created On</th>
-                                    <th>Tickets on project</th>
-                                    
+                                    <th>CREATED ON</th>
+                                    <th>TICKETS ON PROJECT</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>CREATED ON</th>
+                                    <th>TICKETS ON PROJECT</th>
+                                </tr>
+                            </tfoot>
                             <tbody>
-
                                 @foreach (var projects in projectHelper.ListProjectsUserIsOn(userId))
                                 {
                                     <tr>
@@ -42,39 +47,20 @@
                                         <td>@projects.Tickets.Count()</td>
                                     </tr>
                                 }
-
-
-
-
-
-
-
-
-                                @*@foreach (var project in Model)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(p => project.projName)</td>
-                                        <td>@Html.DisplayFor(p => project.projDescription)</td>
-                                        <td>
-                                            @foreach (var user in project.Users)
-                                            {
-                                                @user.FName @user.LName <br>
-                                            }
-                                        </td>
-                                    
-                                    </tr>
-                                }*@
                             </tbody>
                         </table>
                     </div>
+                    <!-- end content-->
                 </div>
+                <!--  end card  -->
             </div>
+            <!-- end col-md-12 -->
         </div>
-        <!--END TABLE FOR DISPLAYING THE USER ---------------->
     </div>
-</body>
-</html>
 
-<script>
-        $('#dataTable3').DataTable();
-</script>
+
+@section scripts{
+    <script>
+        $('#datatable').DataTable();
+    </script>
+}

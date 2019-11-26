@@ -85,11 +85,23 @@ namespace rhBugTracker.Controllers
 
         }
 
+        //GET
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
+            var userId = User.Identity.GetUserId();
+            //Get specific user ID 
+            var user = db.Users.Find(userId);
+            //Creating view model with info of user
+            var profile = new UserInformationDisplay();
+            //assigning the value of properties
+            profile.FName = user.FName;
+            profile.LName = user.LName;
+            profile.DisplayName = user.DisplayName;
+            profile.Email = user.Email;
+            //profile.Password = user.PasswordHash.ToString();
+            //all info passed in as user
+            return View(profile);
         }
 
         //Get

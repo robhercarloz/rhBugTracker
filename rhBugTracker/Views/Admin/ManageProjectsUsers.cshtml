@@ -4,28 +4,22 @@
     ViewBag.Title = "Manage Project Users";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Manage Project Users</title>
 
-    <style>
-        .lstForProjects {
-            width: 100%;
-            text-align: center;
-        }
+<style>
+    .lstForProjects {
+        width: 100%;
+        text-align: center;
+    }
 
-        .btnSubmit {
-            width: 100%;
-            text-align: center;
-        }
-    </style>
+    .btnSubmit {
+        width: 100%;
+        text-align: center;
+    }
+</style>
 
-</head>
-<body>
-    <div class="container">
-        <div class="col-lg-6 mt-3">
+<div class="content">
+    <div class="row">
+        <div class="col-lg-6 mt-1">
             <div class="card">
                 <div class="card-body">
                     <h1 style="text-align: center">Assign Users to Projects</h1>
@@ -65,11 +59,11 @@
             </div>
         </div>
 
-        <div class="col-lg-6 mt-3">
+        <div class="col-lg-6 mt-1">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <table class="table">
+                        <table class="table" id="datatable">
                             <tr>
                                 <th>
                                     @Html.DisplayNameFor(m => m.Name)
@@ -99,10 +93,15 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
+</div>
 
 
+@section scripts{
+    <script>
+        $('#datatable').DataTable();
+    </script>
+}
 
-             
+
+
+
