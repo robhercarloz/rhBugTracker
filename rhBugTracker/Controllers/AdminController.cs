@@ -129,7 +129,7 @@ namespace rhBugTracker.Controllers
 
                 //add to the list
                 myData.Add(userVm);
-            }
+            };
             //passing into the view            
             return View(myData);
         }

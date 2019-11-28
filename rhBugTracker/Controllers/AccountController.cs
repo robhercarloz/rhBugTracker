@@ -262,7 +262,7 @@ namespace rhBugTracker.Controllers
 
                     try
                     {
-                        var from = $"Blog Admin<{WebConfigurationManager.AppSettings["emailto"]}>";
+                        var from = $"Bug tracker Admin<{WebConfigurationManager.AppSettings["emailto"]}>";
                         var email = new MailMessage(from, model.Email)
                         {
                             Subject = "Confirm your account",

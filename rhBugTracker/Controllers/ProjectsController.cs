@@ -31,12 +31,18 @@ namespace rhBugTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
+            Project project = db.Projects.Find(id);       
+            
+            
             if (project == null)
             {
                 return HttpNotFound();
             }
             return View(project);
+
+            
+
+            
         }
 
         // GET: Projects/Create
