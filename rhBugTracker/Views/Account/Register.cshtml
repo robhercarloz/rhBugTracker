@@ -5,8 +5,203 @@
 @{
     Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        RH Bugtracker
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/paper-dashboard.min.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/Content/demo.css" rel="stylesheet" />
+</head>
+<body class="register-page">
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="navbar-toggle">
+                    <button type="button" class="navbar-toggler">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                </div>
+                <a class="navbar-brand" href="#pablo">RH Bugtracker / Registration</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="wrapper wrapper-full-page ">
+        <div class="full-page register-page section-image" filter-color="black" style="background-image:url('../../Images/registerLeafBK.jpg')">
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 ml-auto">
+                            <div class="info-area info-horizontal mt-5">
+                                <div class="icon icon-primary">
+                                    <i class="nc-icon nc-tv-2"></i>
+                                </div>
+                                <div class="description">
+                                    <h5 class="info-title">Sign up and start tracking bugs</h5>
+                                    <p class="description">
+                                        Help your company out by creating tickets of issues to be fixed and or worked on for improvment.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="info-area info-horizontal">
+                                <div class="icon icon-primary">
+                                    <i class="nc-icon nc-html5"></i>
+                                </div>
+                                <div class="description">
+                                    <h5 class="info-title">Create projects</h5>
+                                    <p class="description">
+                                        Create projects and assign a team to them so that for any problems they have they can keep track of them easier than before.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="info-area info-horizontal">
+                                <div class="icon icon-info">
+                                    <i class="nc-icon nc-atom"></i>
+                                </div>
+                                <div class="description">
+                                    <h5 class="info-title">Create Tickets</h5>
+                                    <p class="description">
+                                        Projects that are created have their own set of tickets with details to each one.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mr-auto">
+                            <div class="card card-signup text-center">
+                                <div class="card-body ">
+                                    <h4 class="card-title">Register</h4>
+                                    <!--FORM BEGIN-->
+                                    @using (Html.BeginForm("NewRegister", "Account", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="nc-icon nc-single-02"></i>
+                                                </span>
+                                            </div>
+                                            @*<input type="text" class="form-control" placeholder="First Name...">*@
+                                            @Html.TextBoxFor(m => m.FName, new { @class = "form-control", @placeholder = "First Name" })
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="nc-icon nc-circle-10"></i>
+                                                </span>
+                                            </div>
+                                            @*<input type="text" placeholder="Last Name..." class="form-control">*@
+                                            @Html.TextBoxFor(m => m.LName, new { @class = "form-control", @placeholder = "Last Name" })
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="nc-icon nc-single-02"></i>
+                                                </span>
+                                            </div>
+                                            @*<input type="email" class="form-control" placeholder="Email...">*@
+                                            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @placeholder = "Displayname" })
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="nc-icon nc-email-85"></i>
+                                                </span>
+                                            </div>
+                                            @*<input type="email" class="form-control" placeholder="Email...">*@
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="nc-icon nc-single-02"></i>
+                                                </span>
+                                            </div>
+                                            @*<input type="email" class="form-control" placeholder="Email...">*@
+                                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="nc-icon nc-single-02"></i>
+                                                </span>
+                                            </div>
+                                            @*<input type="email" class="form-control" placeholder="Email...">*@
+                                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                                        </div>
+                                        <div class="form-gp">
+                                            <p>Upload profile picture!</p>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                                @Html.TextBox("Avatar", null, new { @class = "custom-file-input", id = "inputGroupFile02", @type = "file" })
+                                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                                @Html.Label("inputGroupFile02", "Choose File", new { @class = "custom-file-label" })
+                                            </div>
+                                        </div>
+                                        <div class="form-footer text-center mt-5">
+                                            <p class="text-muted">
+                                                Already an account?
+                                                @Html.ActionLink("Log In", "Login", "Account")
+                                            </p>
+                                        </div>
+                                        <div class="card-footer ">
+                                            <button type="submit" class="btn btn-success btn-round">Register </button>
+                                        </div>
 
-<!doctype html>
+                                        <!--END FORM-->
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <footer class="footer footer-black  footer-white ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="credits ml-auto">
+                            <span class="copyright">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                                | Modified by: <a href="#">Roberto Hernandez</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+@*<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
@@ -21,29 +216,29 @@
     <link rel="stylesheet" href="~/Content/metisMenu.css">
     <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Content/slicknav.min.css">
-    <!-- amchart css -->
+     amchart css 
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-    <!-- others css -->
+     others css 
     <link rel="stylesheet" href="~/Content/typography.css">
     <link rel="stylesheet" href="~/Content/default-css.css">
     <link rel="stylesheet" href="~/Content/styles.css">
     <link rel="stylesheet" href="~/Content/responsive.css">
-    <!-- modernizr css -->
+     modernizr css 
     <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
-    <!--[if lt IE 8]>
+    [if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        <![endif]
 
-    <!-- preloader area start -->
+     preloader area start 
     <div id="preloader">
         <div class="loader"></div>
     </div>
-    <!-- preloader area end -->
+     preloader area end 
 
-    <!-- login area start -->
+     login area start 
     <div class="login-area login-bg">
         <div class="container">
             <div class="login-box ptb--100">
@@ -57,51 +252,51 @@
                     </div>
                     <div class="login-form-body">
                         <div class="form-gp">
-                            @*<label for="exampleInputName1">Full Name</label>*@
+                            <label for="exampleInputName1">Full Name</label>
                             @Html.Label("exampleInputName1", "First Name")
-                            @*<input type="text" id="exampleInputName1">*@
+                            <input type="text" id="exampleInputName1">
                             @Html.TextBoxFor(m => m.FName, new { id = "exampleInputName1" })
                             @Html.ValidationMessageFor(m => m.FName, "", new { @class = "text-danger" })
                             <i class="ti-user"></i>
                         </div>
 
                         <div class="form-gp">
-                            @*<label for="exampleInputName1">Full Name</label>*@
+                            <label for="exampleInputName1">Full Name</label>
                             @Html.Label("exampleInputName1", "Last Name")
-                            @*<input type="text" id="exampleInputName1">*@
+                            <input type="text" id="exampleInputName1">
                             @Html.TextBoxFor(m => m.LName, new { id = "exampleInputName1" })
                             @Html.ValidationMessageFor(m => m.LName, "", new { @class = "text-danger" })
                             <i class="ti-user"></i>
                         </div>
                         <div class="form-gp">
-                            @*<label for="exampleInputName1">Full Name</label>*@
+                            <label for="exampleInputName1">Full Name</label>
                             @Html.Label("exampleInputName1", "Display Name")
-                            @*<input type="text" id="exampleInputName1">*@
+                            <input type="text" id="exampleInputName1">
                             @Html.TextBoxFor(m => m.DisplayName, new { id = "exampleInputName1" })
                             @Html.ValidationMessageFor(m => m.DisplayName, "", new { @class = "text-danger" })
                             <i class="ti-user"></i>
                         </div>
 
                         <div class="form-gp">
-                            @*<label for="exampleInputEmail1">Email address</label>*@
+                            <label for="exampleInputEmail1">Email address</label>
                             @Html.Label("exampleInputEmail1", "Email Address")
-                            @*<input type="email" id="exampleInputEmail1">*@
+                            <input type="email" id="exampleInputEmail1">
                             @Html.TextBoxFor(m => m.Email, new { id = "exampleInputName1" })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             <i class="ti-email"></i>
                         </div>
                         <div class="form-gp">
-                            @*<label for="exampleInputPassword1">Password</label>*@
+                            <label for="exampleInputPassword1">Password</label>
                             @Html.Label("exampleInputPassword1", "Password")
-                            @*<input type="password" id="exampleInputPassword1">*@
+                            <input type="password" id="exampleInputPassword1">
                             @Html.TextBoxFor(m => m.Password, new { id = "exampleInputPassword1" })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             <i class="ti-lock"></i>
                         </div>
                         <div class="form-gp">
-                            @*<label for="exampleInputPassword2">Confirm Password</label>*@
+                            <label for="exampleInputPassword2">Confirm Password</label>
                             @Html.Label("exampleInputPassword2", "Confirm Password")
-                            @*<input type="password" id="exampleInputPassword2">*@
+                            <input type="password" id="exampleInputPassword2">
                             @Html.TextBoxFor(m => m.ConfirmPassword, new { id = "exampleInputPassword2" })
                             @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                             <i class="ti-lock"></i>
@@ -109,9 +304,9 @@
                         <div class="form-gp">
                             <p>Upload profile picture!</p>
                             <div class="custom-file">                                
-                                @*<input type="file" class="custom-file-input" id="inputGroupFile02">*@
+                                <input type="file" class="custom-file-input" id="inputGroupFile02">
                                 @Html.TextBox("Avatar", null, new { @class = "custom-file-input", id = "inputGroupFile02", @type = "file"})
-                                @*<label class="custom-file-label" for="inputGroupFile02">Choose file</label>*@
+                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                                 @Html.Label("inputGroupFile02", "Choose File", new { @class = "custom-file-label"})
                             </div>                           
                         </div>
@@ -132,11 +327,11 @@
             </div>
         </div>
     </div>
-    <!-- login area end -->
+     login area end 
 
-    <!-- jquery latest version -->
+     jquery latest version 
     <script src="~/Scripts/jquery-2.2.4.min.js"></script>
-    <!-- bootstrap 4 js -->
+     bootstrap 4 js 
     <script src="~/Scripts/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/owl.carousel.min.js"></script>
@@ -144,12 +339,12 @@
     <script src="~/Scripts/jquery.slimscroll.min.js"></script>
     <script src="~/Scripts/jquery.slicknav.min.js"></script>
 
-    <!-- others plugins -->
+     others plugins 
     <script src="~/Scripts/plugins.js"></script>
     <script src="~/Scripts/scripts.js"></script>
 </body>
 
-</html>
+</html>*@
 
 
 
