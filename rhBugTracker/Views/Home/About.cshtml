@@ -2,6 +2,7 @@
 @using Microsoft.AspNet.Identity
 @using rhBugTracker.Models
 @{
+    
     var db = new ApplicationDbContext();
     var userid = User.Identity.GetUserId();
     var user = db.Users.Find(userid);
@@ -36,19 +37,22 @@
                             @Html.AntiForgeryToken()
                             <div class="form-group">
 
+                                @Html.Label("example-text-input", "Assigned Role", new { @class = "col-form-label" })
+                                @Html.TextBoxFor(m => m.Role, new { @class = "form-control", id = "example-text-input", @type = "text", @Disabled = true})
+
                                 @Html.Label("example-text-input", "First Name", new { @class = "col-form-label" })
                                 @Html.TextBoxFor(m => m.FName, new { @class = "form-control", id = "example-text-input", @type = "text", @Disabled = true })
 
 
                                 @Html.Label("example-text-input", "Last Name", new { @class = "col-form-label" })
-                                @Html.TextBoxFor(m => m.LName, new { @class = "form-control", id = "example-text-input", @type = "text" })
+                                @Html.TextBoxFor(m => m.LName, new { @class = "form-control", id = "example-text-input", @type = "text", @Disabled = true})
 
 
                                 @Html.Label("disabledTextInput", "Display Name", new { @class = "col-form-label" })
-                                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+                                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", id = "disabledTextInput", @type = "text", @Disabled = true })
 
                                 @Html.Label("disabledTextInput", "Email", new { @class = "col-form-label" })
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text", @Disabled = true })
 
                             </div>
                         }                    

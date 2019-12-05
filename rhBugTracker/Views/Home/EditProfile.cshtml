@@ -35,6 +35,9 @@
                             
                                 <div class="form-group">
 
+                                    @Html.Label("example-text-input", "Assigned Role", new { @class = "col-form-label" })
+                                    @Html.TextBoxFor(m => m.Role , new { @class = "form-control", id = "example-text-input", @type = "text", @Disabled = true})
+
                                     @Html.Label("example-text-input", "First Name", new { @class = "col-form-label" })
                                     @Html.TextBoxFor(m => m.FName , new { @class = "form-control", id = "example-text-input", @type = "text" })
 

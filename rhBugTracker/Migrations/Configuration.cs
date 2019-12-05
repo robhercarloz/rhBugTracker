@@ -41,6 +41,13 @@ namespace rhBugTracker.Migrations
             {
                 roleManager.Create(new IdentityRole { Name = "Submitter" });
             }
+            //Guest
+            if (!context.Roles.Any(r => r.Name == "Guest"))
+            {
+                roleManager.Create(new IdentityRole { Name = "Guest" });
+            }
+
+
             #endregion
 
             //Creating the User

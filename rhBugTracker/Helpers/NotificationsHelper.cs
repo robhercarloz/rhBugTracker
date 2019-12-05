@@ -59,5 +59,8 @@ namespace rhBugTracker.Helpers
             var currentUserId = HttpContext.Current.User.Identity.GetUserId();
             return db.TicketNotifications.Include("Sender").Where(t => t.RecipientId == currentUserId && !t.IsRead).ToList();
         }
+
+
+
     }
 }

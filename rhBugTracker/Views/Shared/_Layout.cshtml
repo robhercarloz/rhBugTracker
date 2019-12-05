@@ -7,8 +7,8 @@
     var userid = User.Identity.GetUserId();
     var user = db.Users.Find(userid);
     var notifyHelper = new NotificationsHelper();
-
-
+    var roleHelper = new UserRolesHelper();
+         
 }
 
 <!DOCTYPE html>
@@ -78,6 +78,9 @@
                             <span>
                                 @user.FName @user.LName
                                 <b class="caret"></b>
+                            </span>
+                            <span>
+                                <label class="text-muted">@roleHelper.ListUserRole(user.Id).FirstOrDefault()</label>
                             </span>
                         </a>
                         <div class="clearfix"></div>
@@ -308,7 +311,7 @@
 
                     }
                     //--SUBMITTER----------------------------------------------------------------------------------------->
-                    else
+                    else if (User.IsInRole("Submitter"))
                     {
                         <!--DASHBOARD-->
                         <li class="active">
@@ -352,8 +355,22 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>   
-                        
+                        </li>
+
+
+
+                    }
+                    else
+                    {
+                        <!--DASHBOARD-->
+                        <li class="active">
+                            <a href=@Url.Action("GuestIndex", "Account")>
+                                <i class="nc-icon nc-bank"></i>
+                                <p>DASHBOARD</p>
+                            </a>
+                        </li>
+
+
                     }
 
                 </ul>              
@@ -450,7 +467,7 @@
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim | Edited by: <a href="https://robertochprofile.azurewebsites.net/">Roberto Hernandez</a>
+                                </script> Created by Creative Tim | Edited by: <a href="https://robertochprofile.azurewebsites.net/">Roberto Hernandez</a>
                             </span>
                         </div>
                     </div>

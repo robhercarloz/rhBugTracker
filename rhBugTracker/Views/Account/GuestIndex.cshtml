@@ -1,0 +1,29 @@
+﻿@using rhBugTracker.Models
+@using Microsoft.AspNet.Identity
+
+
+@{ 
+    var db = new ApplicationDbContext();
+    var userId = User.Identity.GetUserId();
+    var user = db.Users.Find(userId);
+}
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body" style="text-align: center">
+                    <h3>
+                        WELCOME! @user.FName @user.LName
+                    </h3>
+                    <p>
+                        Thanks for joining the bugtracker! You are currently enrolled as a Guest please wait to be assigned to role. In the mean time you can always check out the program by logging in as a demo user. 
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        

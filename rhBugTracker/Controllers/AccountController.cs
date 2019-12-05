@@ -167,19 +167,7 @@ namespace rhBugTracker.Controllers
                     AvatarPath = "~/Avatars/profile_Placeholder.png"                    
                 };
 
-                if(avatar != null)
-                {
-                    if (ImageUploadValidator.IsWebFriendlyImage(avatar))
-                    {
-                        var fileName = Path.GetFileName(avatar.FileName);
-                        var justFileName = Path.GetFileNameWithoutExtension(fileName);
-                        justFileName = StringUtilities.URLFriendly(justFileName);
-                        fileName = $"{justFileName}_{DateTime.Now.Ticks}{Path.GetExtension(fileName)}";
-
-                        avatar.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), fileName));
-                        user.AvatarPath = "/Avatars/" + fileName;
-                    }
-                }
+                
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -235,10 +223,12 @@ namespace rhBugTracker.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewRegister(RegisterViewModel model)
+        public async Task<ActionResult> NewRegister(RegisterViewModel model, HttpPostedFileBase avatarImage)
         {
             if (ModelState.IsValid)
             {
+                               
+                //establish user
                 var user = new ApplicationUser
                 {
 
@@ -247,8 +237,26 @@ namespace rhBugTracker.Controllers
                     DisplayName = model.DisplayName,
                     UserName = model.Email,
                     Email = model.Email,
+                    AvatarPath = "/Avatars/profile_Placeholder.png"
 
                 };
+
+                //get their image
+                if (avatarImage != null)
+                {
+                    if (ImageUploadValidator.IsWebFriendlyImage(avatarImage))
+                    {
+                        var fileName = Path.GetFileName(avatarImage.FileName);
+                        var justFileName = Path.GetFileNameWithoutExtension(fileName);
+                        justFileName = StringUtilities.URLFriendly(justFileName);
+                        fileName = $"{justFileName}_{DateTime.Now.Ticks}{Path.GetExtension(fileName)}";
+
+                        avatarImage.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), fileName));
+                        user.AvatarPath = "/Avatars/" + fileName;
+                    }
+                }
+
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -259,6 +267,9 @@ namespace rhBugTracker.Controllers
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //Assign to guest role by defualt
+                    await UserManager.AddToRoleAsync(user.Id, "Guest");
 
                     try
                     {
@@ -278,7 +289,7 @@ namespace rhBugTracker.Controllers
                         await Task.FromResult(0);
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ConfirmEmailSent", "Account");
                 }
                 AddErrors(result);
             }
@@ -298,6 +309,12 @@ namespace rhBugTracker.Controllers
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+
+        //GET
+        public ActionResult ConfirmEmailSent()
+        {
+            return View();
         }
 
         //
@@ -601,13 +618,18 @@ namespace rhBugTracker.Controllers
             }
             return RedirectToAction("ConfirmationSent", "Account");
         }
-
+        //GET
         public ActionResult PasswordRecoverEmail()
         {
             return View();
         }
 
-
+        //GET
+        //FOR users when they first REgister they are guest so they see this
+        public ActionResult GuestIndex()
+        {
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

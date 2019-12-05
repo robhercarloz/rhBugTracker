@@ -79,7 +79,7 @@ namespace rhBugTracker.Controllers
             }
             else
             {
-                return View();
+                return RedirectToAction("GuestIndex", "Account");
             }
 
 
@@ -99,6 +99,7 @@ namespace rhBugTracker.Controllers
             profile.LName = user.LName;
             profile.DisplayName = user.DisplayName;
             profile.Email = user.Email;
+            profile.Role = roleHelper.ListUserRole(userId).FirstOrDefault();
             //profile.Password = user.PasswordHash.ToString();
             //all info passed in as user
             return View(profile);
@@ -117,6 +118,7 @@ namespace rhBugTracker.Controllers
             profile.LName = user.LName;
             profile.DisplayName = user.DisplayName;
             profile.Email = user.Email;
+            profile.Role = roleHelper.ListUserRole(userId).FirstOrDefault();
             //profile.Password = user.PasswordHash.ToString();
             //all info passed in as user
             return View(profile);

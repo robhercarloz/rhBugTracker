@@ -218,9 +218,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Avatars\adminAvatar.png" />
+    <Content Include="Avatars\apple-touch-icon_637094138282775342.png" />
+    <Content Include="Avatars\apple-touch-icon_637094142772546342.png" />
+    <Content Include="Avatars\arthurf_637091529742462730.jpg" />
+    <Content Include="Avatars\chamaleon_637084221345446019.jpg" />
+    <Content Include="Avatars\chamaleon_637084224221883846.jpg" />
+    <Content Include="Avatars\chamaleon_637084231843497806.jpg" />
+    <Content Include="Avatars\chamaleon_637084578860324229.jpg" />
+    <Content Include="Avatars\chamaleon_637087245628139018.jpg" />
+    <Content Include="Avatars\chamaleon_637091470324541160.jpg" />
+    <Content Include="Avatars\comingsoonjs1_637091521927672476.jpg" />
     <Content Include="Avatars\developerAvatar.png" />
+    <Content Include="Avatars\johnathon_637111538842797679.jpg" />
+    <Content Include="Avatars\johnathon_637111577128553022.jpg" />
+    <Content Include="Avatars\mexicandude_637091524728889270.jpg" />
+    <Content Include="Avatars\mikew_637091529141018321.jpg" />
+    <Content Include="Avatars\peterg_637091528401222241.jpg" />
     <Content Include="Avatars\pmAvatar.png" />
+    <Content Include="Avatars\profile-placeholder_637091522714730879.png" />
     <Content Include="Avatars\profile_Placeholder.png" />
+    <Content Include="Avatars\shahere_637111563708473646.jpg" />
+    <Content Include="Avatars\shahere_637111572180472200.jpg" />
     <Content Include="Avatars\submitterAvatar.png" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datatable\dataTables.bootstrap.js" />
@@ -380,6 +398,8 @@
     <Content Include="Views\Admin\MyCreatedProjects.cshtml" />
     <Content Include="Views\Account\DemoUserAccess.cshtml" />
     <None Include="Properties\PublishProfiles\rhBugTracker - Web Deploy.pubxml" />
+    <Content Include="Views\Account\ConfirmEmailSent.cshtml" />
+    <Content Include="Views\Account\GuestIndex.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

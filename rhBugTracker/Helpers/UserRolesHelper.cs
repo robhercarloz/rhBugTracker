@@ -46,5 +46,9 @@ namespace rhBugTracker.Helpers
             return resultList;
         }
 
+        public ICollection<string> ListUserRole(string userId)
+        {
+            return userManager.GetRoles(userId);
+        }
     }
 }

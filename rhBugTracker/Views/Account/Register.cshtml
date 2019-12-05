@@ -151,15 +151,10 @@
                                             @*<input type="email" class="form-control" placeholder="Email...">*@
                                             @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
                                         </div>
-                                        <div class="form-gp">
-                                            <p>Upload profile picture!</p>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                                @Html.TextBox("Avatar", null, new { @class = "custom-file-input", id = "inputGroupFile02", @type = "file" })
-                                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                                                @Html.Label("inputGroupFile02", "Choose File", new { @class = "custom-file-label" })
-                                            </div>
-                                        </div>
+
+                                        <label>Upload Avatar Image</label>
+                                        <input name="AvatarImage" type="file" class="form-control" id="fileupload" />
+
                                         <div class="form-footer text-center mt-5">
                                             <p class="text-muted">
                                                 Already an account?
@@ -169,7 +164,6 @@
                                         <div class="card-footer ">
                                             <button type="submit" class="btn btn-success btn-round">Register </button>
                                         </div>
-
                                         <!--END FORM-->
                                     }
                                 </div>
@@ -187,7 +181,7 @@
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                                </script>, Created by Creative Tim
                                 | Modified by: <a href="#">Roberto Hernandez</a>
                             </span>
                         </div>
