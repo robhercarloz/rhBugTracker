@@ -50,7 +50,7 @@
                         <img src="">
                     </div>
                 </a>
-                <a href="https://robertochprofile.azurewebsites.net/" class="simple-text logo-normal">
+                <a href="@Url.Action("Index", "Home")" class="simple-text logo-normal">
                     CREATIVE ROB
                     <div class="logo-image-big">
                         <img src="">
@@ -173,12 +173,12 @@
                                             <span class="sidebar-normal"> Assign To Projects </span>
                                         </a>
                                     </li>
-                                    <li>
+                                    @*<li>
                                         <a href="@Url.Action("MyCreatedProjects", "Admin")">
                                             <span class="sidebar-mini-icon">E</span>
                                             <span class="sidebar-normal"> My Projects </span>
                                         </a>
-                                    </li>
+                                    </li>*@
                                     <li>
                                         <a href="@Url.Action("Create", "Projects")">
                                             <span class="sidebar-mini-icon">E</span>
@@ -250,7 +250,7 @@
                                     <li>
                                         <a href="@Url.Action("myTickets", "Tickets")">
                                             <span class="sidebar-mini-icon">T</span>
-                                            <span class="sidebar-normal"> My Tickets </span>
+                                            <span class="sidebar-normal"> Project Tickets </span>
                                         </a>
                                     </li>
                                 </ul>
@@ -305,7 +305,7 @@
                         <li>
                             <a href="@Url.Action("myTickets", "Tickets")">
                                 <i class="nc-icon nc-paper"></i>
-                                <p>My Tickets</p>
+                                <p>Project Tickets</p>
                             </a>
                         </li>
 
@@ -344,7 +344,7 @@
                                     <li>
                                         <a href="@Url.Action("myTickets", "Tickets")">
                                             <span class="sidebar-mini-icon">P</span>
-                                            <span class="sidebar-normal"> My Tickets</span>
+                                            <span class="sidebar-normal"> Project Tickets</span>
                                         </a>
                                     </li>
                                     <li>

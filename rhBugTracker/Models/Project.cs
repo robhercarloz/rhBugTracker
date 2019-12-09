@@ -10,9 +10,9 @@ namespace rhBugTracker.Models
     {
         //Keys
         public int Id { get; set; }
-        [StringLength(15, MinimumLength = 2, ErrorMessage = "Project name must contain 2 - 15 characters.")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "No More than 30 characters.")]
         public string Name { get; set; }
-        [StringLength(30, MinimumLength = 2, ErrorMessage = "First name must contain 2 - 30 characters.")]
+        [StringLength(40, MinimumLength = 2, ErrorMessage = "Description can only contain up to 40 characters.")]
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public string ProjectOwnerId { get; set; }

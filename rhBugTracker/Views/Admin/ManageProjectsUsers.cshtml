@@ -1,7 +1,11 @@
-﻿@model IEnumerable<rhBugTracker.Models.UserProjectListViewModel>
+﻿@using rhBugTracker.Helpers
+
+
+@model IEnumerable<rhBugTracker.Models.UserProjectListViewModel>
 
 @{
     ViewBag.Title = "Manage Project Users";
+    var projHelper = new ProjectHelper();
 }
 
 
@@ -59,39 +63,64 @@
             </div>
         </div>
 
-        <div class="col-lg-6 mt-1">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table" id="datatable">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(m => m.Name)
-                                </th>
-                                <th>
-                                    @Html.DisplayName("Projects")
-                                </th>
-                            </tr>
 
-                            @foreach (var item in Model)
-                            {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Users</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
-                                    <td>
-                                        @foreach (var name in item.ProjectNames)
-                                        {
-                                            @name <br />
-                                        }
-                                    </td>
+                                    <th>Name</th>
+                                    <th>Projects</th>
+                                    
                                 </tr>
-                            }
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Projects</th>
+                                    
+                                </tr>
+                            </tfoot>
+                            <tbody>                                                           
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>                                       
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @foreach (var name in item.ProjectNames)
+                                            {
+                                                @name <br />
+
+                                            }
+                                        </td>
+                                       
+
+                                    </tr>
+                                }
+                                </tbody>
                         </table>
                     </div>
+                    <!-- end content-->
                 </div>
+                <!--  end card  -->
             </div>
+            <!-- end col-md-12 -->
         </div>
+        <!-- end row -->
+
+        
+        
     </div>
 </div>
 

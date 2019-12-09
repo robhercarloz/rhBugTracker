@@ -13,6 +13,7 @@ namespace rhBugTracker.Helpers
     public class ProjectHelper
     {
         ApplicationDbContext db = new ApplicationDbContext();
+        UserRolesHelper rolesHelper = new UserRolesHelper();
         
         public ICollection<Project> ListProjectsUserIsOn(string userId)
         {
@@ -26,7 +27,6 @@ namespace rhBugTracker.Helpers
                     projList.Add(proj);
                 }                               
             }
-
             return projList;
         }
 
@@ -40,7 +40,7 @@ namespace rhBugTracker.Helpers
         public ICollection<Project> ListUserProjects(string userId)
         {
             ApplicationUser user = db.Users.Find(userId);
-            var projects = user.Projects.ToList();
+            var projects = user.Projects.ToList();           
             
             return (projects);
         }
@@ -82,6 +82,37 @@ namespace rhBugTracker.Helpers
         {
             var projects = db.Projects.ToList();
             return projects;
+        }
+
+        public List<Project> ListMyProjects()
+        {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            var myProjects = new List<Project>();
+            var myRole = rolesHelper.ListUserRoles(userId).FirstOrDefault();
+
+            switch (myRole)
+            {
+                case "Admin":
+                case "Demo_Admin":
+                    myProjects.AddRange(db.Projects);
+                    break;
+                case "Project Manager":
+                case "Demo_ProjectMangaer":
+                    myProjects.AddRange(db.Projects);
+                    break;
+                case "Developer":
+                case "Demo_Developer":
+                    myProjects.AddRange(user.Projects);
+                    break;
+                case "Submitter":
+                case "Demo_Submitter":
+                    myProjects.AddRange(user.Projects);
+                    break;
+
+            }
+            return myProjects;
+                    
         }
 
     }

@@ -8,9 +8,6 @@
     var ticketHelper = new TicketHelper();
     var proHelper = new ProjectHelper();
     var userHelper = new UserRolesHelper();
-
-
-
 }
 
 
@@ -133,7 +130,7 @@
                                         <th>Avatar</th>
                                         <th>Name</th>
                                         <th>Role</th>
-                                        <th>Remove</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -141,19 +138,17 @@
                                         <th>Avatar</th>
                                         <th>Name</th>
                                         <th>Role</th>
-                                        <th>Remove</th>
+                                        
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     @foreach(var item in Model.Users)
                                     {
                                         <tr>
-                                            <td>@Html.DisplayFor(m => item.AvatarPath)</td>
+                                            <td><img src="@Url.Content(item.AvatarPath)"/></td>
                                             <td>@Html.DisplayFor(m => item.FName) @Html.DisplayFor(m => item.LName)</td>
-                                            <td>@Html.DisplayFor(m => item.Roles)</td>
-                                            <td>
-                                                <a href="" class="btn btn-danger btn-link btn-icon btn-sm remove"><i class="fa fa-times"></i></a>
-                                            </td>
+                                            <td>@userHelper.ListUserRole(item.Id).FirstOrDefault()</td>
+                                            
                                         </tr>
                                     }                                  
 

@@ -22,8 +22,9 @@ namespace rhBugTracker.Models
 
 
         //properties
-        [StringLength(15, MinimumLength = 2, ErrorMessage = "First name must contain 2 - 10 characters.")]
+        [StringLength(30, MinimumLength = 2, ErrorMessage = "Title must contain 2 - 30 characters.")]
         public string Title { get; set; }
+        [StringLength(40, MinimumLength = 5, ErrorMessage = "Description must be 5 - 40 characters.")]
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }

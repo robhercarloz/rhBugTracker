@@ -72,7 +72,7 @@ namespace rhBugTracker.Controllers
                 ticket.OwnerUserId = User.Identity.GetUserId();
                 ticket.Created = DateTime.Now;
                 ticket.TicketStatusId = 1;
-
+                
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -100,6 +100,8 @@ namespace rhBugTracker.Controllers
                 return HttpNotFound();
             }
 
+
+
             var devs = roleHelper.UsersInRole("Developer").ToList();
             ViewBag.Developer = new SelectList(devs, "Id", "FName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FName", ticket.OwnerUserId);
@@ -126,8 +128,7 @@ namespace rhBugTracker.Controllers
                 ticket.Updated = DateTime.Now;
                 if(developer != null)
                 {
-
-                ticket.AssignedToUserId = developer;
+                    ticket.AssignedToUserId = developer;
                 }
                 db.Entry(ticket).State = EntityState.Modified;
                 db.SaveChanges();

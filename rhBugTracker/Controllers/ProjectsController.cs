@@ -21,32 +21,38 @@ namespace rhBugTracker.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-            return View(db.Projects.ToList());
+
+            return View(proHelper.ListMyProjects());
+
+
         }
 
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {
+                                   
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);       
-            
+            Project project = db.Projects.Find(id);           
             
             if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(project);
 
             
+                
 
+
+
+            return View(project);
             
         }
 
         // GET: Projects/Create
-        [Authorize(Roles = "Admin, Project Manager")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();

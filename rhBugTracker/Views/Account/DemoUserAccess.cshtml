@@ -40,119 +40,144 @@
     </head>
     <body>
         <div class="content">
-            <div class="col-lg-12 mt-4" style="padding-bottom: 20px">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card card-user">
-                            <div class="image image-plain"></div>
-                            <div class="content">
-                                <div class="author">
-                                    <a href="#">
-                                        <img class="avatar" src="~/Avatars/adminAvatar.png" alt="..." />
-                                        <h4 class="title">
-                                            <small>Admin</small>
-                                        </h4>
-                                    </a>
+            <div class="col-lg-12" style="text-align: center">
+                <div class="row" style="margin-top: 20px">
+                    <div class="card-deck"  style="margin-left: auto; margin-right: auto;">
+                        <!--Admin-->
+                        <div class="col-md-3">
+                            <div class="card card-user">
+                                <div class="image image-plain"></div>
+                                <div class="content">
+                                    <div class="author">
+                                        <img src="~/Avatars/adminAvatar.png" class="avatar" />                                        
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Admin
+                                        </h5>
+                                        <label>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Are able to assign/unassign people to projects, roles, and tickets.</li>
+                                                <li class="list-group-item">Can create projects.</li>
+                                                <li class="list-group-item">Oversee all projects in progress.</li>
+                                            </ul>
+                                        </label>
+                                    </div>
+                                    <div class="card-footer">
+                                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("emailKey", "DemoAdminEmail")
+                                            <button type="submit" class="btn btn-info btn-round btn-wd"> Login</button>
+                                        }
+                                    </div>
                                 </div>
-                                <p class="description text-center" id="desSize">
-                                    Admins have the ablitiy to do about everything but create
-                                    a ticket.
-                                </p>
                             </div>
-                            @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.Hidden("emailKey", "DemoAdminEmail")
-                                <div class="footer text-center">
-                                    <button type="submit" class="btn btn-info btn-round btn-wd"> Login</button>
+                        </div>                        
+                        <!--Project Manager-->
+                        <div class="col-md-3">
+                            <div class="card card-user">
+                                <div class="image image-plain"></div>
+                                <div class="content">
+                                    <div class="author">
+                                        <img src="~/Avatars/pmAvatar.png" class="avatar" />
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Project Manager
+                                        </h5>
+                                        <label>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Can manage the project team they are assigned to.</li>
+                                                <li class="list-group-item">Can edit projects and tickets they are assigned to.</li> 
+                                            </ul>
+                                        </label>
+                                    </div>
+                                    <div class="card-footer">
+                                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("emailKey", "DemoPMEmail")
+                                            <button type="submit" class="btn btn-info btn-round btn-wd"> Login</button>
+                                        }
+                                    </div>
                                 </div>
-                            }
-                        </div> <!-- end card -->
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card card-user">
-                            <div class="image image-plain"></div>
-                            <div class="content">
-                                <div class="author">
-                                    <a href="#">
-                                        <img class="avatar" src="~/Avatars/pmAvatar.png" alt="..." />
-                                        <h4 class="title">
-                                            <small>Project Manager</small>
-                                        </h4>
-                                    </a>
-                                </div>
-                                <p class="description text-center" id="desSize">
-                                    Project Managers can manage projects they are on and tickets they are on.
-                                </p>
                             </div>
-                            @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.Hidden("emailKey", "DemoPMEmail")
-                                <div class="footer text-center">
-                                    <button type="submit" class="btn btn-info btn-round btn-wd">Login</button>
+                        </div>                        
+                        <!--Developer-->
+                        <div class="col-md-3">
+                            <div class="card card-user">
+                                <div class="image image-plain"></div>
+                                <div class="content">
+                                    <div class="author">
+                                        <img src="~/Avatars/developerAvatar.png" class="avatar" />
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Developer
+                                        </h5>
+                                        <label>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Developer will be able to see their tickets and projects they are on.</li>
+                                                <li class="list-group-item">They are responsible for fixing bugs given to them.</li>
+                                            </ul>
+                                        </label>
+                                    </div>
+                                    <div class="card-footer">
+                                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("emailKey", "DemoDeveloperEmail")
+                                            <button type="submit" class="btn btn-info btn-round btn-wd"> Login</button>
+                                        }
+                                    </div>
                                 </div>
-                            }
-                        </div> <!-- end card -->
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card card-user">
-                            <div class="image image-plain"></div>
-                            <div class="content">
-                                <div class="author">
-                                    <a href="#">
-                                        <img class="avatar" src="~/Avatars/developerAvatar.png" alt="..." />
-                                        <h4 class="title">
-                                            <small>Developer</small>
-                                        </h4>
-                                    </a>
-                                </div>
-                                <p class="description text-center" id="desSize">
-                                    Developer will be able to see their tickets and projects they are on. They are responsible for fixing bugs given to them.
-                                </p>
                             </div>
-                            @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.Hidden("emailKey", "DemoDeveloperEmail")
-                                <div class="footer text-center">
-                                    <button type="submit" class="btn btn-info btn-round btn-wd">Login</button>
+                        </div>                        
+                        <!--Submitter-->
+                        <div class="col-md-3">
+                            <div class="card card-user">
+                                <div class="image image-plain"></div>
+                                <div class="content">
+                                    <div class="author">
+                                        <img src="~/Avatars/submitterAvatar.png" class="avatar" />
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Suubmitter
+                                        </h5>
+                                        <label>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Submitters can be assigned to projects and are the only ones that can create tickets.</li>
+                                            </ul>
+
+                                        </label>
+                                    </div>
+                                    <div class="card-footer">
+                                        @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("emailKey", "DemoSubmitterEmail")
+                                            <button type="submit" class="btn btn-info btn-round btn-wd"> Login</button>
+                                        }
+                                    </div>
                                 </div>
-                            }
-                        </div> <!-- end card -->
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card card-user">
-                            <div class="image image-plain"></div>
-                            <div class="content">
-                                <div class="author">
-                                    <a href="#">
-                                        <img class="avatar" src="~/Avatars/submitterAvatar.png" alt="..." />
-                                        <h4 class="title">
-                                            <small>Submitter</small>
-                                        </h4>
-                                    </a>
-                                </div>
-                                <p class="description text-center" id="desSize">
-                                    Submitters can be assigned to projects and are the only ones that can create tickets.
-                                </p>
                             </div>
-                            @using (Html.BeginForm("DemoUserAccess", "Account", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.Hidden("emailKey", "DemoSubmitterEmail")
-                                <div class="footer text-center">
-                                    <button type="submit" class="btn btn-info btn-round btn-wd">Login</button>
-                                </div>
-                            }
-                        </div> <!-- end card -->
+                        </div>                        
                     </div>
                 </div>
+                <!--INFO-->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-3">
                         <div class="card">
                             <div class="card-body">
                                 <h3 style="text-align: center">BUGTRACKER</h3>
+                                <p>
+                                The Bug Tracker is a Web-based software application designed to mirror any of a wide variety of bug tracking software systems in use by corporations throughout world.
+                                If a company develops software, whether for in-house use or distribution, 
+                                it uses a bug tracking system to maintain an accurate record of the software development process on a per-project basis. 
+                                </p>
+
                             </div>
                         </div>
                     </div>

@@ -98,6 +98,7 @@ namespace rhBugTracker.Controllers
         [Authorize(Roles = "Admin, Project Manager")]
         public ActionResult ManageProjectsUsers()
         {
+
             //displaying all projects on the system in select list
             ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "Name");
             ViewBag.Developers = new MultiSelectList(roleHelper.UsersInRole("Developer"), "Id", "Email");
@@ -120,7 +121,7 @@ namespace rhBugTracker.Controllers
             {
                 userVm = new UserProjectListViewModel //new instance with properties
                 {
-                    Name = $"{user.LName}, {user.FName}",
+                    Name = $"{user.LName}, {user.FName}",                    
                     ProjectNames = projHelper.ListUserProjects(user.Id).Select(p => p.Name).ToList()
                 };
                 //if the person is not on any project then display not available 
@@ -172,7 +173,8 @@ namespace rhBugTracker.Controllers
                         }
                     }
                 }
-            }
+            }         
+
             return RedirectToAction("ManageProjectsUsers");
         }
 

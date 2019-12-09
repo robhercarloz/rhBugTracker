@@ -43,9 +43,11 @@
                                         </div>
                                         <div class="col-7 col-md-8">
                                             <div class="numbers">
-                                                <p class="card-category">My Projects</p>
+                                                <p class="card-category">Create New Project</p>
                                                 <p class="card-title">
-                                                    @if (Model.createdProjects.Count() == 0)
+                                                    <a href="@Url.Action("Create", "Projects")" class="btn-sm btn-warning">+ Create</a>
+
+                                                    @*@if (Model.createdProjects.Count() == 0)
                                                     {
                                                     <p>0</p>
                                                 }
@@ -53,7 +55,7 @@
                                                 {
                                                     <p>@Model.createdProjects.Count()</p>
                                                 }
-                                                    <p>
+                                                    <p>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +63,7 @@
                                     <div class="card-footer ">
                                         <hr>
                                         <div class="stats">
-                                            <a href="@Url.Action("MyCreatedProjects", "Admin")"><i class="fa fa-clock-o"></i> View All </a>
+                                            <a href="@Url.Action("Index", "Projects")"><i class="fa fa-clock-o"></i> View All Projects</a>
                                         </div>
                                     </div>
                                 </div>
