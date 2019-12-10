@@ -37,15 +37,18 @@
                             @Html.ValidationMessageFor(model => model.TicketPriorityId, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <!--STATUS-->
-                    <div class="form-group">
-                        @*@Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                        <label>Ticket Status:</label>
-                        <div class="col-md-10">
-                            @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+                    @if (User.IsInRole("Admin, Project Manager"))
+                    {
+                        <!--STATUS-->
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <label>Ticket Status:</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
+                    }
                     <!--DESCRIPTION-->
                     <div class="form-group">
                         @*@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@

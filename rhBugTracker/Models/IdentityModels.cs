@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -21,6 +22,17 @@ namespace rhBugTracker.Models
         [StringLength(25, MinimumLength = 2, ErrorMessage = "Display Name must be 2 - 10 characters.")]
         public string DisplayName { get; set; }
         public string AvatarPath { get; set; }
+
+        [NotMapped]
+        public string FullNameEMail
+        {
+            get
+            {
+                return $"{Email}, -{FName} {LName}";
+            }
+            
+        }
+
 
         public virtual ICollection<Tickets> Tickets { get; set; }
         public virtual ICollection<TicketComment> TicketComments { get; set; }

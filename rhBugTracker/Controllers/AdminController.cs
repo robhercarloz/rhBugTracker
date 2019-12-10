@@ -21,7 +21,7 @@ namespace rhBugTracker.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ManageRoles()
         {
-            ViewBag.UserIds = new MultiSelectList(db.Users, "Id", "Email");
+            ViewBag.UserIds = new MultiSelectList(db.Users, "Id", "FullNameEmail");
             ViewBag.DisplayName = new MultiSelectList(db.Users, "Id", "Username");
             ViewBag.Email = new MultiSelectList(db.Users, "Id", "Email");
             ViewBag.Role = new SelectList(db.Roles, "Name", "Name");

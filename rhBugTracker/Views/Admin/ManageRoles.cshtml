@@ -26,12 +26,15 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
+                        <label>SELECT USER(S):</label>
                         <div class="row">
                             <div class="col-md-12">
                                 @Html.ListBox("UserIds", null, new { @class = "cntrlWide" })
 
                             </div>
                         </div>
+                        <hr />
+                        <label>SELECT ROLE:</label>
                         <div class="row">
                             <div class="col-md-12">
                                 @Html.DropDownList("Role", null, "-- Select Role -- ", new { @class = "cntrlWide" })
