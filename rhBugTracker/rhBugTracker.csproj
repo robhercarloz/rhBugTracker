@@ -403,6 +403,7 @@
     <None Include="Properties\PublishProfiles\rhBugTracker - Web Deploy.pubxml" />
     <Content Include="Views\Account\ConfirmEmailSent.cshtml" />
     <Content Include="Views\Account\GuestIndex.cshtml" />
+    <Content Include="Views\Admin\ManageUserRole.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -40,8 +40,7 @@
   align-items: center;
 }
 
-.offline-doc .footer {
-  position: absolute;
+.offline-doc .footer {  
   width: 100%;
   background: transparent;
   bottom: 0;

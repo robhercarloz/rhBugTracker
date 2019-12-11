@@ -304,12 +304,14 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Role</th>
+                                        <th>Assign Role</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
                                         <th>Role</th>
+                                        <th>Assign Role</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -323,6 +325,9 @@
                                             <td>
                                                 @roleHelper.ListUserRole(user.Id).FirstOrDefault()
                                             </td>
+                                            <td>
+                                                <a href="@Url.Action("ManageUserRole","Admin",new { id = user.Id })" class="btn btn-success btn-xs">Assign</a>
+                                            </td>
 
                                         </tr>
                                     }
@@ -334,7 +339,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -368,16 +373,7 @@
                                     xkey: 'label',
                                     ykeys: ['value'],
                                     labels: ['Ticket Count'],
-                                    resize: true,
-                                    barColors: function (row, series, type)
-                                    {
-                                        console.log("--> "+row.label, series, type);
-                                        if(row.label == "Immediate") return "#FF0000";
-                                        else if(row.label == "Medium") return "#ffff00";
-                                        else if(row.label == "High") return "#fec04c";
-                                        else if(row.label == "Low") return "#1AB244";
-                                    }
-
+                                    resize: true
                                 });
                             });
 

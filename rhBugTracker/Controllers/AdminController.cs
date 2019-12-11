@@ -21,11 +21,12 @@ namespace rhBugTracker.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ManageRoles()
         {
+            //displaying the things to choose
             ViewBag.UserIds = new MultiSelectList(db.Users, "Id", "FullNameEmail");
             ViewBag.DisplayName = new MultiSelectList(db.Users, "Id", "Username");
             ViewBag.Email = new MultiSelectList(db.Users, "Id", "Email");
             ViewBag.Role = new SelectList(db.Roles, "Name", "Name");
-
+            //displaying a list of users
             var users = new List<ManageRolesViewModel>();
             foreach (var user in db.Users.ToList())
             {
@@ -221,6 +222,17 @@ namespace rhBugTracker.Controllers
             myData.createdProjects = db.Projects.Where(p => p.ProjectOwnerId == userId).ToList();                
             return View(myData);
         }
+
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ManageUserRole(string id)
+        {
+            var user = db.Users.Find(id);
+            ViewBag.Role = new SelectList(db.Roles, "Name", "Name");
+
+            return View(user);
+        }
+        
 
 
 

@@ -19,6 +19,7 @@ namespace rhBugTracker.Controllers
         private UserRolesHelper roleHelper = new UserRolesHelper();
         private TicketHistoryHelper hisHelper = new TicketHistoryHelper();
         private NotificationsHelper notHelper = new NotificationsHelper();
+        private ProjectHelper projHelper = new ProjectHelper();
 
         // GET: Tickets
         public ActionResult Index()
@@ -130,7 +131,7 @@ namespace rhBugTracker.Controllers
                 {
                     ticket.AssignedToUserId = developer;
                 }
-                db.Entry(ticket).State = EntityState.Modified;
+                db.Entry(ticket).State = EntityState.Modified;                
                 db.SaveChanges();
 
                 var newTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
