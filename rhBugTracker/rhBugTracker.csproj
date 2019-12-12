@@ -264,8 +264,10 @@
     <Content Include="Images\emailKey.png" />
     <Content Include="Images\favicon-32x32.png" />
     <Content Include="Images\forgotKey.png" />
+    <Content Include="Images\forgotPasswordBk.jpg" />
     <Content Include="Images\profile_Placeholder.png" />
     <Content Include="Images\registerLeafBK.jpg" />
+    <Content Include="Images\registerPageLeafBK.jpg" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-notify.js" />
     <Content Include="Scripts\bootstrap-selectpicker.js" />

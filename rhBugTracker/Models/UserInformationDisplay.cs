@@ -15,5 +15,7 @@ namespace rhBugTracker.Models
         public string ImagePath { get; set; }
         public string Role { get; set; }
 
+        public string FullName { get; set; }
+
     }
 }

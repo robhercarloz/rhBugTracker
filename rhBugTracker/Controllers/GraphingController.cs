@@ -47,6 +47,21 @@ namespace rhBugTracker.Controllers
             return Json(myData);
         }
 
+        public JsonResult ProduceChart3Data()
+        {
+            var myData = new List<MorrisBarData>();
+            //MorrisBarData data = null;
+            foreach (var status in db.TicketTypes.ToList())
+            {
+                myData.Add(new MorrisBarData
+                {
+                    label = status.Name,
+                    value = db.Tickets.Where(t => t.TicketType.Name == status.Name).Count()
+                });
+            }
+            return Json(myData);
+        }
+
 
     }
 }

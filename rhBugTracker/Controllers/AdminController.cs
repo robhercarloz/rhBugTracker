@@ -123,7 +123,7 @@ namespace rhBugTracker.Controllers
                 userVm = new UserProjectListViewModel //new instance with properties
                 {
                     Name = $"{user.LName}, {user.FName}",                    
-                    ProjectNames = projHelper.ListUserProjects(user.Id).Select(p => p.Name).ToList()
+                    ProjectNames = projHelper.ListProjectsUserIsOn(user.Id).Select(p => p.Name).ToList()
                 };
                 //if the person is not on any project then display not available 
                 if (userVm.ProjectNames.Count() == 0)
@@ -223,22 +223,58 @@ namespace rhBugTracker.Controllers
             return View(myData);
         }
 
+        //----------------------------USER ROLE ASSIGNMENT----------------------///
 
         [Authorize(Roles = "Admin")]
         public ActionResult ManageUserRole(string id)
         {
             var user = db.Users.Find(id);
             ViewBag.Role = new SelectList(db.Roles, "Name", "Name");
+            ViewBag.UserIds = user.Id;
 
-            return View(user);
+            var userInfo = new UserInformationDisplay()
+            {
+                FName = user.FName,
+                LName = user.LName,
+                Email = user.Email,
+                FullName = user.FullName,
+                Role = roleHelper.ListUserRole(user.Id).FirstOrDefault(),
+                DisplayName = user.DisplayName
+                
+            };           
+
+            return View(userInfo);
         }
-        
+
+        //POST 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult ManageUserRole(string userIds, string role)
+        {
+            //step 1 : Unenroll all the selected users from any roles
+            //the may currently occupy
+            //what is the role of this person
+            var userRole = roleHelper.ListUserRoles(userIds).FirstOrDefault();
+            if (userRole != null)
+            {
+                roleHelper.RemoveUserFromRole(userIds, userRole);       
+            }            
+            
+            //Step 2 : Add them back to the selected roles 
+            if (!string.IsNullOrEmpty(role))
+            {
+                roleHelper.AddUserToRole(userIds, role);               
+            }
+
+            //Redirect to dashboard
+            return RedirectToAction("Index", "Admin");
+
+        }
 
 
 
-
-        //    return RedirectToAction("ManageTicketsUsers", "Admin");
-        //}
+        //---------------------------ADMIN DASHBOARD----------------------//
         
         [Authorize]
         public ActionResult index()
@@ -248,6 +284,7 @@ namespace rhBugTracker.Controllers
             var data = new Dashboard();
             data.myProjects = db.Projects.ToList();
             data.createdProjects = db.Projects.Where(p => p.ProjectOwnerId == user.Id).ToList();
+            data.myTickets = db.Tickets.ToList();
 
             return View(data);
         }

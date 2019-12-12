@@ -63,7 +63,12 @@ namespace rhBugTracker.Controllers
 
             if (User.IsInRole("Submitter"))
             {
-                return View();
+                var data = new Dashboard();
+                var userId = User.Identity.GetUserId();
+                data.myProjects = projectHelper.ListProjectsUserIsOn(userId);
+                data.myTickets = db.Tickets.Where(t => t.OwnerUserId == userId).ToList();
+
+                return View(data);
             }
             else if (User.IsInRole("Developer"))
             {
@@ -127,7 +132,7 @@ namespace rhBugTracker.Controllers
         //Post
         
         [HttpPost]           
-        public ActionResult EditProfile(UserInformationDisplay model, HttpPostedFileBase avatar)
+        public ActionResult EditProfile(UserInformationDisplay model, HttpPostedFileBase avatarImage)
         {
 
             var userId = User.Identity.GetUserId();
@@ -139,15 +144,30 @@ namespace rhBugTracker.Controllers
             user.UserName = model.Email;
             //db.Entry(editUser);
 
-            if(avatar != null)
+            //if(avatarImage != null)
+            //{
+            //    if (ImageUploadValidator.IsWebFriendlyImage(avatarImage))
+            //    {
+            //        var filename = Path.GetFileName(avatarImage.FileName);
+            //        avatarImage.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), filename));
+            //        user.AvatarPath = "/Avatars/" + filename;
+            //    }
+            //}
+
+            if (avatarImage != null)
             {
-                if (ImageUploadValidator.IsWebFriendlyImage(avatar))
+                if (ImageUploadValidator.IsWebFriendlyImage(avatarImage))
                 {
-                    var filename = Path.GetFileName(avatar.FileName);
-                    avatar.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), filename));
-                    user.AvatarPath = "/Avatars/" + filename;
+                    var fileName = Path.GetFileName(avatarImage.FileName);
+                    var justFileName = Path.GetFileNameWithoutExtension(fileName);
+                    justFileName = StringUtilities.URLFriendly(justFileName);
+                    fileName = $"{justFileName}_{DateTime.Now.Ticks}{Path.GetExtension(fileName)}";
+
+                    avatarImage.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), fileName));
+                    user.AvatarPath = "/Avatars/" + fileName;
                 }
             }
+
 
             db.SaveChanges();
             return RedirectToAction("EditProfile", "Home");

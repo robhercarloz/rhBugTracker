@@ -34,10 +34,17 @@
                                                 <div class="numbers">
                                                     <p class="card-category">My Tickets</p>
                                                     <p class="card-title">
-                                                        
-                                                        <p>0</p>
-                                                        
-                                                </div>
+
+                                                        @if (Model.myTickets == null)
+                                                        {
+                                                            <p>0</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p>@Model.myTickets.Count()</p>
+                                                        }
+
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -62,8 +69,15 @@
                                                 <div class="numbers">
                                                     <p class="card-category">My projects</p>
                                                     <p class="card-title">
-                                                        <p>0</p>
-                                                        
+                                                        @if (Model.myProjects == null)
+                                                        {
+                                                            <p>0</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p>@Model.myProjects.Count()</p>
+                                                        }
+
                                                     </div>
                                                 </div>
                                             </div>

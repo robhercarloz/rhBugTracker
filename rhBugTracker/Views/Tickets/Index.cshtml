@@ -28,7 +28,7 @@
                                 <th>REQUEST</th>
                                 <th>TICKET PROJECT</th>
                                 <th>CREATED ON</th>
-                                <th>ACTIONS</th>
+                                <th>Edit, Info, Delete</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -41,7 +41,7 @@
                                 <th>REQUEST</th>
                                 <th>TICKET PROJECT</th>
                                 <th>CREATED ON</th>
-                                <th>ACTIONS</th>
+                                <th>Edit, Info, Delete</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -131,6 +131,7 @@
                                             <a href="@Url.Action("Edit", "Tickets", new { id=item.Id })" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                                             <a href="@Url.Action("Details", "Tickets", new { id=item.Id })" class="btn btn-info btn-link btn-icon btn-sm info"><i class="fa fa-info"></i></a>
                                             <a href="@Url.Action("Delete", "Tickets", new { id=item.Id })" class="btn btn-danger btn-link btn-icon btn-sm delete"><i class="fa fa-times"></i></a>
+
                                         </ul>
                                     </td>
 

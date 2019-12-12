@@ -145,7 +145,7 @@
                                     @foreach(var item in Model.Users)
                                     {
                                         <tr>
-                                            <td><img src="@Url.Content(item.AvatarPath)"/></td>
+                                            <td><img src="@Url.Content(item.AvatarPath)" style="height: 100px; width: 100px;"/></td>
                                             <td>@Html.DisplayFor(m => item.FName) @Html.DisplayFor(m => item.LName)</td>
                                             <td>@userHelper.ListUserRole(item.Id).FirstOrDefault()</td>
                                             
@@ -267,7 +267,7 @@
                                                     Archived!
                                                 </td>
                                             }
-                                            <td>@Url.Action("Details", "Tickets", new { id = tickets.Id })</td>
+                                            <td>@Html.ActionLink("Details", "Details", "Tickets",new { id = tickets.Id },null)</td>
                                         </tr>
                                      }
                                 </tbody>

@@ -50,7 +50,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="wrapper wrapper-full-page ">
-        <div class="full-page register-page section-image" filter-color="black" style="background-image:url('../../Images/registerLeafBK.jpg')">
+        <div class="full-page register-page section-image" filter-color="black" style="background-image:url('../../Images/registerPageLeafBK.jpg')">
             <div class="content">
                 <div class="container">
                     <div class="row">
@@ -140,7 +140,7 @@
                                                 </span>
                                             </div>
                                             @*<input type="email" class="form-control" placeholder="Email...">*@
-                                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
                                         </div>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -149,21 +149,25 @@
                                                 </span>
                                             </div>
                                             @*<input type="email" class="form-control" placeholder="Email...">*@
-                                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
                                         </div>
 
                                         <label>Upload Avatar Image</label>
                                         <input name="AvatarImage" type="file" class="form-control" id="fileupload" />
 
-                                        <div class="form-footer text-center mt-5">
+
+                                        <div class="card-footer ">
+                                            <button type="submit" class="btn btn-success btn-round">Register </button>
+                                        </div>
+
+
+                                        <div class="form-footer text-center">
                                             <p class="text-muted">
                                                 Already an account?
                                                 @Html.ActionLink("Log In", "Login", "Account")
                                             </p>
                                         </div>
-                                        <div class="card-footer ">
-                                            <button type="submit" class="btn btn-success btn-round">Register </button>
-                                        </div>
+
                                         <!--END FORM-->
                                     }
                                 </div>

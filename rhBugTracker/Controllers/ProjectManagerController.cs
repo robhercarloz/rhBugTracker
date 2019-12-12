@@ -15,14 +15,17 @@ namespace rhBugTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private ProjectHelper projHelper = new ProjectHelper();
         private UserRolesHelper roleHelper = new UserRolesHelper();
+        private TicketHelper tickHelper = new TicketHelper();
 
         // GET: ProjectManager dashboard
         public ActionResult Index()
         {
-            //var userId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             //var myProjects = projHelper.ListUserProjects(userId);            
             var data = new Dashboard();
             data.myProjects = db.Projects.ToList();
+            data.createdProjects = db.Projects.Where(p => p.ProjectOwnerId == userId).ToList();
+            data.myTickets = data.createdProjects.SelectMany(p => p.Tickets).ToList();
 
             return View(data);
         }

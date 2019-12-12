@@ -165,11 +165,11 @@
                                             <tr>
                                                 @if (user.AvatarPath == null)
                                                 {
-                                                    <td><img src="~/Images/profile_Placeholder.png" class="d-block ui-w-30 rounded-circle" alt=""></td>
+                                                    <td><img src="~/Images/profile_Placeholder.png" class="d-block ui-w-30 rounded-circle" alt="" style="height: 100px; width: 100px;"></td>
                                                 }
                                                 else
                                                 {
-                                                    <td><img src="@user.AvatarPath" class="d-block ui-w-30 rounded-circle" alt=""></td>
+                                                    <td><img src="@user.AvatarPath" class="d-block ui-w-30 rounded-circle" alt="" style="height: 100px; width: 100px"></td>
                                                 }
                                                 <td>
                                                     @user.FName @user.LName

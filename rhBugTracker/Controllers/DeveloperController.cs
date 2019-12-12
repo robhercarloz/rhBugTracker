@@ -1,4 +1,5 @@
-﻿using rhBugTracker.Helpers;
+﻿using Microsoft.AspNet.Identity;
+using rhBugTracker.Helpers;
 using rhBugTracker.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,9 @@ namespace rhBugTracker.Controllers
         public ActionResult Index()
         {
             var data = new Dashboard();
-            data.myProjects = db.Projects.ToList();
+            var userId = User.Identity.GetUserId();
+            data.myProjects = projHelper.ListProjectsUserIsOn(userId);
+            data.myTickets = db.Tickets.Where(t => t.AssignedToUserId == userId).ToList();
 
             return View(data);
         }

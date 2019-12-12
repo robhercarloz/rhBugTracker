@@ -47,16 +47,7 @@
                                                 <p class="card-category">Create New Project</p>
                                                 <p class="card-title">
                                                     <a href="@Url.Action("Create", "Projects")" class="btn-sm btn-warning">+ Create</a>
-
-                                                    @*@if (Model.createdProjects.Count() == 0)
-                                                            {
-                                                            <p>0</p>
-                                                        }
-                                                        else
-                                                        {
-                                                            <p>@Model.createdProjects.Count()</p>
-                                                        }
-                                                            <p>*@
+                                                    
                                             </div>
                                         </div>
                                     </div>
@@ -328,7 +319,6 @@
                                             <td>
                                                 <a href="@Url.Action("ManageUserRole","Admin",new { id = user.Id })" class="btn btn-success btn-xs">Assign</a>
                                             </td>
-
                                         </tr>
                                     }
 
@@ -352,6 +342,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="text-align:center">TICKET COUNT BY TYPES</p>
+                                    <hr />
+                                    <div id="donutChart3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
             <br />
     </div>
@@ -377,7 +382,7 @@
                                 });
                             });
 
-                            var url = '@Url.Action("ProduceChart2Data", "Graphing")';
+                        var url = '@Url.Action("ProduceChart2Data", "Graphing")';
                             $.post(url).then(function (response) {
                                 new Morris.Donut({
                                     element: 'donutChart2',
@@ -388,6 +393,19 @@
                                     resize: true
                                 });
                             });
+
+                         var url = '@Url.Action("ProduceChart3Data", "Graphing")';
+                            $.post(url).then(function (response) {
+                                new Morris.Donut({
+                                    element: 'donutChart3',
+                                    data: response,
+                                    xkey: 'label',
+                                    ykeys: ['value'],
+                                    labels: ['Ticket Count'],
+                                    resize: true
+                                });
+                            });
+
                       });
 
                     $('#datatable').DataTable();

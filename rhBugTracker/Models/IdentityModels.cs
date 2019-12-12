@@ -29,8 +29,16 @@ namespace rhBugTracker.Models
             get
             {
                 return $"{Email}, -{FName} {LName}";
+            }            
+        }
+
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return $"{FName} {LName}";
             }
-            
         }
 
 
