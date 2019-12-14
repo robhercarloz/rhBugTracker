@@ -36,7 +36,6 @@ namespace rhBugTracker.Controllers
                     DisplayName = user.DisplayName,
                     Email = user.Email,
                     RoleName = roleHelper.ListUserRoles(user.Id).FirstOrDefault(),
-
                 });
             }
             return View(users);

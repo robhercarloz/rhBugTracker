@@ -22,44 +22,7 @@ namespace rhBugTracker.Controllers
 
         public ActionResult Index()
         {
-            //if (User.IsInRole("Submitter"))
-            //{
-            //    var userId = User.Identity.GetUserId();
-
-            //    var data = new Dashboard();
-            //    data.myTickets = db.Tickets.Where(t => t.OwnerUserId == userId).ToList();
-            //    data.myProjects = db.Projects.Where(t => t.ProjectOwnerId == userId).ToList();
-            //    data.myUsers = db.Users.ToList();
-            //    return View(data);
-            //}
-            //else if (User.IsInRole("Developer"))
-            //{
-            //    var userId = User.Identity.GetUserId();
-
-            //    var data = new Dashboard();
-            //    data.myTickets = db.Tickets.Where(t => t.OwnerUserId == userId).ToList();
-            //    data.myProjects = db.Projects.Where(t => t.ProjectOwnerId == userId).ToList();                
-            //    return View(data);
-            //}
-            //else if (User.IsInRole("Project Manager"))
-            //{
-            //    var userId = User.Identity.GetUserId();
-            //    var data = new Dashboard();
-            //    data.myTickets = db.Tickets.Where(t => t.OwnerUserId == userId).ToList();
-            //    data.myProjects = db.Projects.Where(t => t.ProjectOwnerId == userId).ToList();
-            //    data.myUsers = db.Users.ToList();                
-            //    return View(data);
-            //}
-            //else if (User.IsInRole("Admin"))
-            //{
-            //    var userId = User.Identity.GetUserId();
-            //    var data = new Dashboard();
-
-            //    data.myProjects = db.Projects.ToList();
-            //    data.myTickets = db.Tickets.ToList();
-            //    data.myUsers = db.Users.ToList();
-            //    return View(data);
-            //}
+            
 
             if (User.IsInRole("Submitter"))
             {
@@ -142,17 +105,7 @@ namespace rhBugTracker.Controllers
             user.DisplayName = model.DisplayName;
             user.Email = model.Email;
             user.UserName = model.Email;
-            //db.Entry(editUser);
-
-            //if(avatarImage != null)
-            //{
-            //    if (ImageUploadValidator.IsWebFriendlyImage(avatarImage))
-            //    {
-            //        var filename = Path.GetFileName(avatarImage.FileName);
-            //        avatarImage.SaveAs(Path.Combine(Server.MapPath("~/Avatars/"), filename));
-            //        user.AvatarPath = "/Avatars/" + filename;
-            //    }
-            //}
+            
 
             if (avatarImage != null)
             {
