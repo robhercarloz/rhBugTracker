@@ -549,6 +549,11 @@ namespace rhBugTracker.Controllers
         //GET
         public ActionResult DemoUserAccess()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("DemoLogOff", "Account");
+            }
+
             return View();
         }
 
