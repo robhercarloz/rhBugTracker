@@ -115,12 +115,19 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Users on project</h4>
-                        </div>
+                <div class="col-md-12">                    
+                    <div class="card">                        
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Users on project</h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="@Url.Action("ManageProjectsUsers", "Admin")" class="btn btn-success"> + Add User</a>
+                                </div>
+                            </div>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                             </div>
@@ -130,7 +137,7 @@
                                         <th>Avatar</th>
                                         <th>Name</th>
                                         <th>Role</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -138,19 +145,19 @@
                                         <th>Avatar</th>
                                         <th>Name</th>
                                         <th>Role</th>
-                                        
+
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @foreach(var item in Model.Users)
+                                    @foreach (var item in Model.Users)
                                     {
                                         <tr>
-                                            <td><img src="@Url.Content(item.AvatarPath)" style="height: 100px; width: 100px;"/></td>
+                                            <td><img src="@Url.Content(item.AvatarPath)" style="height: 100px; width: 100px;" /></td>
                                             <td>@Html.DisplayFor(m => item.FName) @Html.DisplayFor(m => item.LName)</td>
                                             <td>@userHelper.ListUserRole(item.Id).FirstOrDefault()</td>
-                                            
+
                                         </tr>
-                                    }                                  
+                                    }
 
                                 </tbody>
                             </table>

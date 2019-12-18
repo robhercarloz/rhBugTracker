@@ -47,6 +47,13 @@ namespace rhBugTracker.Controllers
         public ActionResult ManageRoles(List<string> userIds, string role)
         {
 
+            if (userIds == null)
+            {
+                TempData["Failure"] = "Please select a user.";
+                return RedirectToAction("ManageRoles", "Admin");
+            }
+
+
             //step 1 : Unenroll all the selected users from any roles
             //the may currently occupy
             foreach (var userId in userIds)
@@ -70,6 +77,7 @@ namespace rhBugTracker.Controllers
 
             //Redirect to dashboard
             return RedirectToAction("ManageRoles", "Admin");
+
         }
 
         //--------------MANAGE USERS----------------------

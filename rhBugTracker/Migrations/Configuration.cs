@@ -47,7 +47,6 @@ namespace rhBugTracker.Migrations
                 roleManager.Create(new IdentityRole { Name = "Guest" });
             }
 
-
             #endregion
 
             //Creating the User
@@ -82,69 +81,69 @@ namespace rhBugTracker.Migrations
                 }, WebConfigurationManager.AppSettings["ProjectManagerPassword"]);
             }
             //DeveloperUser
-            if (!context.Users.Any(u => u.Email == "DemoDev@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "Dev@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoDev@Mailinator.com",
-                    Email = "DemoDev@Mailinator.com",
+                    UserName = "Dev@Mailinator.com",
+                    Email = "Dev@Mailinator.com",
                     FName = "Dev",
                     LName = "Eloper",
-                    DisplayName = "DemoDeveloper",
+                    DisplayName = "Developer",
                     AvatarPath = "/Avatars/profile_Placeholder.png"
 
                 }, WebConfigurationManager.AppSettings["DeveloperPassword"]);
             }
             //Submitter
             //user1
-            if (!context.Users.Any(u => u.Email == "DemoUser1@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "User1@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoUser1@Mailinator.com",
-                    Email = "DemoUser1@Mailinator.com",
+                    UserName = "User1@Mailinator.com",
+                    Email = "User1@Mailinator.com",
                     FName = "Bill",
                     LName = "Nye",
-                    DisplayName = "DemoUser1",
+                    DisplayName = "User1",
                     AvatarPath = "/Avatars/profile_Placeholder.png"
 
                 }, WebConfigurationManager.AppSettings["User1Password"]);
             }
             //user2
-            if (!context.Users.Any(u => u.Email == "DemoUser2@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "User2@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoUser2@Mailinator.com",
-                    Email = "DemoUser2@Mailinator.com",
+                    UserName = "User2@Mailinator.com",
+                    Email = "User2@Mailinator.com",
                     FName = "Rich",
                     LName = "Quan",
-                    DisplayName = "DemoUser2"
+                    DisplayName = "User2"
                 }, WebConfigurationManager.AppSettings["User2Password"]);
             }
             //user3
-            if (!context.Users.Any(u => u.Email == "DemoUser3@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "User3@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoUser3@Mailinator.com",
-                    Email = "DemoUser3@Mailinator.com",
+                    UserName = "User3@Mailinator.com",
+                    Email = "User3@Mailinator.com",
                     FName = "Tech",
                     LName = "Lead",
-                    DisplayName = "DemoUser3",
+                    DisplayName = "User3",
                     AvatarPath = "/Avatars/profile_Placeholder.png"
 
                 }, WebConfigurationManager.AppSettings["User3Password"]);
             }
 
-            //DEMO LOGIN USERS
+            //----------------------------------------DEMO LOGIN USERS------------------------------------------
             //Admin DEMO
-            if (!context.Users.Any(u => u.Email == "DemoAdminEmail@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "_Demo_AdminEmail@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoAdminEmail@Mailinator.com",
-                    Email = "DemoAdminEmail@Mailinator.com",
+                    UserName = "_Demo_AdminEmail@Mailinator.com",
+                    Email = "_Demo_AdminEmail@Mailinator.com",
                     FName = "Demo",
                     LName = "Admin",
                     DisplayName = "DemoAdmin",
@@ -152,12 +151,12 @@ namespace rhBugTracker.Migrations
                 }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
             //PM DEMO
-            if (!context.Users.Any(u => u.Email == "DemoPMEmail@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "_Demo_PMEmail@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoPMEmail@Mailinator.com",
-                    Email = "DemoPMEmail@Mailinator.com",
+                    UserName = "_Demo_PMEmail@Mailinator.com",
+                    Email = "_Demo_PMEmail@Mailinator.com",
                     FName = "Demo",
                     LName = "PM",
                     DisplayName = "DemoPM",
@@ -165,12 +164,12 @@ namespace rhBugTracker.Migrations
                 }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
             //Developer Demo
-            if (!context.Users.Any(u => u.Email == "DemoDeveloperEmail@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "_Demo_DeveloperEmail@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoDeveloperEmail@Mailinator.com",
-                    Email = "DemoDeveloperEmail@Mailinator.com",
+                    UserName = "_Demo_DeveloperEmail@Mailinator.com",
+                    Email = "_Demo_DeveloperEmail@Mailinator.com",
                     FName = "Demo",
                     LName = "Developer",
                     DisplayName = "DemoDeveloper",
@@ -178,12 +177,12 @@ namespace rhBugTracker.Migrations
                 }, WebConfigurationManager.AppSettings["DemoUserPassword"]);
             }
 
-            if (!context.Users.Any(u => u.Email == "DemoSubmitterEmail@Mailinator.com"))
+            if (!context.Users.Any(u => u.Email == "_Demo_SubmitterEmail@Mailinator.com"))
             {
                 userManager.Create(new ApplicationUser
                 {
-                    UserName = "DemoSubmitterEmail@Mailinator.com",
-                    Email = "DemoSubmitterEmail@Mailinator.com",
+                    UserName = "_Demo_SubmitterEmail@Mailinator.com",
+                    Email = "_Demo_SubmitterEmail@Mailinator.com",
                     FName = "Demo",
                     LName = "Submitter",
                     DisplayName = "DemoSubmitter",
@@ -203,31 +202,30 @@ namespace rhBugTracker.Migrations
             var proMgrId = userManager.FindByEmail("coderhcarlos@Gmail.com").Id;
             userManager.AddToRole(proMgrId, "Project Manager");            
 
-            var developerId = userManager.FindByEmail("DemoDev@Mailinator.com").Id;
+            var developerId = userManager.FindByEmail("Dev@Mailinator.com").Id;
             userManager.AddToRole(developerId, "Developer");            
 
-            var user1Id = userManager.FindByEmail("DemoUser1@Mailinator.com").Id;
+            var user1Id = userManager.FindByEmail("User1@Mailinator.com").Id;
             userManager.AddToRole(user1Id, "Submitter");
 
-            var user2Id = userManager.FindByEmail("DemoUser2@Mailinator.com").Id;
+            var user2Id = userManager.FindByEmail("User2@Mailinator.com").Id;
             userManager.AddToRole(user2Id, "Submitter");
 
-            var user3Id = userManager.FindByEmail("DemoUser3@Mailinator.com").Id;
+            var user3Id = userManager.FindByEmail("User3@Mailinator.com").Id;
             userManager.AddToRole(user3Id, "Submitter");
 
             //DEMO
             //Demo Admin
-            var dAdminId = userManager.FindByEmail("DemoAdminEmail@Mailinator.com").Id;
+            var dAdminId = userManager.FindByEmail("_Demo_AdminEmail@Mailinator.com").Id;
             userManager.AddToRole(dAdminId, "Admin");
-
             //////Demo Project Manager
-            var demoProMgrId = userManager.FindByEmail("DemoPMEmail@Mailinator.com").Id;
+            var demoProMgrId = userManager.FindByEmail("_Demo_PMEmail@Mailinator.com").Id;
             userManager.AddToRole(demoProMgrId, "Project Manager");
             //Demo Developer
-            var demoDeveloperId = userManager.FindByEmail("DemoDeveloperEmail@Mailinator.com").Id;
+            var demoDeveloperId = userManager.FindByEmail("_Demo_DeveloperEmail@Mailinator.com").Id;
             userManager.AddToRole(demoDeveloperId, "Developer");
             //DemoSubmitter
-            var DemoUserId = userManager.FindByEmail("DemoSubmitterEmail@Mailinator.com").Id;
+            var DemoUserId = userManager.FindByEmail("_Demo_SubmitterEmail@Mailinator.com").Id;
             userManager.AddToRole(DemoUserId, "Submitter");
 
 

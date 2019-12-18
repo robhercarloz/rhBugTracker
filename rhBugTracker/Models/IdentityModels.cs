@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using rhBugTracker.Helpers;
 
 namespace rhBugTracker.Models
 {
@@ -68,6 +70,20 @@ namespace rhBugTracker.Models
     }
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //Comment out when update-database
+        //public override int SaveChanges()
+        //{
+        //    //step 1: get user
+        //    var user = HttpContext.Current.User.Identity.GetUserId();
+        //    //step 2: instantiate role helper
+        //    UserRolesHelper rolesHelper = new UserRolesHelper();
+        //    //step 3: 
+
+
+        //    return base.SaveChanges();
+        //}
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

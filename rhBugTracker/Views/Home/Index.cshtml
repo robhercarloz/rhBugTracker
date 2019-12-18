@@ -156,35 +156,35 @@
                                         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
                                         <script>
-             $(function () {
-                    var url = '@Url.Action("ProduceChart1Data", "Graphing")';
-                    $.post(url).then(function (response) {
-                        new Morris.Bar({
-                            element: 'barChart1',
-                            data: response,
-                            xkey: 'label',
-                            ykeys: ['value'],
-                            labels: ['Ticket Count'],
-                            resize: true
-                        });
-                    });
+                                            $(function () {
+                                                var url = '@Url.Action("ProduceChart1Data", "Graphing")';
+                                                        $.post(url).then(function (response) {
+                                                            new Morris.Bar({
+                                                                element: 'barChart1',
+                                                                data: response,
+                                                                xkey: 'label',
+                                                                ykeys: ['value'],
+                                                                labels: ['Ticket Count'],
+                                                                resize: true
+                                                            });
+                                                        });
 
-                    var url = '@Url.Action("ProduceChart2Data", "Graphing")';
-                    $.post(url).then(function (response) {
-                        new Morris.Donut({
-                            element: 'donutChart2',
-                            data: response,
-                            xkey: 'label',
-                            ykeys: ['value'],
-                            labels: ['Ticket Count'],
-                            resize: true
-                        });
-                    });
-              });
-
+                                                        var url = '@Url.Action("ProduceChart2Data", "Graphing")';
+                                                        $.post(url).then(function (response) {
+                                                            new Morris.Donut({
+                                                                element: 'donutChart2',
+                                                                data: response,
+                                                                xkey: 'label',
+                                                                ykeys: ['value'],
+                                                                labels: ['Ticket Count'],
+                                                                colors: ['#00B802', '#92F793', '#52B6D7', '#FFF05E', '#FF002E'],
+                                                                resize: true
+                                                            });
+                                                        });        
+                                                  });       
+     
 
                                         </script>
-
 
                                     }
 

@@ -45,10 +45,17 @@ namespace rhBugTracker.Helpers
             }
             return resultList;
         }
-
         public ICollection<string> ListUserRole(string userId)
         {
             return userManager.GetRoles(userId);
         }
+        public bool IsDemoUser(string userId)
+        {
+            var roles = ListUserRoles(userId).FirstOrDefault() ?? "";
+            return roles.Contains("Demo");
+
+        }
+
+
     }
 }

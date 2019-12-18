@@ -557,6 +557,7 @@ namespace rhBugTracker.Controllers
             return View();
         }
 
+        //POST
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -575,11 +576,16 @@ namespace rhBugTracker.Controllers
                 default:
                     return RedirectToAction("Login", "Account");
             }
-
-
+            
+        }
+                
+        //DEMO LOGOFF
+        public ActionResult DemoLogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("DemoUserAccess", "Account");
         }
 
-        
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
