@@ -62,8 +62,8 @@
                                 @Html.Label("disabledTextInput", "Display Name", new { @class = "col-form-label" })
                                 @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
 
-                                @Html.Label("disabledTextInput", "Email", new { @class = "col-form-label", @Disabled = true})
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text" })
+                                @Html.Label("disabledTextInput", "Email", new { @class = "col-form-label"})
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "disabledTextInput", @type = "text", @Disabled = true })
 
                                 
                             </div>

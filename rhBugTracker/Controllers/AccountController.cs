@@ -359,7 +359,7 @@ namespace rhBugTracker.Controllers
                     var mailMessage = new MailMessage(from, model.Email)
                     {
                         Subject = "Reset Password",
-                        Body = $"Please reset your password by clicking <a href\"{callbackUrl}\">here</a>",
+                        Body = $"Please reset your password by clicking <a href=\"{callbackUrl}\">here</a>",
                         IsBodyHtml = true
                     };
                     var svc = new PersonalEmail();

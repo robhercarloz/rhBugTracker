@@ -289,6 +289,7 @@
     <Content Include="Scripts\perfect-scrollbar.jquery.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\sweetalert2.min.js" />
+    <Content Include="Uploads\testIMG_637092563590186322.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -371,7 +372,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
     <Folder Include="Views\Graphing\" />
   </ItemGroup>
   <ItemGroup>
